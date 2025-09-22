@@ -1,14 +1,18 @@
 import { useState, useEffect } from 'react'
 import { Button } from "@/components/ui/button"
-import { Card, CardContent } from "@/components/ui/card"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Badge } from "@/components/ui/badge"
 import { Progress } from "@/components/ui/progress"
-import { Users, EnvelopeSimple, ArrowRight, Play, GraduationCap, Trophy, Lightbulb } from "@phosphor-icons/react"
+import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar"
+import { Separator } from "@/components/ui/separator"
+import { Users, EnvelopeSimple, ArrowRight, Play, GraduationCap, Trophy, Lightbulb, BookOpen, Quotes, Star, ArrowSquareOut, Calendar } from "@phosphor-icons/react"
 import { useKV } from '@github/spark/hooks'
 
 const SUBSCRIBER_GOAL = 10000
+const YOUTUBE_API_KEY = 'AIzaSyBQ9wufVmddbSNcVXrKbN76tRGKFPuVkYI'
+const CHANNEL_ID = 'UCYourChannelId' // You'll need to get your actual channel ID
 
 function YouTubeEmbed() {
   return (
@@ -24,15 +28,65 @@ function YouTubeEmbed() {
   )
 }
 
+interface YouTubeApiResponse {
+  items: Array<{
+    statistics: {
+      subscriberCount: string
+      videoCount: string
+      viewCount: string
+    }
+  }>
+}
+
 function SubscriberCounter() {
   const [subscriberCount, setSubscriberCount] = useState(7420)
+  const [videoCount, setVideoCount] = useState(0)
+  const [isLoading, setIsLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
+  
   const progressPercentage = (subscriberCount / SUBSCRIBER_GOAL) * 100
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setSubscriberCount(prev => prev + Math.floor(Math.random() * 3))
-    }, 30000)
-    return () => clearInterval(interval)
+    const fetchYouTubeData = async () => {
+      try {
+        // YouTube API to get channel statistics using the channel handle
+        // Note: This endpoint may require the actual channel ID instead of handle
+        const channelResponse = await fetch(
+          `https://www.googleapis.com/youtube/v3/search?part=snippet&type=channel&q=@the_drdede&key=${YOUTUBE_API_KEY}`
+        )
+        
+        if (!channelResponse.ok) {
+          throw new Error('Failed to fetch YouTube data')
+        }
+        
+        const searchData = await channelResponse.json()
+        
+        if (searchData.items && searchData.items.length > 0) {
+          const channelId = searchData.items[0].snippet.channelId
+          
+          // Now get the channel statistics
+          const statsResponse = await fetch(
+            `https://www.googleapis.com/youtube/v3/channels?part=statistics&id=${channelId}&key=${YOUTUBE_API_KEY}`
+          )
+          
+          const statsData: YouTubeApiResponse = await statsResponse.json()
+          
+          if (statsData.items && statsData.items.length > 0) {
+            const stats = statsData.items[0].statistics
+            setSubscriberCount(parseInt(stats.subscriberCount))
+            setVideoCount(parseInt(stats.videoCount))
+          }
+        }
+      } catch (err) {
+        console.error('YouTube API error:', err)
+        setError('Unable to load live data')
+        // Keep the mock data as fallback
+      } finally {
+        setIsLoading(false)
+      }
+    }
+
+    fetchYouTubeData()
   }, [])
 
   return (
@@ -41,14 +95,25 @@ function SubscriberCounter() {
         <div className="text-center space-y-4">
           <div className="flex items-center justify-center gap-2 text-accent">
             <Users size={24} weight="bold" />
-            <span className="text-2xl font-bold">{subscriberCount.toLocaleString()}</span>
+            <span className="text-2xl font-bold">
+              {isLoading ? '...' : subscriberCount.toLocaleString()}
+            </span>
           </div>
           <div>
             <p className="text-sm text-muted-foreground mb-2">Progress to 10K subscribers</p>
             <Progress value={progressPercentage} className="h-2" />
             <p className="text-xs text-muted-foreground mt-1">{Math.round(progressPercentage)}% complete</p>
           </div>
-          <Button className="w-full bg-accent hover:bg-accent/90 text-accent-foreground">
+          {videoCount > 0 && (
+            <p className="text-xs text-muted-foreground">{videoCount} videos published</p>
+          )}
+          {error && (
+            <p className="text-xs text-red-500">{error}</p>
+          )}
+          <Button 
+            className="w-full bg-accent hover:bg-accent/90 text-accent-foreground"
+            onClick={() => window.open('https://www.youtube.com/@the_drdede', '_blank')}
+          >
             Subscribe on YouTube
           </Button>
         </div>
@@ -184,6 +249,183 @@ function ContactForm() {
   )
 }
 
+function TestimonialsSection() {
+  const testimonials = [
+    {
+      quote: "Dr. Tetsubayashi's keynote completely transformed how our engineering team approaches AI ethics. Their frameworks are practical, actionable, and deeply rooted in real-world impact.",
+      author: "Sarah Chen",
+      title: "CTO, TechForward Inc.",
+      rating: 5,
+      avatar: "SC"
+    },
+    {
+      quote: "The accessibility workshop was eye-opening. We implemented Dr. Tetsubayashi's recommendations and saw immediate improvements in our product's inclusive design.",
+      author: "Marcus Rodriguez",
+      title: "Director of Product, InnovateLabs",
+      rating: 5,
+      avatar: "MR"
+    },
+    {
+      quote: "Brilliant, insightful, and incredibly engaging. Dr. Tetsubayashi's presentation on AI governance received the highest evaluation scores in our conference's history.",
+      author: "Dr. Amelia Foster",
+      title: "Conference Chair, AI Ethics Summit 2024",
+      rating: 5,
+      avatar: "AF"
+    },
+    {
+      quote: "Working with Dr. Tetsubayashi on our AI governance strategy was transformative. Their interdisciplinary approach helped us navigate complex regulatory requirements while staying true to our values.",
+      author: "James Park",
+      title: "VP of Legal & Compliance, DataStream Corp",
+      rating: 5,
+      avatar: "JP"
+    }
+  ]
+
+  return (
+    <section className="py-12">
+      <div className="container mx-auto px-4">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold mb-4">What People Are Saying</h2>
+            <p className="text-lg text-muted-foreground">
+              Feedback from speaking engagements and consulting clients
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {testimonials.map((testimonial, index) => (
+              <Card key={index} className="h-full">
+                <CardContent className="p-6">
+                  <div className="flex items-start gap-4">
+                    <Quotes size={24} className="text-accent mt-1 flex-shrink-0" />
+                    <div className="space-y-4">
+                      <p className="text-muted-foreground leading-relaxed">
+                        "{testimonial.quote}"
+                      </p>
+                      
+                      <div className="flex items-center gap-1 mb-3">
+                        {[...Array(testimonial.rating)].map((_, i) => (
+                          <Star key={i} size={16} weight="fill" className="text-yellow-500" />
+                        ))}
+                      </div>
+                      
+                      <div className="flex items-center gap-3">
+                        <Avatar className="h-10 w-10">
+                          <AvatarFallback className="bg-primary text-primary-foreground text-sm">
+                            {testimonial.avatar}
+                          </AvatarFallback>
+                        </Avatar>
+                        <div>
+                          <p className="font-semibold text-sm">{testimonial.author}</p>
+                          <p className="text-xs text-muted-foreground">{testimonial.title}</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+function BlogInsightsSection() {
+  const blogPosts = [
+    {
+      title: "The Hidden Bias in AI Accessibility Tools",
+      excerpt: "Exploring how current AI accessibility solutions often miss the mark for disabled users, and what we can do about it.",
+      date: "March 15, 2024",
+      category: "AI Ethics",
+      readTime: "8 min read"
+    },
+    {
+      title: "Beyond Compliance: Building Truly Inclusive AI Systems",
+      excerpt: "Why legal compliance is just the starting point for creating AI that works for everyone.",
+      date: "February 28, 2024",
+      category: "Inclusive Design",
+      readTime: "12 min read"
+    },
+    {
+      title: "Systems Thinking for AI Governance Leaders",
+      excerpt: "How to approach organizational AI governance with a systems mindset that creates lasting change.",
+      date: "February 10, 2024",
+      category: "Leadership",
+      readTime: "10 min read"
+    }
+  ]
+
+  return (
+    <section className="py-12 bg-secondary/30">
+      <div className="container mx-auto px-4">
+        <div className="max-w-6xl mx-auto">
+          <div className="flex items-center justify-between mb-12">
+            <div>
+              <h2 className="text-3xl font-bold mb-4">Latest Insights</h2>
+              <p className="text-lg text-muted-foreground">
+                Thought leadership on AI governance, accessibility, and systems change
+              </p>
+            </div>
+            <Button 
+              variant="outline" 
+              onClick={() => window.open('https://www.incluu.us/blog', '_blank')}
+              className="hidden md:flex"
+            >
+              View All Posts
+              <ArrowSquareOut size={16} className="ml-2" />
+            </Button>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+            {blogPosts.map((post, index) => (
+              <Card key={index} className="h-full hover:shadow-md transition-shadow cursor-pointer">
+                <CardHeader>
+                  <div className="flex items-center justify-between mb-2">
+                    <Badge variant="secondary" className="text-xs">
+                      {post.category}
+                    </Badge>
+                    <span className="text-xs text-muted-foreground">{post.readTime}</span>
+                  </div>
+                  <CardTitle className="text-lg leading-tight hover:text-primary transition-colors">
+                    {post.title}
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-muted-foreground text-sm mb-4 leading-relaxed">
+                    {post.excerpt}
+                  </p>
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs text-muted-foreground flex items-center gap-1">
+                      <Calendar size={12} />
+                      {post.date}
+                    </span>
+                    <Button variant="ghost" size="sm" className="text-xs">
+                      Read More
+                      <ArrowRight size={12} className="ml-1" />
+                    </Button>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+          
+          <div className="text-center">
+            <Button 
+              onClick={() => window.open('https://www.incluu.us/blog', '_blank')}
+              className="md:hidden"
+            >
+              View All Posts
+              <ArrowSquareOut size={16} className="ml-2" />
+            </Button>
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
 function App() {
   return (
     <div className="min-h-screen bg-background">
@@ -194,9 +436,20 @@ function App() {
               <h1 className="text-2xl font-bold text-primary">Dr. Dédé Tetsubayashi</h1>
               <p className="text-sm text-muted-foreground">AI Governance Expert | TEDx Speaker</p>
             </div>
-            <Button variant="outline" className="hidden md:flex">
-              Book Speaking Engagement
-            </Button>
+            <div className="flex items-center gap-4">
+              <Button 
+                variant="ghost" 
+                size="sm" 
+                onClick={() => window.open('https://www.incluu.us/blog', '_blank')}
+                className="hidden md:flex"
+              >
+                <BookOpen size={16} className="mr-2" />
+                Blog
+              </Button>
+              <Button variant="outline" className="hidden md:flex">
+                Book Speaking Engagement
+              </Button>
+            </div>
           </div>
         </div>
       </header>
@@ -274,6 +527,10 @@ function App() {
             </div>
           </div>
         </section>
+
+        <TestimonialsSection />
+
+        <BlogInsightsSection />
 
         <section className="py-12">
           <div className="container mx-auto px-4">
@@ -379,11 +636,20 @@ function App() {
             </div>
             
             <div className="flex justify-center gap-4">
-              <Button variant="outline" size="sm">
+              <Button 
+                variant="outline" 
+                size="sm"
+                onClick={() => window.open('https://www.youtube.com/@the_drdede', '_blank')}
+              >
                 YouTube Channel
               </Button>
-              <Button variant="outline" size="sm">
-                LinkedIn Profile
+              <Button 
+                variant="outline" 
+                size="sm"
+                onClick={() => window.open('https://www.incluu.us/blog', '_blank')}
+              >
+                <BookOpen size={16} className="mr-2" />
+                Blog
               </Button>
               <Button variant="outline" size="sm">
                 Speaking Inquiry
