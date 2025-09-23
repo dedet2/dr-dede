@@ -36,6 +36,11 @@
   --ring: oklch(91.7% 0.08 205.041);
 
   --radius: 0.5rem;
+  
+  /* RGB approximations for background gradients */
+  --background-rgb: 240, 241, 255;
+  --primary-rgb: 139, 92, 246;
+  --accent-rgb: 16, 185, 129;
 }
 
 @theme {
@@ -228,13 +233,52 @@ body {
   animation: pulse-glow-accent 3s ease-in-out infinite;
 }
 
-/* Advanced parallax scrolling effects */
+/* Enhanced parallax scrolling effects with smoother performance */
 .parallax-slow {
   transform: translateY(var(--scroll-y, 0) * -0.5);
+  will-change: transform;
 }
 
 .parallax-fast {
   transform: translateY(var(--scroll-y, 0) * -0.8);
+  will-change: transform;
+}
+
+/* Fixed background with enhanced blur support */
+.fixed-bg {
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  will-change: transform;
+}
+
+/* Enhanced hero section with improved gradient overlay */
+.hero-gradient {
+  background: linear-gradient(
+    135deg,
+    rgba(var(--background-rgb), 0.95) 0%,
+    rgba(var(--background-rgb), 0.90) 25%,
+    rgba(var(--background-rgb), 0.85) 50%,
+    rgba(var(--background-rgb), 0.90) 75%,
+    rgba(var(--background-rgb), 0.95) 100%
+  );
+  backdrop-filter: blur(8px);
+}
+
+/* Mobile-responsive animations with reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .float-animation,
+  .float-reverse,
+  .pulse-glow,
+  .pulse-glow-accent {
+    animation: none;
+  }
+  
+  .parallax-slow,
+  .parallax-fast {
+    transform: none;
+  }
 }
 
 /* Enhanced button hover effects with shine */
