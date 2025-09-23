@@ -1246,30 +1246,24 @@ function App() {
           <div className="flex items-center justify-between">
             <div className="min-w-0 flex-1">
               <h1 className="text-xl md:text-2xl font-bold text-primary truncate">Dr. Dédé Tetsubayashi</h1>
-              <p className="text-xs md:text-sm text-muted-foreground">AI GRC Exec | Board Member | Luxury Disability Travel TEDx Speaker</p>
+              <p className="text-xs md:text-sm text-muted-foreground">AI GRC Exec | Board Member | TEDx Speaker</p>
             </div>
             <div className="flex items-center gap-2 md:gap-4 flex-shrink-0">
               <Button 
                 variant="ghost" 
+                size="sm"
                 onClick={() => window.open('https://pmukyznd.manus.space/', '_blank')}
-            </div>x text-xs"
-            <div className="flex items-center gap-2 md:gap-4 flex-shrink-0">
-                <Calculator size={16} className="mr-2" />
-                variant="ghost" 
-              </Button>
-                onClick={() => window.open('https://pmukyznd.manus.space/', '_blank')}
-                variant="ghost" 
+                className="hidden sm:flex text-xs"
               >
-                onClick={() => {
-                🎉 ROI Calculator ✨, if not use backup
+                <Calculator size={16} className="mr-2" />
+                🎉 ROI Calculator ✨
               </Button>
               <Button 
-                  }
-                  img.onerror = () => {
-                    window.open('https://nslacnow.manus.space/', '_blank')
-                  }
-                  img.src = heroBackground
-                  // Fallback timeout
+                variant="ghost" 
+                size="sm"
+                onClick={() => {
+                  const img = new Image()
+                  img.onload = () => {
                     window.open('https://dr-dede-tedx-homepage.vercel.app/', '_blank')
                   }
                   img.onerror = () => {
@@ -1279,6 +1273,13 @@ function App() {
                   // Fallback timeout
                   setTimeout(() => {
                     if (!img.complete) {
+                      window.open('https://nslacnow.manus.space/', '_blank')
+                    }
+                  }, 2000)
+                }}
+                className="hidden sm:flex text-xs"
+              >
+                <Presentation size={16} className="mr-2" />
                 TEDx Talk
               </Button>
               <Button 
@@ -1543,17 +1544,17 @@ function App() {
         <section className="py-12">
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto">
-                <AccordionItem value="social-updates" className="border rounded-lg px-6">
-                  <AccordionTrigger className="text-xl font-semibold hover:no-underline">
-                  <AccordionTrigger className="text-xl font-semibold hover:no-underline">
- Latest Insights
-        <BlogInsightsSection />
-
-                    <BlogInsightsContent />
-          <div className="container mx-auto px-4">
-            <div className="max-w-4xl mx-auto">
               <Accordion type="single" collapsible className="space-y-4">
-                <AccordionItem value="ai-curated" className="border rounded-lg px-6">
+                <AccordionItem value="latest-insights" className="border rounded-lg px-6">
+                  <AccordionTrigger className="text-xl font-semibold hover:no-underline">
+                    Latest Insights
+                  </AccordionTrigger>
+                  <AccordionContent>
+                    <BlogInsightsContent />
+                  </AccordionContent>
+                </AccordionItem>
+                
+                <AccordionItem value="social-updates" className="border rounded-lg px-6">
                   <AccordionTrigger className="text-xl font-semibold hover:no-underline">
                     Latest Social Updates
                   </AccordionTrigger>
@@ -1561,117 +1562,67 @@ function App() {
                     <SocialMediaFeeds />
                   </AccordionContent>
                 </AccordionItem>
-       </Accordion>
-            </div>
+                
+                <AccordionItem value="ai-curated" className="border rounded-lg px-6">
                   <AccordionTrigger className="text-xl font-semibold hover:no-underline">
-        </section>
-
-                  <AccordionContent>om-accent/5 to-primary/5">
+                    AI-Curated for You
+                  </AccordionTrigger>
+                  <AccordionContent>
                     <AIContentRecommendations />
                   </AccordionContent>
                 </AccordionItem>
               </Accordion>
             </div>
-              </p>
-        </section> gap-6 mb-8">
-
-                  <FileText size={40} className="mx-auto mb-4 text-primary" />
-                  <h3 className="font-semibold mb-2">Free Resources</h3>
-            <div className="max-w-4xl mx-auto text-center">
-                    Download frameworks, guides, and toolkits to advance your AI governance journey.
-              <p className="text-lg text-muted-foreground mb-8">
-                Access our comprehensive resources, take the maturity assessment, and stay connected with the latest insights.
-                <Card className="p-6">
-                  <CheckCircle size={40} className="mx-auto mb-4 text-accent" />
-                  <h3 className="font-semibold mb-2">Maturity Assessment</h3>
-                  <p className="text-sm text-muted-foreground mb-4">
-                  <h3 className="font-semibold mb-2">Free Resources</h3>
-                  <p className="text-sm text-muted-foreground mb-4">
-                    Download frameworks, guides, and toolkits to advance your AI governance journey.
-                    size="sm" 
-                    onClick={() => setCurrentPage('assessment')}
-                    className="w-full"
-                  <CheckCircle size={40} className="mx-auto mb-4 text-accent" />
-                  <h3 className="font-semibold mb-2">Maturity Assessment</h3>
-                  <p className="text-sm text-muted-foreground mb-4">
-                    Discover your organization's AI governance strengths and improvement opportunities.
-                  </p>
-                  <Button ssName="mx-auto mb-4 text-primary" />
-                    size="sm" b-2">Stay Connected</h3>
-                  <p className="text-sm text-muted-foreground mb-4">
-                    Follow events, insights, and connect on LinkedIn, Instagram, and YouTube.
-                  >
-                    Take Assessment
-                  </Button>
-                </Card>
-                <Card className="p-6">
-                size="lg"
-                className="bg-primary hover:bg-primary/90"
-              >
-                    Follow events, insights, and connect on LinkedIn, Instagram, and YouTube.
-                  </p>
-                </Card>
-              </div>
-              <Button 
-                onClick={() => setCurrentPage('resources')}
+          </div>
+        </section>
 
         <section className="py-8 md:py-12">
           <div className="container mx-auto px-4">
-            <div className="max-w-4xl mx-auto">
-                Access Resources & Assessmenthops</h2>
-              <p className="text-lg md:text-xl text-muted-foreground text-center mb-8 md:mb-12">
-                Transform your organization's approach to AI governance and equitable innovation
-              </p>
-              
-d:gap-8 mb-8 md:mb-12">
-                <Card>
-          <div className="container mx-auto px-4">
-            <div className="max-w-4xl mx-auto">
-              <h2 className="text-2xl md:text-3xl font-bold text-center mb-3 md:mb-4">Speaking & Workshops</h2>
+            <div className="max-w-4xl mx-auto text-center">
+              <h2 className="text-2xl md:text-3xl font-bold mb-3 md:mb-4">Speaking & Workshops</h2>
               <p className="text-lg md:text-xl text-muted-foreground text-center mb-8 md:mb-12">
                 Transform your organization's approach to AI governance and equitable innovation
               </p>
               
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8 mb-8 md:mb-12">
-                <Card>>
+                <Card>
+                  <CardContent className="p-4 md:p-6">
+                    <div className="flex flex-wrap gap-2 mb-3">
                       <Badge variant="secondary" className="text-xs">Virtual or in-person</Badge>
+                      <Badge variant="secondary" className="text-xs">30-90 minutes</Badge>
                     </div>
+                    <h3 className="text-lg md:text-xl font-semibold mb-3 md:mb-4">Keynote Speaking</h3>
                     <p className="text-muted-foreground mb-3 md:mb-4 text-sm md:text-base">
+                      Inspiring presentations on AI governance, accessibility, and systems transformation 
+                      that energize audiences and drive organizational change.
+                    </p>
+                  </CardContent>
                 </Card>
 
-                    </p>
-                    <div className="flex flex-wrap gap-2">
+                <Card>
+                  <CardContent className="p-4 md:p-6">
+                    <div className="flex flex-wrap gap-2 mb-3">
+                      <Badge variant="secondary" className="text-xs">2-8 hours</Badge>
+                      <Badge variant="secondary" className="text-xs">Hands-on exercises</Badge>
+                      <Badge variant="secondary" className="text-xs">Team-specific</Badge>
+                    </div>
                     <h3 className="text-lg md:text-xl font-semibold mb-3 md:mb-4">Custom Workshops</h3>
                     <p className="text-muted-foreground mb-3 md:mb-4 text-sm md:text-base">
                       Interactive sessions tailored to your team's needs, focusing on practical 
                       implementation of equitable AI governance practices.
                     </p>
-                </Card>
-                   <Badge variant="secondary" className="text-xs">2-8 hours</Badge>
-                      <Badge variant="secondary" className="text-xs">Hands-on exercises</Badge>
-                  <CardContent className="p-4 md:p-6">cific</Badge>
-                    <h3 className="text-lg md:text-xl font-semibold mb-3 md:mb-4">Custom Workshops</h3>
                   </CardContent>
                 </Card>
               </div>
 
               <div className="bg-card p-4 md:p-8 rounded-lg">
                 <h3 className="text-xl md:text-2xl font-semibold mb-4 md:mb-6 text-center">Speaking Topics</h3>
-                      <Badge variant="secondary" className="text-xs">Hands-on exercises</Badge>
-                      <Badge variant="secondary" className="text-xs">Team-specific</Badge>
-                    </div>
-                  </CardContent>ound">
-                </Card>
-                      <li>• Ethical AI framework development</li>
-                      <li>• Risk assessment methodologies</li>
-                    </ul>
-                  </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
                   <div>
-                    <h4 className="font-semibold mb-2 md:mb-3">Equitable Technology Design</h4>
+                    <h4 className="font-semibold mb-2 md:mb-3">AI Governance & Compliance</h4>
                     <ul className="space-y-1 md:space-y-2 text-xs md:text-sm text-muted-foreground">
-                      <li>• Accessibility-first development</li>
-                      <li>• Bias detection and mitigation</li>
-                      <li>• Community-centered design thinking</li>
+                      <li>• Regulatory compliance strategies</li>
+                      <li>• Ethical AI framework development</li>
                       <li>• Risk assessment methodologies</li>
                     </ul>
                   </div>
@@ -1691,17 +1642,9 @@ d:gap-8 mb-8 md:mb-12">
                       <li>• Building diverse tech teams</li>
                     </ul>
                   </div>
-                  <div>
+                </div>
+              </div>
             </div>
-          </div>
-        </section>
-
-        <section className="py-8 md:py-12 bg-primary/5">
-          <div className="container mx-auto px-4">
-            <div className="max-w-2xl mx-auto text-center mb-8 md:mb-12">
-              <h2 className="text-2xl md:text-3xl font-bold mb-3 md:mb-4">Transform Your Organization's AI Future</h2>
-              <p className="text-base md:text-lg text-muted-foreground mb-4 md:mb-6">
-                Ready to build AI systems that drive equitable innovation while ensuring regulatory compliance? 
           </div>
         </section>
 
@@ -1714,11 +1657,20 @@ d:gap-8 mb-8 md:mb-12">
                 Let's discuss how we can accelerate your success.
               </p>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
+                <div className="bg-card/80 p-4 rounded-lg">
                   <div className="text-2xl font-bold text-primary">Global</div>
+                  <div className="text-sm text-muted-foreground">Reach and impact</div>
+                </div>
+                <div className="bg-card/80 p-4 rounded-lg">
                   <div className="text-2xl font-bold text-primary">48hr</div>
                   <div className="text-sm text-muted-foreground">Response time guaranteed</div>
                 </div>
                 <div className="bg-card/80 p-4 rounded-lg">
+                  <div className="text-2xl font-bold text-primary">100%</div>
+                  <div className="text-sm text-muted-foreground">Client satisfaction</div>
+                </div>
+              </div>
+              <div className="bg-card/80 p-4 rounded-lg">
                 <CalendlyIntegration />
               </div>
               <div className="mt-4 text-center">
@@ -1728,8 +1680,7 @@ d:gap-8 mb-8 md:mb-12">
                 </p>
               </div>
             </div>
-                <CalendlyIntegration />
-              </div>
+          </div>
         </section>
       </main>
 
@@ -1740,25 +1691,16 @@ d:gap-8 mb-8 md:mb-12">
               <h3 className="text-lg md:text-xl font-semibold mb-2">Dr. Dédé Tetsubayashi</h3>
               <p className="text-sm md:text-base text-muted-foreground">AI GRC Executive | Board Member | TEDx Speaker | Systems Disruptor</p>
             </div>
-      </main>
-lassName="flex flex-col sm:flex-row justify-center gap-2 md:gap-4">
-      <footer className="bg-card border-t py-8 md:py-12">
-        <div className="container mx-auto px-4">
-          <div className="text-center space-y-4 md:space-y-6">
-            <div>
-              <h3 className="text-lg md:text-xl font-semibold mb-2">Dr. Dédé Tetsubayashi</h3>
-              <p className="text-sm md:text-base text-muted-foreground">AI GRC Executive | Board Member | TEDx Speaker | Systems Disruptor</p>
-            </div>https://dr-dede-tedx-homepage.vercel.app/', '_blank')
             
             <div className="flex flex-col sm:flex-row justify-center gap-2 md:gap-4">
-              <Button dow.open('https://nslacnow.manus.space/', '_blank')
-                  setTimeout(() => {
-                    if (!img.complete) {
+              <Button 
+                variant="outline" 
+                size="sm"
                 onClick={() => {
                   const img = new Image()
                   img.onload = () => {
                     window.open('https://dr-dede-tedx-homepage.vercel.app/', '_blank')
-                  }o"
+                  }
                   img.onerror = () => {
                     window.open('https://nslacnow.manus.space/', '_blank')
                   }
@@ -1766,7 +1708,7 @@ lassName="flex flex-col sm:flex-row justify-center gap-2 md:gap-4">
                   setTimeout(() => {
                     if (!img.complete) {
                       window.open('https://nslacnow.manus.space/', '_blank')
-                    }blank')}
+                    }
                   }, 2000)
                 }}
                 className="w-full sm:w-auto"
@@ -1775,7 +1717,7 @@ lassName="flex flex-col sm:flex-row justify-center gap-2 md:gap-4">
                 TEDx Talk
               </Button>
               <Button 
-                variant="outline" ww.youtube.com/@the_drdede', '_blank')}
+                variant="outline" 
                 size="sm"
                 onClick={() => window.open('https://pmukyznd.manus.space/', '_blank')}
                 className="w-full sm:w-auto"
@@ -1783,26 +1725,38 @@ lassName="flex flex-col sm:flex-row justify-center gap-2 md:gap-4">
                 <Calculator size={16} className="mr-2" />
                 🎉 ROI Calculator ✨
               </Button>
-              <Button 'https://www.incluu.us/blog', '_blank')}
+              <Button 
                 variant="outline" 
                 size="sm"
                 onClick={() => window.open('https://www.youtube.com/@the_drdede', '_blank')}
-                Blog
-              </Button>
+                className="w-full sm:w-auto"
+              >
+                <YoutubeLogo size={16} className="mr-2" />
                 YouTube Channel
-                size="sm"
-                onClick={() => window.open('https://incluu.us', '_blank')}
+              </Button>
+              <Button 
                 variant="outline" 
                 size="sm"
                 onClick={() => window.open('https://www.incluu.us/blog', '_blank')}
                 className="w-full sm:w-auto"
               >
                 <BookOpen size={16} className="mr-2" />
-              </div>
-            </div>
+                Blog
+              </Button>
               <Button 
                 variant="outline" 
                 size="sm"
+                onClick={() => window.open('https://incluu.us', '_blank')}
+                className="w-full sm:w-auto"
+              >
+                incluu
+              </Button>
+            </div>
+            
+            <Separator />
+            
+            <div className="text-xs md:text-sm text-muted-foreground">
+              © 2025 Dr. Dédé Tetsubayashi. All rights reserved.
             </div>
           </div>
         </div>
