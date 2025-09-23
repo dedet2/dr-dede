@@ -8,6 +8,7 @@ import { Progress } from "@/components/ui/progress"
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar"
 import { Separator } from "@/components/ui/separator"
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Users, EnvelopeSimple, ArrowRight, Play, GraduationCap, Trophy, Lightbulb, BookOpen, Quotes, Star, ArrowSquareOut, Calendar, VideoCamera, Eye, X, CalendarBlank, PaperPlaneTilt, DownloadSimple, FileText, CheckCircle, Shield, Users as UsersIcon, LinkedinLogo, InstagramLogo, YoutubeLogo, Calculator, Presentation } from "@phosphor-icons/react"
 import { useKV } from '@github/spark/hooks'
@@ -1215,7 +1216,7 @@ function App() {
             <div className="flex items-center justify-between">
               <div className="min-w-0 flex-1">
                 <h1 className="text-xl md:text-2xl font-bold text-primary truncate">Dr. Dédé Tetsubayashi</h1>
-                <p className="text-xs md:text-sm text-muted-foreground">AI GRC Exec | Board Member | TEDx Speaker</p>
+                <p className="text-xs md:text-sm text-muted-foreground">AI GRC Exec | Board Member | Luxury Disability Travel TEDx Speaker</p>
               </div>
               <Button 
                 variant="ghost" 
@@ -1250,7 +1251,7 @@ function App() {
           <div className="flex items-center justify-between">
             <div className="min-w-0 flex-1">
               <h1 className="text-xl md:text-2xl font-bold text-primary truncate">Dr. Dédé Tetsubayashi</h1>
-              <p className="text-xs md:text-sm text-muted-foreground">AI GRC Exec | Board Member | TEDx Speaker</p>
+              <p className="text-xs md:text-sm text-muted-foreground">AI GRC Exec | Board Member | Luxury Disability Travel TEDx Speaker</p>
             </div>
             <div className="flex items-center gap-2 md:gap-4 flex-shrink-0">
               <Button 
@@ -1295,6 +1296,14 @@ function App() {
               >
                 <BookOpen size={16} className="mr-2" />
                 Blog
+              </Button>
+              <Button 
+                variant="ghost" 
+                size="sm" 
+                onClick={() => window.open('https://incluu.us', '_blank')}
+                className="hidden sm:flex"
+              >
+                incluu
               </Button>
               <Button 
                 variant="ghost" 
@@ -1534,15 +1543,37 @@ function App() {
 
         <TestimonialsSection />
 
-        <VideoTestimonialsSection />
+        {/* <VideoTestimonialsSection /> */}
 
         <CaseStudyShowcase />
 
         <BlogInsightsSection />
 
-        <AIContentRecommendations />
+        <section className="py-12">
+          <div className="container mx-auto px-4">
+            <div className="max-w-4xl mx-auto">
+              <Accordion type="single" collapsible className="space-y-4">
+                <AccordionItem value="social-updates" className="border rounded-lg px-6">
+                  <AccordionTrigger className="text-xl font-semibold hover:no-underline">
+                    Latest Social Updates
+                  </AccordionTrigger>
+                  <AccordionContent>
+                    <SocialMediaFeeds />
+                  </AccordionContent>
+                </AccordionItem>
 
-        <SocialMediaFeeds />
+                <AccordionItem value="ai-curated" className="border rounded-lg px-6">
+                  <AccordionTrigger className="text-xl font-semibold hover:no-underline">
+                    AI-Curated for You
+                  </AccordionTrigger>
+                  <AccordionContent>
+                    <AIContentRecommendations />
+                  </AccordionContent>
+                </AccordionItem>
+              </Accordion>
+            </div>
+          </div>
+        </section>
 
         <section className="py-12 bg-gradient-to-br from-accent/5 to-primary/5">
           <div className="container mx-auto px-4">
@@ -1716,7 +1747,7 @@ function App() {
           <div className="text-center space-y-4 md:space-y-6">
             <div>
               <h3 className="text-lg md:text-xl font-semibold mb-2">Dr. Dédé Tetsubayashi</h3>
-              <p className="text-sm md:text-base text-muted-foreground">AI GRC Executive | Board Member | TEDx Speaker | Systems Disruptor</p>
+              <p className="text-sm md:text-base text-muted-foreground">AI GRC Executive | Board Member | Luxury Disability Travel TEDx Speaker | Systems Disruptor</p>
             </div>
             
             <div className="flex flex-col sm:flex-row justify-center gap-2 md:gap-4">
@@ -1768,6 +1799,14 @@ function App() {
               >
                 <BookOpen size={16} className="mr-2" />
                 Blog
+              </Button>
+              <Button 
+                variant="outline" 
+                size="sm"
+                onClick={() => window.open('https://incluu.us', '_blank')}
+                className="w-full sm:w-auto"
+              >
+                incluu
               </Button>
               <div className="w-full sm:w-auto">
                 <CalendlyIntegration />
