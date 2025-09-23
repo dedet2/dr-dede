@@ -9,10 +9,11 @@ import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar"
 import { Separator } from "@/components/ui/separator"
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Users, EnvelopeSimple, ArrowRight, Play, GraduationCap, Trophy, Lightbulb, BookOpen, Quotes, Star, ArrowSquareOut, Calendar, VideoCamera, Eye, X, CalendarBlank, PaperPlaneTilt, DownloadSimple, FileText, CheckCircle, Shield, Users as UsersIcon } from "@phosphor-icons/react"
+import { Users, EnvelopeSimple, ArrowRight, Play, GraduationCap, Trophy, Lightbulb, BookOpen, Quotes, Star, ArrowSquareOut, Calendar, VideoCamera, Eye, X, CalendarBlank, PaperPlaneTilt, DownloadSimple, FileText, CheckCircle, Shield, Users as UsersIcon, LinkedinLogo, InstagramLogo, YoutubeLogo } from "@phosphor-icons/react"
 import { useKV } from '@github/spark/hooks'
 import { toast, Toaster } from 'sonner'
 import heroBackground from '@/assets/images/hero-bg.png'
+import ResourcesPage from './ResourcesPage'
 
 declare global {
   interface Window {
@@ -37,8 +38,8 @@ function YouTubeEmbed() {
   return (
     <div className="relative w-full aspect-video bg-gray-100 rounded-lg overflow-hidden">
       <iframe
-        src="https://www.youtube.com/embed/YtYXwV8YdNI"
-        title="Dr. Dédé Tetsubayashi TEDx Talk - Reimagining AI for Inclusive Innovation"
+        src="https://www.youtube.com/embed/YtYXwV8YdNI?rel=0&modestbranding=1"
+        title="Dr. Dédé Tetsubayashi TEDx Talk - Reimagining AI for Equitable Innovation"
         className="absolute inset-0 w-full h-full"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
         referrerPolicy="strict-origin-when-cross-origin"
@@ -182,7 +183,7 @@ function NewsletterSignup() {
           AI Governance Insights
         </CardTitle>
         <p className="text-sm text-muted-foreground text-center">
-          Get weekly insights on inclusive AI, policy updates, and speaking opportunities.
+          Get weekly insights on equitable AI, policy updates, and speaking opportunities.
         </p>
       </CardHeader>
       <CardContent>
@@ -498,11 +499,11 @@ function CaseStudyShowcase() {
     },
     {
       id: 2,
-      title: "Inclusive AI for Healthcare Accessibility",
+      title: "Equitable AI for Healthcare Accessibility",
       client: "Regional Healthcare Network",
       industry: "Healthcare",
       challenge: "AI diagnostic tools were showing bias against patients with disabilities, resulting in misdiagnosis and delayed treatment for over 40% of disabled patients.",
-      solution: "Redesigned data collection and model training with disability representation and inclusive design principles. Implemented real-time bias detection and created accessibility-first user interfaces for both patients and healthcare providers.",
+      solution: "Redesigned data collection and model training with disability representation and equitable design principles. Implemented real-time bias detection and created accessibility-first user interfaces for both patients and healthcare providers.",
       results: [
         "95% accuracy improvement for disabled patients",
         "Reduced diagnostic disparities by 60%",
@@ -510,7 +511,7 @@ function CaseStudyShowcase() {
         "$2.3M cost savings from reduced misdiagnoses",
         "Improved patient satisfaction scores by 85%"
       ],
-      image: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=600&h=400&fit=crop",
+      image: "https://images.unsplash.com/photo-1631815588090-d4bfec5b1ccb?w=600&h=400&fit=crop",
       tags: ["Healthcare AI", "Accessibility", "Bias Mitigation", "Patient Outcomes"]
     },
     {
@@ -526,7 +527,7 @@ function CaseStudyShowcase() {
         "Framework open-sourced and adopted by 100+ startups"
       ],
       image: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=600&h=400&fit=crop",
-      tags: ["Startup", "EdTech", "Ethics Framework"]
+      tags: ["Startup", "EdTech", "Ethics Framework", "Equitable Design"]
     }
   ]
 
@@ -539,7 +540,7 @@ function CaseStudyShowcase() {
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold mb-4">Case Study Showcase</h2>
             <p className="text-lg text-muted-foreground">
-              Real-world results from AI governance transformations
+              Real-world results from AI governance transformations that drive measurable business value and competitive advantage
             </p>
           </div>
           
@@ -747,7 +748,7 @@ The fundamental issue lies in training data. Most AI accessibility tools are tra
 
 True accessibility requires more than algorithmic improvements. It demands a fundamental shift in how we approach AI development:
 
-### 1. Inclusive Design from Day One
+### 1. Equitable Design from Day One
 Rather than retrofitting accessibility features, we must center disabled perspectives from the earliest stages of development.
 
 ### 2. Community-Led Validation
@@ -766,21 +767,21 @@ The solution isn't to abandon AI accessibility tools, but to rebuild them with a
 
 ## Conclusion
 
-As AI becomes increasingly integrated into our daily lives, we have a choice: we can perpetuate existing systems of exclusion, or we can use this moment of technological transformation to build a more inclusive future. The latter requires acknowledging that accessibility isn't just a technical problem—it's a question of justice.
+As AI becomes increasingly integrated into our daily lives, we have a choice: we can perpetuate existing systems of exclusion, or we can use this moment of technological transformation to build a more equitable future. The latter requires acknowledging that accessibility isn't just a technical problem—it's a question of justice.
 
 The disabled community has always been at the forefront of innovation, creating solutions that benefit everyone. It's time for the AI community to return the favor.
       `
     },
     {
-      title: "Beyond Compliance: Building Truly Inclusive AI Systems",
+      title: "Beyond Compliance: Building Truly Equitable AI Systems",
       excerpt: "Why legal compliance is just the starting point for creating AI that works for everyone.",
       date: "February 28, 2024",
-      category: "Inclusive Design",
+      category: "Equitable Design",
       readTime: "12 min read",
       fullContent: `
-# Beyond Compliance: Building Truly Inclusive AI Systems
+# Beyond Compliance: Building Truly Equitable AI Systems
 
-Legal compliance with disability laws like the ADA is often treated as the finish line for AI accessibility. But for those of us building truly inclusive systems, compliance is merely the starting line. True inclusion requires a fundamental reimagining of how we design, develop, and deploy AI systems.
+Legal compliance with disability laws like the ADA is often treated as the finish line for AI accessibility. But for those of us building truly equitable systems, compliance is merely the starting line. True equity requires a fundamental reimagining of how we design, develop, and deploy AI systems.
 
 ## The Compliance Trap
 
@@ -788,7 +789,7 @@ Most organizations approach AI accessibility through a compliance lens: "What do
 
 Consider voice assistants. They may technically comply with accessibility guidelines by supporting voice commands, but they often struggle with non-standard speech patterns, effectively excluding many disabled users from the "accessible" experience.
 
-## Principles of Inclusive AI Design
+## Principles of Equitable AI Design
 
 ### 1. Nothing About Us, Without Us
 This foundational principle of the disability rights movement must guide AI development. Disabled people aren't just test users—they should be core team members, decision-makers, and leaders in AI projects.
@@ -797,7 +798,7 @@ This foundational principle of the disability rights movement must guide AI deve
 When we design for edge cases—like users with cognitive disabilities or motor impairments—we create solutions that work better for everyone. This is how we got curb cuts, which benefit wheelchair users but also parents with strollers, delivery workers, and travelers with luggage.
 
 ### 3. Intersectionality Matters
-Disability intersects with race, gender, age, and socioeconomic status. An inclusive AI system must consider these overlapping identities and avoid solutions that help some disabled people while harming others.
+Disability intersects with race, gender, age, and socioeconomic status. An equitable AI system must consider these overlapping identities and avoid solutions that help some disabled people while harming others.
 
 ## Practical Implementation Strategies
 
@@ -818,27 +819,27 @@ Disability intersects with race, gender, age, and socioeconomic status. An inclu
 
 ## Moving Beyond Individual Solutions
 
-True inclusion requires systemic change:
+True equity requires systemic change:
 
 ### Industry-Wide Standards
 We need new accessibility standards specifically designed for AI systems, developed in partnership with disabled communities.
 
 ### Economic Incentives
-Organizations should be rewarded for proactive inclusion, not just penalized for exclusion.
+Organizations should be rewarded for proactive equity, not just penalized for exclusion.
 
 ### Educational Reform
-AI education programs must include disability studies and inclusive design principles as core curriculum.
+AI education programs must include disability studies and equitable design principles as core curriculum.
 
-## The Business Case for Inclusion
+## The Business Case for Equity
 
-Inclusive AI isn't just morally right—it's good business:
+Equitable AI isn't just morally right—it's good business:
 - The disability market represents over $13 trillion in annual disposable income globally
-- Inclusive design innovations often become mainstream features
+- Equitable design innovations often become mainstream features
 - Diverse teams build better products and identify more opportunities
 
 ## Conclusion
 
-Building truly inclusive AI systems requires us to move beyond compliance checkboxes toward a fundamental commitment to justice and equity. This isn't just about avoiding lawsuits—it's about unlocking the full potential of AI to serve all of humanity.
+Building truly equitable AI systems requires us to move beyond compliance checkboxes toward a fundamental commitment to justice and equity. This isn't just about avoiding lawsuits—it's about unlocking the full potential of AI to serve all of humanity.
 
 The future of AI will be shaped by the choices we make today. We can choose to perpetuate existing systems of exclusion, or we can use this moment of technological transformation to build something better. The disabled community is ready to lead the way—the question is whether the AI industry is ready to follow.
       `
@@ -1086,783 +1087,6 @@ The organizations that master systems thinking for AI governance won't just avoi
   )
 }
 
-function ResourcesDownloadsSection() {
-  const [downloads, setDownloads] = useKV<Record<string, number>>('resource-downloads', {})
-
-  const resources = [
-    {
-      id: 'ai-governance-framework',
-      title: 'Complete AI Governance Framework',
-      description: 'A comprehensive 40-page framework for implementing ethical AI governance in organizations of any size.',
-      type: 'Framework',
-      pages: 40,
-      format: 'PDF',
-      category: 'AI Governance',
-      downloadUrl: '#',
-      preview: 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=400&h=300&fit=crop'
-    },
-    {
-      id: 'accessibility-checklist',
-      title: 'AI Accessibility Assessment Checklist',
-      description: 'Step-by-step checklist for evaluating and improving AI system accessibility across disabilities.',
-      type: 'Checklist',
-      pages: 12,
-      format: 'PDF',
-      category: 'Accessibility',
-      downloadUrl: '#',
-      preview: 'https://images.unsplash.com/photo-1586281380349-632531db7ed4?w=400&h=300&fit=crop'
-    },
-    {
-      id: 'bias-detection-whitepaper',
-      title: 'Bias Detection in AI Systems: A Practical Guide',
-      description: 'Research-backed methods for identifying and mitigating bias in machine learning models.',
-      type: 'White Paper',
-      pages: 28,
-      format: 'PDF',
-      category: 'AI Ethics',
-      downloadUrl: '#',
-      preview: 'https://images.unsplash.com/photo-1551434678-e076c223a692?w=400&h=300&fit=crop'
-    },
-    {
-      id: 'inclusive-design-toolkit',
-      title: 'Inclusive AI Design Toolkit',
-      description: 'Templates, worksheets, and guidelines for building AI systems that work for everyone.',
-      type: 'Toolkit',
-      pages: 35,
-      format: 'PDF',
-      category: 'Inclusive Design',
-      downloadUrl: '#',
-      preview: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=400&h=300&fit=crop'
-    },
-    {
-      id: 'regulatory-compliance-guide',
-      title: 'AI Regulatory Compliance Guide 2024',
-      description: 'Navigate global AI regulations including EU AI Act, GDPR, and US state legislation.',
-      type: 'Guide',
-      pages: 45,
-      format: 'PDF',
-      category: 'Compliance',
-      downloadUrl: '#',
-      preview: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=300&fit=crop'
-    },
-    {
-      id: 'systems-thinking-workbook',
-      title: 'Systems Thinking for AI Leaders Workbook',
-      description: 'Interactive exercises and frameworks for applying systems thinking to AI governance challenges.',
-      type: 'Workbook',
-      pages: 32,
-      format: 'PDF',
-      category: 'Leadership',
-      downloadUrl: '#',
-      preview: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&h=300&fit=crop'
-    }
-  ]
-
-  const handleDownload = async (resourceId: string) => {
-    // Increment download counter
-    setDownloads(current => ({
-      ...(current || {}),
-      [resourceId]: ((current || {})[resourceId] || 0) + 1
-    }))
-    
-    // In a real implementation, this would trigger an actual download
-    toast.success('Download started! Check your downloads folder.')
-  }
-
-  return (
-    <section className="py-12 bg-secondary/10">
-      <div className="container mx-auto px-4">
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold mb-4">Resources & Downloads</h2>
-            <p className="text-lg text-muted-foreground">
-              Free frameworks, guides, and tools to advance your AI governance journey
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {resources.map((resource) => (
-              <Card key={resource.id} className="h-full hover:shadow-lg transition-shadow">
-                <CardContent className="p-0">
-                  <div className="relative">
-                    <img 
-                      src={resource.preview} 
-                      alt={resource.title}
-                      className="w-full h-48 object-cover rounded-t-lg"
-                    />
-                    <div className="absolute top-3 left-3 flex gap-2">
-                      <Badge variant="secondary" className="text-xs bg-white/90 text-black">
-                        {resource.category}
-                      </Badge>
-                      <Badge variant="outline" className="text-xs bg-white/90">
-                        {resource.format}
-                      </Badge>
-                    </div>
-                  </div>
-                  <div className="p-6">
-                    <div className="flex items-start gap-2 mb-3">
-                      <FileText size={20} className="text-primary mt-0.5 flex-shrink-0" />
-                      <div>
-                        <h3 className="font-semibold text-lg leading-tight mb-2">{resource.title}</h3>
-                        <p className="text-sm text-muted-foreground mb-3">{resource.description}</p>
-                      </div>
-                    </div>
-                    
-                    <div className="flex items-center justify-between mb-4">
-                      <div className="flex items-center gap-4 text-xs text-muted-foreground">
-                        <span>{resource.type}</span>
-                        <span>{resource.pages} pages</span>
-                        {(downloads && downloads[resource.id]) && (
-                          <span className="text-accent">{downloads[resource.id]} downloads</span>
-                        )}
-                      </div>
-                    </div>
-                    
-                    <Button 
-                      onClick={() => handleDownload(resource.id)}
-                      className="w-full"
-                      size="sm"
-                    >
-                      <DownloadSimple size={16} className="mr-2" />
-                      Download Free
-                    </Button>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-
-          <div className="mt-12 text-center">
-            <Card className="max-w-2xl mx-auto">
-              <CardContent className="p-8">
-                <h3 className="text-xl font-semibold mb-4">Want More Resources?</h3>
-                <p className="text-muted-foreground mb-6">
-                  Subscribe to receive new frameworks, research updates, and exclusive content directly in your inbox.
-                </p>
-                <NewsletterSignup />
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-      </div>
-    </section>
-  )
-}
-
-function AIGovernanceAssessment() {
-  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
-  const [answers, setAnswers] = useState<Record<string, number>>({})
-  const [showResults, setShowResults] = useState(false)
-  const [assessmentResults, setAssessmentResults] = useKV<any>('assessment-results', null)
-
-  const questions = [
-    {
-      id: 'governance-framework',
-      category: 'Governance Framework',
-      question: 'How would you rate your organization\'s current AI governance framework?',
-      options: [
-        { value: 1, text: 'No formal framework exists' },
-        { value: 2, text: 'Basic policies but no enforcement' },
-        { value: 3, text: 'Documented framework with some oversight' },
-        { value: 4, text: 'Comprehensive framework with regular reviews' },
-        { value: 5, text: 'Industry-leading governance with continuous improvement' }
-      ]
-    },
-    {
-      id: 'risk-assessment',
-      category: 'Risk Management',
-      question: 'How does your organization identify and assess AI-related risks?',
-      options: [
-        { value: 1, text: 'No formal risk assessment process' },
-        { value: 2, text: 'Ad-hoc risk identification' },
-        { value: 3, text: 'Regular risk assessments for major AI projects' },
-        { value: 4, text: 'Systematic risk assessment across all AI initiatives' },
-        { value: 5, text: 'Proactive risk management with predictive analytics' }
-      ]
-    },
-    {
-      id: 'bias-mitigation',
-      category: 'Fairness & Bias',
-      question: 'What measures are in place to detect and mitigate algorithmic bias?',
-      options: [
-        { value: 1, text: 'No bias detection or mitigation measures' },
-        { value: 2, text: 'Basic awareness but no systematic approach' },
-        { value: 3, text: 'Bias testing during development phase' },
-        { value: 4, text: 'Ongoing bias monitoring and correction' },
-        { value: 5, text: 'Advanced bias detection with automated corrective measures' }
-      ]
-    },
-    {
-      id: 'accessibility',
-      category: 'Accessibility',
-      question: 'How well do your AI systems serve users with disabilities?',
-      options: [
-        { value: 1, text: 'Accessibility is not considered' },
-        { value: 2, text: 'Basic legal compliance only' },
-        { value: 3, text: 'Some accessibility features included' },
-        { value: 4, text: 'Accessibility integrated throughout design' },
-        { value: 5, text: 'Universal design principles with continuous user feedback' }
-      ]
-    },
-    {
-      id: 'transparency',
-      category: 'Transparency',
-      question: 'How transparent are your AI systems to stakeholders?',
-      options: [
-        { value: 1, text: 'AI systems operate as black boxes' },
-        { value: 2, text: 'Limited documentation available' },
-        { value: 3, text: 'Basic explanations provided to users' },
-        { value: 4, text: 'Comprehensive transparency measures' },
-        { value: 5, text: 'Full algorithmic accountability and explainability' }
-      ]
-    },
-    {
-      id: 'data-governance',
-      category: 'Data Governance',
-      question: 'How well is data governance integrated with AI development?',
-      options: [
-        { value: 1, text: 'No formal data governance for AI' },
-        { value: 2, text: 'Basic data handling procedures' },
-        { value: 3, text: 'Data quality checks for AI training' },
-        { value: 4, text: 'Comprehensive data lifecycle management' },
-        { value: 5, text: 'Advanced data governance with automated quality assurance' }
-      ]
-    },
-    {
-      id: 'stakeholder-engagement',
-      category: 'Stakeholder Engagement',
-      question: 'How are diverse stakeholders involved in AI development decisions?',
-      options: [
-        { value: 1, text: 'No external stakeholder involvement' },
-        { value: 2, text: 'Limited consultation with select groups' },
-        { value: 3, text: 'Regular feedback from key stakeholders' },
-        { value: 4, text: 'Systematic engagement across diverse communities' },
-        { value: 5, text: 'Co-creation with affected communities and continuous dialogue' }
-      ]
-    },
-    {
-      id: 'monitoring-evaluation',
-      category: 'Monitoring & Evaluation',
-      question: 'How do you monitor AI system performance and impact?',
-      options: [
-        { value: 1, text: 'No ongoing monitoring after deployment' },
-        { value: 2, text: 'Basic performance metrics tracking' },
-        { value: 3, text: 'Regular performance and impact assessments' },
-        { value: 4, text: 'Comprehensive monitoring with corrective actions' },
-        { value: 5, text: 'Real-time monitoring with automated interventions' }
-      ]
-    }
-  ]
-
-  const currentQuestion = questions[currentQuestionIndex]
-
-  const handleAnswer = (value: number) => {
-    setAnswers(prev => ({
-      ...prev,
-      [currentQuestion.id]: value
-    }))
-  }
-
-  const nextQuestion = () => {
-    if (currentQuestionIndex < questions.length - 1) {
-      setCurrentQuestionIndex(prev => prev + 1)
-    } else {
-      calculateResults()
-    }
-  }
-
-  const calculateResults = async () => {
-    const totalScore = Object.values(answers).reduce((sum, value) => sum + value, 0)
-    const maxScore = questions.length * 5
-    const percentage = Math.round((totalScore / maxScore) * 100)
-    
-    let level = 'Emerging'
-    let description = 'Your organization is in the early stages of AI governance development.'
-    let recommendations = [
-      'Establish a formal AI governance committee',
-      'Develop basic AI ethics policies',
-      'Create awareness training programs'
-    ]
-
-    if (percentage >= 80) {
-      level = 'Advanced'
-      description = 'Your organization demonstrates mature AI governance practices.'
-      recommendations = [
-        'Share best practices with industry peers',
-        'Explore cutting-edge governance technologies',
-        'Mentor other organizations in AI governance'
-      ]
-    } else if (percentage >= 60) {
-      level = 'Developing'
-      description = 'Your organization has solid foundations with room for improvement.'
-      recommendations = [
-        'Expand stakeholder engagement programs',
-        'Implement automated monitoring systems',
-        'Develop advanced bias detection capabilities'
-      ]
-    } else if (percentage >= 40) {
-      level = 'Growing'
-      description = 'Your organization is making progress but needs systematic improvements.'
-      recommendations = [
-        'Formalize risk assessment processes',
-        'Enhance transparency measures',
-        'Invest in accessibility improvements'
-      ]
-    }
-
-    const results = {
-      totalScore,
-      maxScore,
-      percentage,
-      level,
-      description,
-      recommendations,
-      categoryScores: questions.reduce((acc, q) => {
-        acc[q.category] = (acc[q.category] || 0) + (answers[q.id] || 0)
-        return acc
-      }, {} as Record<string, number>),
-      completedAt: new Date().toISOString()
-    }
-
-    setAssessmentResults(results)
-    setShowResults(true)
-  }
-
-  const resetAssessment = () => {
-    setCurrentQuestionIndex(0)
-    setAnswers({})
-    setShowResults(false)
-  }
-
-  if (showResults && assessmentResults) {
-    return (
-      <section className="py-12">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto">
-            <Card>
-              <CardHeader className="text-center">
-                <CardTitle className="text-2xl mb-2">Your AI Governance Assessment Results</CardTitle>
-                <div className="flex items-center justify-center gap-4">
-                  <div className="text-4xl font-bold text-primary">{assessmentResults.percentage}%</div>
-                  <Badge variant="secondary" className="text-lg px-4 py-2">
-                    {assessmentResults.level}
-                  </Badge>
-                </div>
-              </CardHeader>
-              <CardContent className="space-y-6">
-                <div className="text-center">
-                  <Progress value={assessmentResults.percentage} className="h-4 mb-4" />
-                  <p className="text-lg text-muted-foreground">{assessmentResults.description}</p>
-                </div>
-
-                <div>
-                  <h3 className="text-xl font-semibold mb-4">Category Breakdown</h3>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    {Object.entries(assessmentResults.categoryScores).map(([category, score]) => (
-                      <div key={category} className="flex items-center justify-between p-3 bg-secondary/20 rounded-lg">
-                        <span className="font-medium">{category}</span>
-                        <span className="text-accent font-bold">{Number(score)}/5</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                <div>
-                  <h3 className="text-xl font-semibold mb-4">Next Steps</h3>
-                  <ul className="space-y-2">
-                    {assessmentResults.recommendations.map((rec: string, index: number) => (
-                      <li key={index} className="flex items-start gap-2">
-                        <CheckCircle size={20} className="text-green-500 mt-0.5 flex-shrink-0" />
-                        <span>{rec}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-
-                <div className="flex flex-col sm:flex-row gap-4 pt-6">
-                  <Button onClick={resetAssessment} variant="outline" className="flex-1">
-                    Retake Assessment
-                  </Button>
-                  <Dialog>
-                    <DialogTrigger asChild>
-                      <Button className="flex-1">
-                        <EnvelopeSimple size={16} className="mr-2" />
-                        Schedule Consultation
-                      </Button>
-                    </DialogTrigger>
-                    <DialogContent>
-                      <DialogHeader>
-                        <DialogTitle>Improve Your AI Governance</DialogTitle>
-                        <p className="text-muted-foreground">
-                          Let's discuss how to advance your organization's AI governance practices.
-                        </p>
-                      </DialogHeader>
-                      <CalendlyIntegration />
-                    </DialogContent>
-                  </Dialog>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-      </section>
-    )
-  }
-
-  return (
-    <section className="py-12 bg-gradient-to-br from-primary/5 to-accent/5">
-      <div className="container mx-auto px-4">
-        <div className="max-w-3xl mx-auto">
-          <div className="text-center mb-8">
-            <h2 className="text-3xl font-bold mb-4">AI Governance Maturity Assessment</h2>
-            <p className="text-lg text-muted-foreground">
-              Discover your organization's AI governance strengths and areas for improvement
-            </p>
-          </div>
-
-          <Card>
-            <CardHeader>
-              <div className="flex items-center justify-between mb-4">
-                <Badge variant="outline">{currentQuestion?.category}</Badge>
-                <span className="text-sm text-muted-foreground">
-                  Question {currentQuestionIndex + 1} of {questions.length}
-                </span>
-              </div>
-              <Progress value={(currentQuestionIndex / questions.length) * 100} className="h-2" />
-            </CardHeader>
-            <CardContent className="space-y-6">
-              <h3 className="text-xl font-semibold">{currentQuestion?.question}</h3>
-              
-              <div className="space-y-3">
-                {currentQuestion?.options.map((option) => (
-                  <div
-                    key={option.value}
-                    className={`p-4 rounded-lg border-2 cursor-pointer transition-all hover:border-primary/50 ${
-                      answers[currentQuestion.id] === option.value
-                        ? 'border-primary bg-primary/5'
-                        : 'border-border'
-                    }`}
-                    onClick={() => handleAnswer(option.value)}
-                  >
-                    <div className="flex items-center gap-3">
-                      <div className={`w-4 h-4 rounded-full border-2 ${
-                        answers[currentQuestion.id] === option.value
-                          ? 'border-primary bg-primary'
-                          : 'border-gray-300'
-                      }`} />
-                      <span className="flex-1">{option.text}</span>
-                      <span className="text-sm text-muted-foreground">
-                        {option.value}/5
-                      </span>
-                    </div>
-                  </div>
-                ))}
-              </div>
-
-              <div className="flex justify-between pt-6">
-                <Button 
-                  variant="outline" 
-                  onClick={() => setCurrentQuestionIndex(Math.max(0, currentQuestionIndex - 1))}
-                  disabled={currentQuestionIndex === 0}
-                >
-                  Previous
-                </Button>
-                <Button 
-                  onClick={nextQuestion}
-                  disabled={!answers[currentQuestion?.id]}
-                >
-                  {currentQuestionIndex === questions.length - 1 ? 'Get Results' : 'Next'}
-                  <ArrowRight size={16} className="ml-2" />
-                </Button>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
-      </div>
-    </section>
-  )
-}
-
-function SocialMediaAndEventsSection() {
-  const [selectedTab, setSelectedTab] = useState<'social' | 'events'>('events')
-  const [events, setEvents] = useKV<Array<any>>('upcoming-events', [
-    {
-      id: 1,
-      title: "AI Ethics Summit 2024",
-      date: "2024-04-15",
-      time: "09:00 AM - 05:00 PM",
-      location: "San Francisco, CA",
-      type: "Keynote",
-      status: "confirmed",
-      description: "Opening keynote on 'Building Inclusive AI Systems for the Future'",
-      attendees: 500,
-      url: "https://aiethicssummit2024.com"
-    },
-    {
-      id: 2,
-      title: "Tech Leadership Workshop",
-      date: "2024-04-28",
-      time: "02:00 PM - 06:00 PM",
-      location: "Virtual Event",
-      type: "Workshop",
-      status: "confirmed",
-      description: "Interactive workshop on systems thinking for AI governance leaders",
-      attendees: 50,
-      url: "https://techleadershipworkshop.com"
-    },
-    {
-      id: 3,
-      title: "Disability in Tech Conference",
-      date: "2024-05-12",
-      time: "11:00 AM - 12:00 PM",
-      location: "Boston, MA",
-      type: "Panel Discussion",
-      status: "confirmed",
-      description: "Panel on 'Breaking Down Barriers in AI Development'",
-      attendees: 300,
-      url: "https://disabilityintechconf.org"
-    },
-    {
-      id: 4,
-      title: "Corporate AI Governance Roundtable",
-      date: "2024-05-25",
-      time: "10:00 AM - 03:00 PM",
-      location: "New York, NY",
-      type: "Roundtable",
-      status: "tentative",
-      description: "Invitation-only discussion with Fortune 500 executives",
-      attendees: 25,
-      url: "#"
-    }
-  ])
-
-  const [socialPosts] = useState([
-    {
-      id: 1,
-      platform: "LinkedIn",
-      content: "Excited to announce that our AI Governance Framework has been downloaded over 10,000 times! 🎉 The response from the community has been incredible. Thank you to everyone working to make AI more inclusive and ethical.",
-      timestamp: "2024-03-20T10:30:00Z",
-      likes: 234,
-      shares: 45,
-      comments: 18
-    },
-    {
-      id: 2,
-      platform: "Twitter",
-      content: "Just wrapped up an amazing workshop on inclusive AI design. Key takeaway: When we design for the margins, we create solutions that work better for everyone. 🧠✨ #InclusiveAI #DisabilityInTech",
-      timestamp: "2024-03-18T14:15:00Z",
-      likes: 156,
-      shares: 89,
-      comments: 23
-    },
-    {
-      id: 3,
-      platform: "LinkedIn",
-      content: "New blog post: 'Beyond Compliance - Building Truly Inclusive AI Systems' 📝 We need to move past checkbox mentality and embrace authentic inclusion in AI development.",
-      timestamp: "2024-03-15T09:00:00Z",
-      likes: 189,
-      shares: 34,
-      comments: 12
-    },
-    {
-      id: 4,
-      platform: "Twitter", 
-      content: "Speaking at the AI Ethics Summit next month! Looking forward to discussing how systems thinking can transform organizational AI governance. Who's joining us? 🎤",
-      timestamp: "2024-03-12T16:45:00Z",
-      likes: 98,
-      shares: 67,
-      comments: 15
-    }
-  ])
-
-  const formatDate = (dateString: string) => {
-    const date = new Date(dateString)
-    return date.toLocaleDateString('en-US', { 
-      weekday: 'short', 
-      year: 'numeric', 
-      month: 'short', 
-      day: 'numeric' 
-    })
-  }
-
-  const formatTimestamp = (timestamp: string) => {
-    const date = new Date(timestamp)
-    const now = new Date()
-    const diffInHours = Math.floor((now.getTime() - date.getTime()) / (1000 * 60 * 60))
-    
-    if (diffInHours < 24) {
-      return `${diffInHours}h ago`
-    } else {
-      const diffInDays = Math.floor(diffInHours / 24)
-      return `${diffInDays}d ago`
-    }
-  }
-
-  const getEventStatusColor = (status: string) => {
-    switch (status) {
-      case 'confirmed': return 'bg-green-100 text-green-800'
-      case 'tentative': return 'bg-yellow-100 text-yellow-800'
-      default: return 'bg-gray-100 text-gray-800'
-    }
-  }
-
-  const upcomingEvents = (events || []).filter(event => new Date(event.date) > new Date()).sort((a, b) => 
-    new Date(a.date).getTime() - new Date(b.date).getTime()
-  )
-
-  return (
-    <section className="py-12 bg-gradient-to-br from-primary/10 to-accent/10">
-      <div className="container mx-auto px-4">
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold mb-4">Stay Connected</h2>
-            <p className="text-lg text-muted-foreground">
-              Follow the latest insights and upcoming speaking events
-            </p>
-          </div>
-
-          <div className="flex justify-center mb-8">
-            <div className="bg-card rounded-lg p-1">
-              <Button
-                variant={selectedTab === 'events' ? 'default' : 'ghost'}
-                onClick={() => setSelectedTab('events')}
-                className="px-6"
-              >
-                <Calendar size={16} className="mr-2" />
-                Speaking Events
-              </Button>
-              <Button
-                variant={selectedTab === 'social' ? 'default' : 'ghost'}
-                onClick={() => setSelectedTab('social')}
-                className="px-6"
-              >
-                <UsersIcon size={16} className="mr-2" />
-                Social Media
-              </Button>
-            </div>
-          </div>
-
-          {selectedTab === 'events' && (
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-              {upcomingEvents.map((event) => (
-                <Card key={event.id} className="hover:shadow-lg transition-shadow">
-                  <CardContent className="p-6">
-                    <div className="flex items-start justify-between mb-4">
-                      <div className="flex-1">
-                        <h3 className="text-lg font-semibold mb-2">{event.title}</h3>
-                        <div className="space-y-2 text-sm text-muted-foreground">
-                          <div className="flex items-center gap-2">
-                            <Calendar size={14} />
-                            <span>{formatDate(event.date)}</span>
-                          </div>
-                          <div className="flex items-center gap-2">
-                            <span>📍</span>
-                            <span>{event.location}</span>
-                          </div>
-                          <div className="flex items-center gap-2">
-                            <span>👥</span>
-                            <span>{event.attendees} attendees</span>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="flex flex-col items-end gap-2">
-                        <Badge variant="secondary" className={getEventStatusColor(event.status)}>
-                          {event.status}
-                        </Badge>
-                        <Badge variant="outline" className="text-xs">
-                          {event.type}
-                        </Badge>
-                      </div>
-                    </div>
-                    
-                    <p className="text-sm text-muted-foreground mb-4">{event.description}</p>
-                    
-                    <div className="flex gap-2">
-                      {event.url !== '#' && (
-                        <Button 
-                          variant="outline" 
-                          size="sm"
-                          onClick={() => window.open(event.url, '_blank')}
-                        >
-                          <ArrowSquareOut size={14} className="mr-1" />
-                          Event Details
-                        </Button>
-                      )}
-                      <CalendlyIntegration />
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          )}
-
-          {selectedTab === 'social' && (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {socialPosts.map((post) => (
-                <Card key={post.id} className="hover:shadow-md transition-shadow">
-                  <CardContent className="p-6">
-                    <div className="flex items-center justify-between mb-4">
-                      <div className="flex items-center gap-2">
-                        <div className={`w-3 h-3 rounded ${
-                          post.platform === 'LinkedIn' ? 'bg-blue-600' : 'bg-sky-400'
-                        }`} />
-                        <span className="font-medium text-sm">{post.platform}</span>
-                      </div>
-                      <span className="text-xs text-muted-foreground">
-                        {formatTimestamp(post.timestamp)}
-                      </span>
-                    </div>
-                    
-                    <p className="text-sm leading-relaxed mb-4">{post.content}</p>
-                    
-                    <div className="flex items-center gap-4 text-xs text-muted-foreground">
-                      <span className="flex items-center gap-1">
-                        ❤️ {post.likes}
-                      </span>
-                      <span className="flex items-center gap-1">
-                        🔄 {post.shares}
-                      </span>
-                      <span className="flex items-center gap-1">
-                        💬 {post.comments}
-                      </span>
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          )}
-
-          <div className="mt-12 text-center">
-            <div className="flex justify-center gap-4">
-              <Button 
-                variant="outline"
-                onClick={() => window.open('https://www.linkedin.com/in/dede-tetsubayashi/', '_blank')}
-              >
-                LinkedIn
-                <ArrowSquareOut size={16} className="ml-2" />
-              </Button>
-              <Button 
-                variant="outline"
-                onClick={() => window.open('https://twitter.com/dr_dede_', '_blank')}
-              >
-                Twitter
-                <ArrowSquareOut size={16} className="ml-2" />
-              </Button>
-              <Button 
-                variant="outline"
-                onClick={() => window.open('https://www.youtube.com/@the_drdede', '_blank')}
-              >
-                YouTube
-                <ArrowSquareOut size={16} className="ml-2" />
-              </Button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  )
-}
-
 function AdminPanel() {
   const [isOpen, setIsOpen] = useState(false)
   const [user, setUser] = useState<any>(null)
@@ -1971,6 +1195,11 @@ function AdminPanel() {
 }
 
 function App() {
+  const [currentPage, setCurrentPage] = useState<'home' | 'resources'>('home')
+
+  if (currentPage === 'resources') {
+    return <ResourcesPage onBack={() => setCurrentPage('home')} />
+  }
   return (
     <div className="min-h-screen bg-background">
       <Toaster position="top-right" />
@@ -1991,6 +1220,15 @@ function App() {
               >
                 <BookOpen size={16} className="mr-2" />
                 Blog
+              </Button>
+              <Button 
+                variant="ghost" 
+                size="sm" 
+                onClick={() => setCurrentPage('resources')}
+                className="hidden sm:flex"
+              >
+                <FileText size={16} className="mr-2" />
+                Resources
               </Button>
               <div className="w-full sm:w-auto">
                 <CalendlyIntegration />
@@ -2014,7 +1252,7 @@ function App() {
               <div className="order-2 lg:order-1">
                 <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4 md:mb-6 leading-tight">
                   Transforming AI Governance Through
-                  <span className="text-primary"> Inclusive Innovation</span>
+                  <span className="text-primary"> Equitable Innovation</span>
                 </h2>
                 <p className="text-lg md:text-xl text-muted-foreground mb-6 md:mb-8 leading-relaxed">
                   Watch my TEDx talk on reimagining artificial intelligence systems to serve everyone, 
@@ -2068,7 +1306,7 @@ function App() {
                   <CardContent className="p-4 md:p-6">
                     <Trophy size={40} className="mx-auto mb-3 md:mb-4 text-accent md:w-12 md:h-12" />
                     <h3 className="font-semibold mb-2 text-sm md:text-base">Disability Advocate & Systems Disruptor</h3>
-                    <p className="text-xs md:text-sm text-muted-foreground">Champion for accessible technology and inclusive design practices</p>
+                    <p className="text-xs md:text-sm text-muted-foreground">Champion for accessible technology and equitable design practices</p>
                   </CardContent>
                 </Card>
                 <Card className="text-center">
@@ -2227,18 +1465,54 @@ function App() {
 
         <BlogInsightsSection />
 
-        <ResourcesDownloadsSection />
-
-        <AIGovernanceAssessment />
-
-        <SocialMediaAndEventsSection />
+        <section className="py-12 bg-gradient-to-br from-accent/5 to-primary/5">
+          <div className="container mx-auto px-4">
+            <div className="max-w-4xl mx-auto text-center">
+              <h2 className="text-3xl font-bold mb-4">Ready to Transform Your AI Governance?</h2>
+              <p className="text-lg text-muted-foreground mb-8">
+                Access our comprehensive resources, take the maturity assessment, and stay connected with the latest insights.
+              </p>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                <Card className="p-6">
+                  <FileText size={40} className="mx-auto mb-4 text-primary" />
+                  <h3 className="font-semibold mb-2">Free Resources</h3>
+                  <p className="text-sm text-muted-foreground mb-4">
+                    Download frameworks, guides, and toolkits to advance your AI governance journey.
+                  </p>
+                </Card>
+                <Card className="p-6">
+                  <CheckCircle size={40} className="mx-auto mb-4 text-accent" />
+                  <h3 className="font-semibold mb-2">Maturity Assessment</h3>
+                  <p className="text-sm text-muted-foreground mb-4">
+                    Discover your organization's AI governance strengths and improvement opportunities.
+                  </p>
+                </Card>
+                <Card className="p-6">
+                  <UsersIcon size={40} className="mx-auto mb-4 text-primary" />
+                  <h3 className="font-semibold mb-2">Stay Connected</h3>
+                  <p className="text-sm text-muted-foreground mb-4">
+                    Follow events, insights, and connect on LinkedIn, Instagram, and YouTube.
+                  </p>
+                </Card>
+              </div>
+              <Button 
+                onClick={() => setCurrentPage('resources')}
+                size="lg"
+                className="bg-primary hover:bg-primary/90"
+              >
+                <ArrowRight size={20} className="mr-2" />
+                Access Resources & Assessment
+              </Button>
+            </div>
+          </div>
+        </section>
 
         <section className="py-8 md:py-12">
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto">
               <h2 className="text-2xl md:text-3xl font-bold text-center mb-3 md:mb-4">Speaking & Workshops</h2>
               <p className="text-lg md:text-xl text-muted-foreground text-center mb-8 md:mb-12">
-                Transform your organization's approach to AI governance and inclusive innovation
+                Transform your organization's approach to AI governance and equitable innovation
               </p>
               
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8 mb-8 md:mb-12">
@@ -2247,7 +1521,7 @@ function App() {
                     <h3 className="text-lg md:text-xl font-semibold mb-3 md:mb-4">Keynote Presentations</h3>
                     <p className="text-muted-foreground mb-3 md:mb-4 text-sm md:text-base">
                       Inspirational talks that challenge assumptions and provide actionable frameworks 
-                      for building more inclusive AI systems.
+                      for building more equitable AI systems.
                     </p>
                     <div className="flex flex-wrap gap-2">
                       <Badge variant="secondary" className="text-xs">45-60 minutes</Badge>
@@ -2262,7 +1536,7 @@ function App() {
                     <h3 className="text-lg md:text-xl font-semibold mb-3 md:mb-4">Custom Workshops</h3>
                     <p className="text-muted-foreground mb-3 md:mb-4 text-sm md:text-base">
                       Interactive sessions tailored to your team's needs, focusing on practical 
-                      implementation of inclusive AI governance practices.
+                      implementation of equitable AI governance practices.
                     </p>
                     <div className="flex flex-wrap gap-2">
                       <Badge variant="secondary" className="text-xs">2-8 hours</Badge>
@@ -2285,7 +1559,7 @@ function App() {
                     </ul>
                   </div>
                   <div>
-                    <h4 className="font-semibold mb-2 md:mb-3">Inclusive Technology Design</h4>
+                    <h4 className="font-semibold mb-2 md:mb-3">Equitable Technology Design</h4>
                     <ul className="space-y-1 md:space-y-2 text-xs md:text-sm text-muted-foreground">
                       <li>• Accessibility-first development</li>
                       <li>• Bias detection and mitigation</li>
@@ -2296,7 +1570,7 @@ function App() {
                     <h4 className="font-semibold mb-2 md:mb-3">Systems Change & Leadership</h4>
                     <ul className="space-y-1 md:space-y-2 text-xs md:text-sm text-muted-foreground">
                       <li>• Organizational transformation</li>
-                      <li>• Inclusive leadership practices</li>
+                      <li>• Equitable leadership practices</li>
                       <li>• Building diverse tech teams</li>
                     </ul>
                   </div>
@@ -2319,7 +1593,7 @@ function App() {
             <div className="max-w-2xl mx-auto text-center mb-8 md:mb-12">
               <h2 className="text-2xl md:text-3xl font-bold mb-3 md:mb-4">Transform Your Organization's AI Future</h2>
               <p className="text-base md:text-lg text-muted-foreground mb-4 md:mb-6">
-                Ready to build AI systems that drive inclusive innovation while ensuring regulatory compliance? 
+                Ready to build AI systems that drive equitable innovation while ensuring regulatory compliance? 
                 Let's discuss how we can accelerate your success.
               </p>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
