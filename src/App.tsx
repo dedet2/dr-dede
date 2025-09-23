@@ -9,11 +9,13 @@ import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar"
 import { Separator } from "@/components/ui/separator"
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Users, EnvelopeSimple, ArrowRight, Play, GraduationCap, Trophy, Lightbulb, BookOpen, Quotes, Star, ArrowSquareOut, Calendar, VideoCamera, Eye, X, CalendarBlank, PaperPlaneTilt, DownloadSimple, FileText, CheckCircle, Shield, Users as UsersIcon, LinkedinLogo, InstagramLogo, YoutubeLogo } from "@phosphor-icons/react"
+import { Users, EnvelopeSimple, ArrowRight, Play, GraduationCap, Trophy, Lightbulb, BookOpen, Quotes, Star, ArrowSquareOut, Calendar, VideoCamera, Eye, X, CalendarBlank, PaperPlaneTilt, DownloadSimple, FileText, CheckCircle, Shield, Users as UsersIcon, LinkedinLogo, InstagramLogo, YoutubeLogo, Calculator, Presentation } from "@phosphor-icons/react"
 import { useKV } from '@github/spark/hooks'
 import { toast, Toaster } from 'sonner'
 import heroBackground from '@/assets/images/hero-bg.png'
 import ResourcesPage from './ResourcesPage'
+import SocialMediaFeeds from './components/SocialMediaFeeds'
+import AIGovernanceAssessment from './components/AIGovernanceAssessment'
 
 declare global {
   interface Window {
@@ -1195,10 +1197,47 @@ function AdminPanel() {
 }
 
 function App() {
-  const [currentPage, setCurrentPage] = useState<'home' | 'resources'>('home')
+  const [currentPage, setCurrentPage] = useState<'home' | 'resources' | 'assessment'>('home')
 
   if (currentPage === 'resources') {
     return <ResourcesPage onBack={() => setCurrentPage('home')} />
+  }
+
+  if (currentPage === 'assessment') {
+    return (
+      <div className="min-h-screen bg-background">
+        <Toaster position="top-right" />
+        <AdminPanel />
+        <header className="border-b bg-card/50 backdrop-blur-sm sticky top-0 z-40">
+          <div className="container mx-auto px-4 py-4">
+            <div className="flex items-center justify-between">
+              <div className="min-w-0 flex-1">
+                <h1 className="text-xl md:text-2xl font-bold text-primary truncate">Dr. Dédé Tetsubayashi</h1>
+                <p className="text-xs md:text-sm text-muted-foreground">AI GRC Exec | Board Member | TEDx Speaker</p>
+              </div>
+              <Button 
+                variant="ghost" 
+                onClick={() => setCurrentPage('home')}
+                className="text-sm"
+              >
+                ← Back to Home
+              </Button>
+            </div>
+          </div>
+        </header>
+        <main className="py-12">
+          <div className="container mx-auto px-4">
+            <div className="text-center mb-8">
+              <h1 className="text-3xl font-bold mb-4">AI Governance Maturity Assessment</h1>
+              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+                Discover your organization's AI governance strengths and areas for improvement with this comprehensive assessment tool.
+              </p>
+            </div>
+            <AIGovernanceAssessment />
+          </div>
+        </main>
+      </div>
+    )
   }
   return (
     <div className="min-h-screen bg-background">
@@ -1212,6 +1251,40 @@ function App() {
               <p className="text-xs md:text-sm text-muted-foreground">AI GRC Exec | Board Member | TEDx Speaker</p>
             </div>
             <div className="flex items-center gap-2 md:gap-4 flex-shrink-0">
+              <Button 
+                variant="ghost" 
+                size="sm" 
+                onClick={() => window.open('https://pmukyznd.manus.space/', '_blank')}
+                className="hidden sm:flex text-xs"
+              >
+                <Calculator size={16} className="mr-2" />
+                🎉 ROI Calculator ✨
+              </Button>
+              <Button 
+                variant="ghost" 
+                size="sm" 
+                onClick={() => {
+                  // Check if background image is loading, if not use backup
+                  const img = new Image()
+                  img.onload = () => {
+                    window.open('https://dr-dede-tedx-homepage.vercel.app/', '_blank')
+                  }
+                  img.onerror = () => {
+                    window.open('https://nslacnow.manus.space/', '_blank')
+                  }
+                  img.src = heroBackground
+                  // Fallback timeout
+                  setTimeout(() => {
+                    if (!img.complete) {
+                      window.open('https://nslacnow.manus.space/', '_blank')
+                    }
+                  }, 2000)
+                }}
+                className="hidden sm:flex text-xs"
+              >
+                <Presentation size={16} className="mr-2" />
+                TEDx Talk
+              </Button>
               <Button 
                 variant="ghost" 
                 size="sm" 
@@ -1465,6 +1538,8 @@ function App() {
 
         <BlogInsightsSection />
 
+        <SocialMediaFeeds />
+
         <section className="py-12 bg-gradient-to-br from-accent/5 to-primary/5">
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto text-center">
@@ -1486,6 +1561,13 @@ function App() {
                   <p className="text-sm text-muted-foreground mb-4">
                     Discover your organization's AI governance strengths and improvement opportunities.
                   </p>
+                  <Button 
+                    size="sm" 
+                    onClick={() => setCurrentPage('assessment')}
+                    className="w-full"
+                  >
+                    Take Assessment
+                  </Button>
                 </Card>
                 <Card className="p-6">
                   <UsersIcon size={40} className="mx-auto mb-4 text-primary" />
@@ -1628,6 +1710,38 @@ function App() {
             </div>
             
             <div className="flex flex-col sm:flex-row justify-center gap-2 md:gap-4">
+              <Button 
+                variant="outline" 
+                size="sm"
+                onClick={() => {
+                  const img = new Image()
+                  img.onload = () => {
+                    window.open('https://dr-dede-tedx-homepage.vercel.app/', '_blank')
+                  }
+                  img.onerror = () => {
+                    window.open('https://nslacnow.manus.space/', '_blank')
+                  }
+                  img.src = heroBackground
+                  setTimeout(() => {
+                    if (!img.complete) {
+                      window.open('https://nslacnow.manus.space/', '_blank')
+                    }
+                  }, 2000)
+                }}
+                className="w-full sm:w-auto"
+              >
+                <Presentation size={16} className="mr-2" />
+                TEDx Talk
+              </Button>
+              <Button 
+                variant="outline" 
+                size="sm"
+                onClick={() => window.open('https://pmukyznd.manus.space/', '_blank')}
+                className="w-full sm:w-auto"
+              >
+                <Calculator size={16} className="mr-2" />
+                🎉 ROI Calculator ✨
+              </Button>
               <Button 
                 variant="outline" 
                 size="sm"
