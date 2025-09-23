@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
@@ -14,7 +15,13 @@ import { Users, EnvelopeSimple, ArrowRight, Play, GraduationCap, Trophy, Lightbu
 import { useKV } from '@github/spark/hooks'
 import { toast, Toaster } from 'sonner'
 import heroBackground from '@/assets/images/hero-bg.png'
+import professionalHeadshot from '@/assets/images/professional-headshot-1.jpg'
+import professionalHeadshot2 from '@/assets/images/professional-headshot-2.jpg'
+import speakingPhoto from '@/assets/images/speaking-photo-1.jpg'
+import consultingPhoto from '@/assets/images/consulting-photo-1.jpg'
+import personalPhoto from '@/assets/images/personal-photo-1.jpg'
 import ResourcesPage from './ResourcesPage'
+import CaseStudiesPage from './CaseStudiesPage'
 import SocialMediaFeeds from './components/SocialMediaFeeds'
 import AIGovernanceAssessment from './components/AIGovernanceAssessment'
 import VideoTestimonialRecorder from './components/VideoTestimonialRecorder'
@@ -485,7 +492,7 @@ function VideoTestimonialsSection() {
   )
 }
 
-function CaseStudyShowcase() {
+function CaseStudyShowcase({ setCurrentPage }: { setCurrentPage: (page: 'home' | 'resources' | 'assessment' | 'case-studies') => void }) {
   const caseStudies = [
     {
       id: 1,
@@ -499,7 +506,7 @@ function CaseStudyShowcase() {
         "40% reduction in AI project approval time",
         "Created reusable framework adopted by 3 other divisions"
       ],
-      image: "https://images.unsplash.com/photo-1551434678-e076c223a692?w=600&h=400&fit=crop",
+      image: consultingPhoto,
       tags: ["AI Governance", "Global Scale", "Regulatory Compliance"]
     },
     {
@@ -531,7 +538,7 @@ function CaseStudyShowcase() {
         "Secured $50M Series C citing responsible AI practices",
         "Framework open-sourced and adopted by 100+ startups"
       ],
-      image: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=600&h=400&fit=crop",
+      image: speakingPhoto,
       tags: ["Startup", "EdTech", "Ethics Framework", "Equitable Design"]
     }
   ]
@@ -539,48 +546,91 @@ function CaseStudyShowcase() {
   const [selectedCase, setSelectedCase] = useState<null | typeof caseStudies[0]>(null)
 
   return (
-    <section className="py-12 bg-secondary/20">
+    <motion.section 
+      className="py-12 bg-secondary/20"
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.8 }}
+    >
       <div className="container mx-auto px-4">
         <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-12">
+          <motion.div 
+            className="text-center mb-12"
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+          >
             <h2 className="text-3xl font-bold mb-4">Case Study Showcase</h2>
-            <p className="text-lg text-muted-foreground">
+            <p className="text-lg text-muted-foreground mb-8">
               Real-world results from AI governance transformations that drive measurable business value and competitive advantage
             </p>
-          </div>
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <Button 
+                onClick={() => setCurrentPage('case-studies')}
+                className="mb-8"
+              >
+                <Trophy size={16} className="mr-2" />
+                View All Case Studies
+              </Button>
+            </motion.div>
+          </motion.div>
           
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            {caseStudies.map((caseStudy) => (
-              <Card key={caseStudy.id} className="h-full cursor-pointer hover:shadow-lg transition-shadow">
-                <CardContent className="p-0">
-                  <img 
-                    src={caseStudy.image} 
-                    alt={caseStudy.title}
-                    className="w-full h-48 object-cover rounded-t-lg"
-                  />
-                  <div className="p-6">
-                    <div className="flex flex-wrap gap-2 mb-3">
-                      {caseStudy.tags.map((tag) => (
-                        <Badge key={tag} variant="secondary" className="text-xs">
-                          {tag}
-                        </Badge>
-                      ))}
+            {caseStudies.map((caseStudy, index) => (
+              <motion.div
+                key={caseStudy.id}
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: index * 0.2 }}
+                whileHover={{ scale: 1.03, y: -10 }}
+              >
+                <Card className="h-full cursor-pointer hover:shadow-xl transition-all duration-300 bg-card/90 backdrop-blur-sm">
+                  <CardContent className="p-0">
+                    <div className="relative overflow-hidden">
+                      <motion.img 
+                        src={caseStudy.image} 
+                        alt={caseStudy.title}
+                        className="w-full h-48 object-cover rounded-t-lg"
+                        whileHover={{ scale: 1.1 }}
+                        transition={{ duration: 0.5 }}
+                      />
+                      <motion.div 
+                        className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"
+                        initial={{ opacity: 0 }}
+                        whileHover={{ opacity: 1 }}
+                        transition={{ duration: 0.3 }}
+                      />
                     </div>
-                    <h3 className="font-semibold mb-2">{caseStudy.title}</h3>
-                    <p className="text-sm text-muted-foreground mb-4">{caseStudy.industry}</p>
-                    <p className="text-sm mb-4">{caseStudy.challenge}</p>
-                    <Button 
-                      variant="outline" 
-                      size="sm" 
-                      className="w-full"
-                      onClick={() => setSelectedCase(caseStudy)}
-                    >
-                      <Eye size={16} className="mr-2" />
-                      View Full Case Study
-                    </Button>
-                  </div>
-                </CardContent>
-              </Card>
+                    <div className="p-6">
+                      <div className="flex flex-wrap gap-2 mb-3">
+                        {caseStudy.tags.map((tag) => (
+                          <Badge key={tag} variant="secondary" className="text-xs">
+                            {tag}
+                          </Badge>
+                        ))}
+                      </div>
+                      <h3 className="font-semibold mb-2">{caseStudy.title}</h3>
+                      <p className="text-sm text-muted-foreground mb-4">{caseStudy.industry}</p>
+                      <p className="text-sm mb-4 line-clamp-3">{caseStudy.challenge}</p>
+                      <Button 
+                        variant="outline" 
+                        size="sm" 
+                        className="w-full"
+                        onClick={() => setSelectedCase(caseStudy)}
+                      >
+                        <Eye size={16} className="mr-2" />
+                        View Full Case Study
+                      </Button>
+                    </div>
+                  </CardContent>
+                </Card>
+              </motion.div>
             ))}
           </div>
 
@@ -590,7 +640,12 @@ function CaseStudyShowcase() {
                 <DialogTitle>{selectedCase?.title}</DialogTitle>
               </DialogHeader>
               {selectedCase && (
-                <div className="space-y-6">
+                <motion.div 
+                  className="space-y-6"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5 }}
+                >
                   <img 
                     src={selectedCase.image} 
                     alt={selectedCase.title}
@@ -636,13 +691,25 @@ function CaseStudyShowcase() {
                       ))}
                     </ul>
                   </div>
-                </div>
+                  
+                  <div className="flex gap-4 pt-4">
+                    <Button 
+                      onClick={() => setCurrentPage('case-studies')}
+                      className="flex-1"
+                    >
+                      View All Case Studies
+                    </Button>
+                    <Button variant="outline" className="flex-1">
+                      Contact for Similar Results
+                    </Button>
+                  </div>
+                </motion.div>
               )}
             </DialogContent>
           </Dialog>
         </div>
       </div>
-    </section>
+    </motion.section>
   )
 }
 
@@ -679,53 +746,100 @@ function TestimonialsSection() {
   ]
 
   return (
-    <section className="py-12">
+    <motion.section 
+      className="py-12"
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.8 }}
+    >
       <div className="container mx-auto px-4">
         <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-12">
+          <motion.div 
+            className="text-center mb-12"
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+          >
             <h2 className="text-3xl font-bold mb-4">What People Are Saying</h2>
             <p className="text-lg text-muted-foreground">
               Feedback from speaking engagements and consulting clients
             </p>
-          </div>
+            {/* Professional headshot in testimonial header */}
+            <motion.div 
+              className="flex justify-center mt-8 mb-4"
+              initial={{ opacity: 0, scale: 0.8 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.3 }}
+            >
+              <img 
+                src={professionalHeadshot2}
+                alt="Dr. Dédé Tetsubayashi with clients"
+                className="w-24 h-24 rounded-full object-cover shadow-lg ring-2 ring-primary/20"
+              />
+            </motion.div>
+          </motion.div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {testimonials.map((testimonial, index) => (
-              <Card key={index} className="h-full">
-                <CardContent className="p-6">
-                  <div className="flex items-start gap-4">
-                    <Quotes size={24} className="text-accent mt-1 flex-shrink-0" />
-                    <div className="space-y-4">
-                      <p className="text-muted-foreground leading-relaxed">
-                        "{testimonial.quote}"
-                      </p>
-                      
-                      <div className="flex items-center gap-1 mb-3">
-                        {[...Array(testimonial.rating)].map((_, i) => (
-                          <Star key={i} size={16} weight="fill" className="text-yellow-500" />
-                        ))}
-                      </div>
-                      
-                      <div className="flex items-center gap-3">
-                        <Avatar className="h-10 w-10">
-                          <AvatarFallback className="bg-primary text-primary-foreground text-sm">
-                            {testimonial.avatar}
-                          </AvatarFallback>
-                        </Avatar>
-                        <div>
-                          <p className="font-semibold text-sm">{testimonial.author}</p>
-                          <p className="text-xs text-muted-foreground">{testimonial.title}</p>
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+                whileHover={{ scale: 1.02, y: -5 }}
+              >
+                <Card className="h-full bg-card/90 backdrop-blur-sm hover:shadow-xl transition-all duration-300">
+                  <CardContent className="p-6">
+                    <div className="flex items-start gap-4">
+                      <motion.div
+                        animate={{ rotate: [0, 10, 0] }}
+                        transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+                      >
+                        <Quotes size={24} className="text-accent mt-1 flex-shrink-0" />
+                      </motion.div>
+                      <div className="space-y-4">
+                        <p className="text-muted-foreground leading-relaxed">
+                          "{testimonial.quote}"
+                        </p>
+                        
+                        <div className="flex items-center gap-1 mb-3">
+                          {[...Array(testimonial.rating)].map((_, i) => (
+                            <motion.div
+                              key={i}
+                              initial={{ opacity: 0, scale: 0 }}
+                              whileInView={{ opacity: 1, scale: 1 }}
+                              transition={{ delay: i * 0.1 }}
+                            >
+                              <Star size={16} weight="fill" className="text-yellow-500" />
+                            </motion.div>
+                          ))}
+                        </div>
+                        
+                        <div className="flex items-center gap-3">
+                          <Avatar className="h-10 w-10">
+                            <AvatarFallback className="bg-primary text-primary-foreground text-sm">
+                              {testimonial.avatar}
+                            </AvatarFallback>
+                          </Avatar>
+                          <div>
+                            <p className="font-semibold text-sm">{testimonial.author}</p>
+                            <p className="text-xs text-muted-foreground">{testimonial.title}</p>
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                </CardContent>
-              </Card>
+                  </CardContent>
+                </Card>
+              </motion.div>
             ))}
           </div>
         </div>
       </div>
-    </section>
+    </motion.section>
   )
 }
 
@@ -1195,10 +1309,14 @@ function AdminPanel() {
 }
 
 function App() {
-  const [currentPage, setCurrentPage] = useState<'home' | 'resources' | 'assessment'>('home')
+  const [currentPage, setCurrentPage] = useState<'home' | 'resources' | 'assessment' | 'case-studies'>('home')
 
   if (currentPage === 'resources') {
     return <ResourcesPage onBack={() => setCurrentPage('home')} />
+  }
+
+  if (currentPage === 'case-studies') {
+    return <CaseStudiesPage onBack={() => setCurrentPage('home')} />
   }
 
   if (currentPage === 'assessment') {
@@ -1333,6 +1451,15 @@ function App() {
                   <FileText size={14} className="mr-1" />
                   Resources
                 </Button>
+                <Button 
+                  variant="ghost" 
+                  size="sm" 
+                  onClick={() => setCurrentPage('case-studies')}
+                  className="hidden lg:flex text-xs px-2 py-1"
+                >
+                  <Trophy size={14} className="mr-1" />
+                  Case Studies
+                </Button>
                 <div className="flex-shrink-0">
                   <CalendlyIntegration />
                 </div>
@@ -1345,31 +1472,66 @@ function App() {
         <section className="py-12 lg:py-32 min-h-[80vh] flex items-center">
           <div className="container mx-auto px-4">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center max-w-7xl mx-auto">
-              <div className="order-2 lg:order-1 space-y-8">
+              <motion.div 
+                className="order-2 lg:order-1 space-y-8"
+                initial={{ opacity: 0, x: -50 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.8 }}
+              >
                 <div>
-                  <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6 leading-tight">
+                  <motion.h1 
+                    className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6 leading-tight"
+                    initial={{ opacity: 0, y: 30 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.2, duration: 0.8 }}
+                  >
                     Transforming AI Through
-                    <span className="text-primary block"> Equitable Innovation</span>
-                  </h1>
-                  <p className="text-xl text-muted-foreground mb-8 leading-relaxed max-w-2xl">
+                    <motion.span 
+                      className="text-primary block"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ delay: 0.6, duration: 0.8 }}
+                    > Equitable Innovation</motion.span>
+                  </motion.h1>
+                  <motion.p 
+                    className="text-xl text-muted-foreground mb-8 leading-relaxed max-w-2xl"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.4, duration: 0.8 }}
+                  >
                     Watch my TEDx talk on reimagining artificial intelligence systems to serve everyone, 
                     not just the privileged few.
-                  </p>
+                  </motion.p>
                 </div>
-                <div className="flex flex-col sm:flex-row gap-4">
-                  <Button 
-                    size="lg" 
-                    className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-4 text-lg"
-                    onClick={() => window.open('https://www.youtube.com/@the_drdede', '_blank')}
+                <motion.div 
+                  className="flex flex-col sm:flex-row gap-4"
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.8, duration: 0.8 }}
+                >
+                  <motion.div
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
                   >
-                    <Play size={24} className="mr-3" />
-                    Watch TEDx Talk
-                  </Button>
+                    <Button 
+                      size="lg" 
+                      className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-4 text-lg"
+                      onClick={() => window.open('https://www.youtube.com/@the_drdede', '_blank')}
+                    >
+                      <Play size={24} className="mr-3" />
+                      Watch TEDx Talk
+                    </Button>
+                  </motion.div>
                   <Dialog>
                     <DialogTrigger asChild>
-                      <Button variant="outline" size="lg" className="px-8 py-4 text-lg">
-                        Get AI Insights
-                      </Button>
+                      <motion.div
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                      >
+                        <Button variant="outline" size="lg" className="px-8 py-4 text-lg">
+                          Get AI Insights
+                        </Button>
+                      </motion.div>
                     </DialogTrigger>
                     <DialogContent className="mx-4 max-w-md">
                       <DialogHeader>
@@ -1378,60 +1540,137 @@ function App() {
                       <NewsletterSignup />
                     </DialogContent>
                   </Dialog>
-                </div>
-              </div>
-              <div className="order-1 lg:order-2">
+                </motion.div>
+              </motion.div>
+              <motion.div 
+                className="order-1 lg:order-2"
+                initial={{ opacity: 0, x: 50 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+              >
                 <div className="space-y-6">
-                  <YouTubeEmbed />
-                  <SubscriberCounter />
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ delay: 0.5, duration: 0.8 }}
+                  >
+                    <YouTubeEmbed />
+                  </motion.div>
+                  <motion.div
+                    initial={{ opacity: 0, y: 30 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.7, duration: 0.8 }}
+                  >
+                    <SubscriberCounter />
+                  </motion.div>
                 </div>
-              </div>
+              </motion.div>
             </div>
           </div>
         </section>
 
         <section className="py-16 bg-card/50 backdrop-blur-sm">
           <div className="container mx-auto px-4">
-            <div className="max-w-4xl mx-auto text-center mb-16">
+            <motion.div 
+              className="max-w-4xl mx-auto text-center mb-16"
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+            >
               <h2 className="text-3xl md:text-4xl font-bold mb-6">About Dr. Dédé</h2>
               <p className="text-xl text-muted-foreground leading-relaxed">
                 Combining rigorous academic training with lived experience as a disability advocate 
                 to challenge conventional approaches to AI governance and create lasting systemic change.
               </p>
-            </div>
+            </motion.div>
             
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
-              <Card className="text-center bg-card/80 backdrop-blur-sm border-0 shadow-lg">
-                <CardContent className="p-8">
-                  <GraduationCap size={48} className="mx-auto mb-4 text-primary" />
-                  <h3 className="font-semibold mb-3">AI GRC Executive & Board Member</h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed">Advanced expertise in Technology Policy and AI Governance Risk & Compliance</p>
-                </CardContent>
-              </Card>
-              <Card className="text-center bg-card/80 backdrop-blur-sm border-0 shadow-lg">
-                <CardContent className="p-8">
-                  <Trophy size={48} className="mx-auto mb-4 text-accent" />
-                  <h3 className="font-semibold mb-3">Disability Advocate & Systems Disruptor</h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed">Champion for accessible technology and equitable design practices</p>
-                </CardContent>
-              </Card>
-              <Card className="text-center bg-card/80 backdrop-blur-sm border-0 shadow-lg">
-                <CardContent className="p-8">
-                  <VideoCamera size={48} className="mx-auto mb-4 text-primary" />
-                  <h3 className="font-semibold mb-3">TEDx Speaker</h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed">Inspiring global audiences on inclusive AI and systems transformation</p>
-                </CardContent>
-              </Card>
-              <Card className="text-center bg-card/80 backdrop-blur-sm border-0 shadow-lg">
-                <CardContent className="p-8">
-                  <Lightbulb size={48} className="mx-auto mb-4 text-accent" />
-                  <h3 className="font-semibold mb-3">Innovation Leader</h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed">Reimagining power structures in AI development and deployment</p>
-                </CardContent>
-              </Card>
-            </div>
+            {/* Professional headshot */}
+            <motion.div 
+              className="flex justify-center mb-12"
+              initial={{ opacity: 0, scale: 0.8 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+            >
+              <div className="relative">
+                <img 
+                  src={professionalHeadshot}
+                  alt="Dr. Dédé Tetsubayashi - Professional Headshot"
+                  className="w-48 h-48 rounded-full object-cover shadow-2xl ring-4 ring-primary/20"
+                />
+                <motion.div 
+                  className="absolute inset-0 rounded-full bg-gradient-to-br from-primary/20 to-accent/20"
+                  animate={{ rotate: 360 }}
+                  transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+                />
+              </div>
+            </motion.div>
             
-            <div className="max-w-4xl mx-auto text-center">
+            <motion.div 
+              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-16"
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+            >
+              {[
+                {
+                  icon: GraduationCap,
+                  title: "AI GRC Executive & Board Member",
+                  description: "Advanced expertise in Technology Policy and AI Governance Risk & Compliance",
+                  color: "text-primary"
+                },
+                {
+                  icon: Trophy,
+                  title: "Disability Advocate & Systems Disruptor",
+                  description: "Champion for accessible technology and equitable design practices",
+                  color: "text-accent"
+                },
+                {
+                  icon: VideoCamera,
+                  title: "TEDx Speaker",
+                  description: "Inspiring global audiences on inclusive AI and systems transformation",
+                  color: "text-primary"
+                },
+                {
+                  icon: Lightbulb,
+                  title: "Innovation Leader",
+                  description: "Reimagining power structures in AI development and deployment",
+                  color: "text-accent"
+                }
+              ].map((item, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 50 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: index * 0.1 }}
+                  whileHover={{ scale: 1.05, y: -10 }}
+                >
+                  <Card className="text-center bg-card/80 backdrop-blur-sm border-0 shadow-lg h-full">
+                    <CardContent className="p-8">
+                      <motion.div
+                        animate={{ y: [0, -10, 0] }}
+                        transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                      >
+                        <item.icon size={48} className={`mx-auto mb-4 ${item.color}`} />
+                      </motion.div>
+                      <h3 className="font-semibold mb-3">{item.title}</h3>
+                      <p className="text-sm text-muted-foreground leading-relaxed">{item.description}</p>
+                    </CardContent>
+                  </Card>
+                </motion.div>
+              ))}
+            </motion.div>
+            
+            <motion.div 
+              className="max-w-4xl mx-auto text-center"
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.6 }}
+            >
               <p className="text-lg leading-relaxed mb-6">
                 Dr. Dédé Tetsubayashi dismantles systemic barriers that exclude marginalized communities 
                 from technological advancement. Their interdisciplinary approach bridges technical innovation 
@@ -1441,13 +1680,13 @@ function App() {
                 As a sought-after speaker and consultant, Dr. Tetsubayashi helps organizations build more equitable 
                 AI systems while navigating complex regulatory landscapes.
               </p>
-            </div>
+            </motion.div>
           </div>
         </section>
 
         <TestimonialsSection />
 
-        <CaseStudyShowcase />
+        <CaseStudyShowcase setCurrentPage={setCurrentPage} />
 
         <section className="py-16 bg-card/50 backdrop-blur-sm">
           <div className="container mx-auto px-4">
@@ -1574,102 +1813,176 @@ function App() {
 
         <section className="py-16">
           <div className="container mx-auto px-4">
-            <div className="max-w-4xl mx-auto text-center mb-16">
+            <motion.div 
+              className="max-w-4xl mx-auto text-center mb-16"
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+            >
               <h2 className="text-3xl md:text-4xl font-bold mb-6">Speaking & Workshops</h2>
-              <p className="text-xl text-muted-foreground">
+              <p className="text-xl text-muted-foreground mb-8">
                 Transform your organization's approach to AI governance and equitable innovation
               </p>
-            </div>
-            
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
-              <Card className="bg-card/80 backdrop-blur-sm border-0 shadow-lg">
-                <CardContent className="p-8">
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    <Badge variant="secondary" className="text-xs">Virtual or in-person</Badge>
-                    <Badge variant="secondary" className="text-xs">30-90 minutes</Badge>
-                  </div>
-                  <h3 className="text-2xl font-semibold mb-4">Keynote Speaking</h3>
-                  <p className="text-muted-foreground mb-6 leading-relaxed">
-                    Inspiring presentations on AI governance, accessibility, and systems transformation 
-                    that energize audiences and drive organizational change.
-                  </p>
-                </CardContent>
-              </Card>
-
-              <Card className="bg-card/80 backdrop-blur-sm border-0 shadow-lg">
-                <CardContent className="p-8">
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    <Badge variant="secondary" className="text-xs">2-8 hours</Badge>
-                    <Badge variant="secondary" className="text-xs">Hands-on exercises</Badge>
-                    <Badge variant="secondary" className="text-xs">Team-specific</Badge>
-                  </div>
-                  <h3 className="text-2xl font-semibold mb-4">Custom Workshops</h3>
-                  <p className="text-muted-foreground mb-6 leading-relaxed">
-                    Interactive sessions tailored to your team's needs, focusing on practical 
-                    implementation of equitable AI governance practices.
-                  </p>
-                </CardContent>
-              </Card>
-            </div>
-
-            <Card className="bg-gradient-to-r from-primary/10 to-accent/10 border-0">
-              <CardContent className="p-12">
-                <h3 className="text-2xl font-semibold mb-8 text-center">Speaking Topics</h3>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                  <div>
-                    <h4 className="font-semibold mb-4 text-lg">AI Governance & Compliance</h4>
-                    <ul className="space-y-3 text-sm text-muted-foreground">
-                      <li className="flex items-start">
-                        <CheckCircle size={14} className="text-primary mr-2 mt-0.5 flex-shrink-0" />
-                        Regulatory compliance strategies
-                      </li>
-                      <li className="flex items-start">
-                        <CheckCircle size={14} className="text-primary mr-2 mt-0.5 flex-shrink-0" />
-                        Ethical AI framework development
-                      </li>
-                      <li className="flex items-start">
-                        <CheckCircle size={14} className="text-primary mr-2 mt-0.5 flex-shrink-0" />
-                        Risk assessment methodologies
-                      </li>
-                    </ul>
-                  </div>
-                  <div>
-                    <h4 className="font-semibold mb-4 text-lg">Equitable Technology Design</h4>
-                    <ul className="space-y-3 text-sm text-muted-foreground">
-                      <li className="flex items-start">
-                        <CheckCircle size={14} className="text-accent mr-2 mt-0.5 flex-shrink-0" />
-                        Accessibility-first development
-                      </li>
-                      <li className="flex items-start">
-                        <CheckCircle size={14} className="text-accent mr-2 mt-0.5 flex-shrink-0" />
-                        Bias detection and mitigation
-                      </li>
-                      <li className="flex items-start">
-                        <CheckCircle size={14} className="text-accent mr-2 mt-0.5 flex-shrink-0" />
-                        Community-centered design thinking
-                      </li>
-                    </ul>
-                  </div>
-                  <div>
-                    <h4 className="font-semibold mb-4 text-lg">Systems Change & Leadership</h4>
-                    <ul className="space-y-3 text-sm text-muted-foreground">
-                      <li className="flex items-start">
-                        <CheckCircle size={14} className="text-primary mr-2 mt-0.5 flex-shrink-0" />
-                        Organizational transformation
-                      </li>
-                      <li className="flex items-start">
-                        <CheckCircle size={14} className="text-primary mr-2 mt-0.5 flex-shrink-0" />
-                        Equitable leadership practices
-                      </li>
-                      <li className="flex items-start">
-                        <CheckCircle size={14} className="text-primary mr-2 mt-0.5 flex-shrink-0" />
-                        Building diverse tech teams
-                      </li>
-                    </ul>
-                  </div>
+              {/* Add professional speaking photo */}
+              <motion.div 
+                className="flex justify-center mb-8"
+                initial={{ opacity: 0, scale: 0.8 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, delay: 0.3 }}
+              >
+                <div className="relative">
+                  <img 
+                    src={speakingPhoto}
+                    alt="Dr. Dédé Tetsubayashi speaking at a conference"
+                    className="w-72 h-48 rounded-lg object-cover shadow-xl professional-img"
+                  />
+                  <motion.div 
+                    className="absolute -bottom-2 -right-2 bg-primary text-primary-foreground px-3 py-1 rounded-full text-sm font-medium"
+                    initial={{ opacity: 0, scale: 0 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    transition={{ delay: 0.8 }}
+                  >
+                    Available Worldwide
+                  </motion.div>
                 </div>
-              </CardContent>
-            </Card>
+              </motion.div>
+            </motion.div>
+            
+            <motion.div 
+              className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16"
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+            >
+              <motion.div
+                whileHover={{ scale: 1.02 }}
+                transition={{ duration: 0.3 }}
+              >
+                <Card className="bg-card/80 backdrop-blur-sm border-0 shadow-lg h-full">
+                  <CardContent className="p-8">
+                    <div className="flex flex-wrap gap-2 mb-4">
+                      <Badge variant="secondary" className="text-xs">Virtual or in-person</Badge>
+                      <Badge variant="secondary" className="text-xs">30-90 minutes</Badge>
+                    </div>
+                    <h3 className="text-2xl font-semibold mb-4">Keynote Speaking</h3>
+                    <p className="text-muted-foreground mb-6 leading-relaxed">
+                      Inspiring presentations on AI governance, accessibility, and systems transformation 
+                      that energize audiences and drive organizational change.
+                    </p>
+                    <motion.div 
+                      className="flex justify-center mb-4"
+                      whileHover={{ scale: 1.05 }}
+                    >
+                      <img 
+                        src={personalPhoto}
+                        alt="Dr. Dédé during a keynote presentation"
+                        className="w-20 h-20 rounded-full object-cover ring-2 ring-primary/20"
+                      />
+                    </motion.div>
+                  </CardContent>
+                </Card>
+              </motion.div>
+
+              <motion.div
+                whileHover={{ scale: 1.02 }}
+                transition={{ duration: 0.3 }}
+              >
+                <Card className="bg-card/80 backdrop-blur-sm border-0 shadow-lg h-full">
+                  <CardContent className="p-8">
+                    <div className="flex flex-wrap gap-2 mb-4">
+                      <Badge variant="secondary" className="text-xs">2-8 hours</Badge>
+                      <Badge variant="secondary" className="text-xs">Hands-on exercises</Badge>
+                      <Badge variant="secondary" className="text-xs">Team-specific</Badge>
+                    </div>
+                    <h3 className="text-2xl font-semibold mb-4">Custom Workshops</h3>
+                    <p className="text-muted-foreground mb-6 leading-relaxed">
+                      Interactive sessions tailored to your team's needs, focusing on practical 
+                      implementation of equitable AI governance practices.
+                    </p>
+                    <motion.div 
+                      className="flex justify-center mb-4"
+                      whileHover={{ scale: 1.05 }}
+                    >
+                      <img 
+                        src={consultingPhoto}
+                        alt="Dr. Dédé facilitating a workshop"
+                        className="w-20 h-20 rounded-full object-cover ring-2 ring-accent/20"
+                      />
+                    </motion.div>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.6 }}
+            >
+              <Card className="bg-gradient-to-r from-primary/10 to-accent/10 border-0">
+                <CardContent className="p-12">
+                  <h3 className="text-2xl font-semibold mb-8 text-center">Speaking Topics</h3>
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    {[
+                      {
+                        title: "AI Governance & Compliance",
+                        items: [
+                          "Regulatory compliance strategies",
+                          "Ethical AI framework development", 
+                          "Risk assessment methodologies"
+                        ]
+                      },
+                      {
+                        title: "Equitable Technology Design",
+                        items: [
+                          "Accessibility-first development",
+                          "Bias detection and mitigation",
+                          "Community-centered design thinking"
+                        ]
+                      },
+                      {
+                        title: "Systems Change & Leadership",
+                        items: [
+                          "Organizational transformation",
+                          "Equitable leadership practices",
+                          "Building diverse tech teams"
+                        ]
+                      }
+                    ].map((topic, index) => (
+                      <motion.div 
+                        key={index}
+                        initial={{ opacity: 0, y: 30 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.5, delay: index * 0.1 }}
+                      >
+                        <div>
+                          <h4 className="font-semibold mb-4 text-lg">{topic.title}</h4>
+                          <ul className="space-y-3 text-sm text-muted-foreground">
+                            {topic.items.map((item, itemIndex) => (
+                              <motion.li 
+                                key={itemIndex}
+                                className="flex items-start"
+                                initial={{ opacity: 0, x: -20 }}
+                                whileInView={{ opacity: 1, x: 0 }}
+                                transition={{ delay: (index * 0.1) + (itemIndex * 0.05) }}
+                              >
+                                <CheckCircle size={14} className={`${index === 1 ? 'text-accent' : 'text-primary'} mr-2 mt-0.5 flex-shrink-0`} />
+                                {item}
+                              </motion.li>
+                            ))}
+                          </ul>
+                        </div>
+                      </motion.div>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+            </motion.div>
           </div>
         </section>
 
@@ -1710,51 +2023,93 @@ function App() {
 
         <section className="py-16 bg-gradient-to-br from-primary/10 to-accent/10">
           <div className="container mx-auto px-4">
-            <div className="max-w-4xl mx-auto text-center">
+            <motion.div 
+              className="max-w-4xl mx-auto text-center"
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+            >
               <h2 className="text-3xl md:text-4xl font-bold mb-6">Ready to Transform Your AI Future?</h2>
               <p className="text-xl text-muted-foreground mb-12">
                 Join the Fortune 500 companies, innovative startups, and leading healthcare networks 
                 who trust Dr. Dédé to guide their AI governance transformation.
               </p>
               
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-12">
-                <Card className="bg-card/90 backdrop-blur-sm border-0 shadow-lg">
-                  <CardContent className="p-6 text-center">
-                    <div className="text-3xl font-bold text-primary mb-2">Global</div>
-                    <div className="text-sm text-muted-foreground">Reach and impact</div>
-                  </CardContent>
-                </Card>
-                <Card className="bg-card/90 backdrop-blur-sm border-0 shadow-lg">
-                  <CardContent className="p-6 text-center">
-                    <div className="text-3xl font-bold text-primary mb-2">48hr</div>
-                    <div className="text-sm text-muted-foreground">Response time guaranteed</div>
-                  </CardContent>
-                </Card>
-                <Card className="bg-card/90 backdrop-blur-sm border-0 shadow-lg">
-                  <CardContent className="p-6 text-center">
-                    <div className="text-3xl font-bold text-primary mb-2">100%</div>
-                    <div className="text-sm text-muted-foreground">Client satisfaction</div>
-                  </CardContent>
-                </Card>
-              </div>
+              <motion.div 
+                className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-12"
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, delay: 0.3 }}
+              >
+                {[
+                  { metric: "Global", description: "Reach and impact" },
+                  { metric: "48hr", description: "Response time guaranteed" },
+                  { metric: "100%", description: "Client satisfaction" }
+                ].map((item, index) => (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: index * 0.1 }}
+                    whileHover={{ scale: 1.05 }}
+                  >
+                    <Card className="bg-card/90 backdrop-blur-sm border-0 shadow-lg">
+                      <CardContent className="p-6 text-center">
+                        <div className="text-3xl font-bold text-primary mb-2">{item.metric}</div>
+                        <div className="text-sm text-muted-foreground">{item.description}</div>
+                      </CardContent>
+                    </Card>
+                  </motion.div>
+                ))}
+              </motion.div>
               
-              <div className="flex flex-col sm:flex-row gap-6 justify-center mb-8">
-                <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-4 text-lg">
-                  <Calendar size={24} className="mr-3" />
-                  Book Strategy Session
-                </Button>
-                <Button variant="outline" size="lg" className="px-8 py-4 text-lg border-2">
-                  Download Success Stories
-                </Button>
-              </div>
+              <motion.div 
+                className="flex flex-col sm:flex-row gap-6 justify-center mb-8"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, delay: 0.6 }}
+              >
+                <motion.div
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-4 text-lg btn-enhanced pulse-glow">
+                    <Calendar size={24} className="mr-3" />
+                    Book Strategy Session
+                  </Button>
+                </motion.div>
+                <motion.div
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <Button 
+                    variant="outline" 
+                    size="lg" 
+                    className="px-8 py-4 text-lg border-2 btn-enhanced"
+                    onClick={() => setCurrentPage('case-studies')}
+                  >
+                    View Success Stories
+                  </Button>
+                </motion.div>
+              </motion.div>
               
-              <div className="flex flex-col items-center gap-4">
+              <motion.div 
+                className="flex flex-col items-center gap-4"
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, delay: 0.8 }}
+              >
                 <VideoTestimonialRecorder />
                 <p className="text-sm text-muted-foreground">
                   Share your experience working with Dr. Dédé
                 </p>
-              </div>
-            </div>
+              </motion.div>
+            </motion.div>
           </div>
         </section>
       </main>
