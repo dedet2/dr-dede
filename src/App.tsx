@@ -730,7 +730,7 @@ function TestimonialsSection() {
 }
 
 
-function BlogInsightsSection() {
+function BlogInsightsContent() {
   const [selectedPost, setSelectedPost] = useState<null | typeof blogPosts[0]>(null)
   
   const blogPosts = [
@@ -968,74 +968,69 @@ The organizations that master systems thinking for AI governance won't just avoi
   ]
 
   return (
-    <section className="py-12 bg-secondary/30">
-      <div className="container mx-auto px-4">
-        <div className="max-w-6xl mx-auto">
-          <div className="flex items-center justify-between mb-12">
-            <div>
-              <h2 className="text-3xl font-bold mb-4">Latest Insights</h2>
-              <p className="text-lg text-muted-foreground">
-                Thought leadership on AI governance, accessibility, and systems change
-              </p>
-            </div>
-            <Button 
-              variant="outline" 
-              onClick={() => window.open('https://www.incluu.us/blog', '_blank')}
-              className="hidden md:flex"
-            >
-              View All Posts
-              <ArrowSquareOut size={16} className="ml-2" />
-            </Button>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
-            {blogPosts.map((post, index) => (
-              <Card key={index} className="h-full hover:shadow-md transition-shadow cursor-pointer">
-                <CardHeader>
-                  <div className="flex items-center justify-between mb-2">
-                    <Badge variant="secondary" className="text-xs">
-                      {post.category}
-                    </Badge>
-                    <span className="text-xs text-muted-foreground">{post.readTime}</span>
-                  </div>
-                  <CardTitle className="text-lg leading-tight hover:text-primary transition-colors">
-                    {post.title}
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-muted-foreground text-sm mb-4 leading-relaxed">
-                    {post.excerpt}
-                  </p>
-                  <div className="flex items-center justify-between">
-                    <span className="text-xs text-muted-foreground flex items-center gap-1">
-                      <Calendar size={12} />
-                      {post.date}
-                    </span>
-                    <Button 
-                      variant="ghost" 
-                      size="sm" 
-                      className="text-xs"
-                      onClick={() => setSelectedPost(post)}
-                    >
-                      Read More
-                      <ArrowRight size={12} className="ml-1" />
-                    </Button>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-          
-          <div className="text-center">
-            <Button 
-              onClick={() => window.open('https://www.incluu.us/blog', '_blank')}
-              className="md:hidden"
-            >
-              View All Posts
-              <ArrowSquareOut size={16} className="ml-2" />
-            </Button>
-          </div>
+    <div className="max-w-6xl mx-auto">
+      <div className="flex items-center justify-between mb-12">
+        <div>
+          <p className="text-lg text-muted-foreground">
+            Thought leadership on AI governance, accessibility, and systems change
+          </p>
         </div>
+        <Button 
+          variant="outline" 
+          onClick={() => window.open('https://www.incluu.us/blog', '_blank')}
+          className="hidden md:flex"
+        >
+          View All Posts
+          <ArrowSquareOut size={16} className="ml-2" />
+        </Button>
+      </div>
+      
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+        {blogPosts.map((post, index) => (
+          <Card key={index} className="h-full hover:shadow-md transition-shadow cursor-pointer">
+            <CardHeader>
+              <div className="flex items-center justify-between mb-2">
+                <Badge variant="secondary" className="text-xs">
+                  {post.category}
+                </Badge>
+                <span className="text-xs text-muted-foreground">{post.readTime}</span>
+              </div>
+              <CardTitle className="text-lg leading-tight hover:text-primary transition-colors">
+                {post.title}
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-muted-foreground text-sm mb-4 leading-relaxed">
+                {post.excerpt}
+              </p>
+              <div className="flex items-center justify-between">
+                <span className="text-xs text-muted-foreground flex items-center gap-1">
+                  <Calendar size={12} />
+                  {post.date}
+                </span>
+                <Button 
+                  variant="ghost" 
+                  size="sm" 
+                  className="text-xs"
+                  onClick={() => setSelectedPost(post)}
+                >
+                  Read More
+                  <ArrowRight size={12} className="ml-1" />
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
+        ))}
+      </div>
+      
+      <div className="text-center">
+        <Button 
+          onClick={() => window.open('https://www.incluu.us/blog', '_blank')}
+          className="md:hidden"
+        >
+          View All Posts
+          <ArrowSquareOut size={16} className="ml-2" />
+        </Button>
       </div>
 
       <Dialog open={!!selectedPost} onOpenChange={() => setSelectedPost(null)}>
@@ -1088,7 +1083,7 @@ The organizations that master systems thinking for AI governance won't just avoi
           )}
         </DialogContent>
       </Dialog>
-    </section>
+    </div>
   )
 }
 
@@ -1216,7 +1211,7 @@ function App() {
             <div className="flex items-center justify-between">
               <div className="min-w-0 flex-1">
                 <h1 className="text-xl md:text-2xl font-bold text-primary truncate">Dr. Dédé Tetsubayashi</h1>
-                <p className="text-xs md:text-sm text-muted-foreground">AI GRC Exec | Board Member | Luxury Disability Travel TEDx Speaker</p>
+                <p className="text-xs md:text-sm text-muted-foreground">AI GRC Exec | Board Member | TEDx Speaker</p>
               </div>
               <Button 
                 variant="ghost" 
@@ -1547,8 +1542,6 @@ function App() {
 
         <CaseStudyShowcase />
 
-        <BlogInsightsSection />
-
         <section className="py-12">
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto">
@@ -1559,6 +1552,15 @@ function App() {
                   </AccordionTrigger>
                   <AccordionContent>
                     <SocialMediaFeeds />
+                  </AccordionContent>
+                </AccordionItem>
+
+                <AccordionItem value="latest-insights" className="border rounded-lg px-6">
+                  <AccordionTrigger className="text-xl font-semibold hover:no-underline">
+                    Latest Insights
+                  </AccordionTrigger>
+                  <AccordionContent>
+                    <BlogInsightsContent />
                   </AccordionContent>
                 </AccordionItem>
 
@@ -1747,7 +1749,7 @@ function App() {
           <div className="text-center space-y-4 md:space-y-6">
             <div>
               <h3 className="text-lg md:text-xl font-semibold mb-2">Dr. Dédé Tetsubayashi</h3>
-              <p className="text-sm md:text-base text-muted-foreground">AI GRC Executive | Board Member | Luxury Disability Travel TEDx Speaker | Systems Disruptor</p>
+              <p className="text-sm md:text-base text-muted-foreground">AI GRC Executive | Board Member | TEDx Speaker | Systems Disruptor</p>
             </div>
             
             <div className="flex flex-col sm:flex-row justify-center gap-2 md:gap-4">
