@@ -241,11 +241,11 @@ function CalendlyIntegration() {
   return (
     <Button 
       onClick={openCalendly}
-      className="w-full sm:w-auto bg-primary hover:bg-primary/90 text-sm px-3 py-2"
+      className="bg-primary hover:bg-primary/90 text-xs px-2 py-1 whitespace-nowrap"
       size="sm"
     >
-      <CalendarBlank size={16} className="mr-1 sm:mr-2" />
-      <span className="hidden xs:inline">Schedule </span>Speaking
+      <CalendarBlank size={14} className="mr-1" />
+      <span className="hidden sm:inline">Schedule </span>Speaking
     </Button>
   )
 }
@@ -1208,15 +1208,16 @@ function App() {
         <AdminPanel />
         <header className="border-b bg-card/50 backdrop-blur-sm sticky top-0 z-40">
           <div className="container mx-auto px-4 py-4">
-            <div className="flex items-center justify-between">
-              <div className="min-w-0 flex-1">
-                <h1 className="text-xl md:text-2xl font-bold text-primary truncate">Dr. Dédé Tetsubayashi</h1>
-                <p className="text-xs md:text-sm text-muted-foreground">AI GRC Exec | Board Member | TEDx Speaker</p>
+            <div className="flex items-center justify-between gap-4">
+              <div className="min-w-0 flex-1 header-title">
+                <h1 className="text-lg sm:text-xl md:text-2xl font-bold text-primary whitespace-nowrap overflow-hidden text-ellipsis">Dr. Dédé Tetsubayashi</h1>
+                <p className="text-xs sm:text-sm text-muted-foreground whitespace-nowrap">AI GRC Exec | Board Member | TEDx Speaker</p>
               </div>
               <Button 
                 variant="ghost" 
                 onClick={() => setCurrentPage('home')}
-                className="text-sm"
+                className="text-xs px-2 py-1 whitespace-nowrap flex-shrink-0"
+                size="sm"
               >
                 ← Back to Home
               </Button>
@@ -1243,20 +1244,21 @@ function App() {
       <AdminPanel />
       <header className="border-b bg-card/50 backdrop-blur-sm sticky top-0 z-40">
         <div className="container mx-auto px-4 py-4">
-          <div className="flex items-center justify-between">
-            <div className="min-w-0 flex-1">
-              <h1 className="text-xl md:text-2xl font-bold text-primary truncate">Dr. Dédé Tetsubayashi</h1>
-              <p className="text-xs md:text-sm text-muted-foreground">AI GRC Exec | Board Member | TEDx Speaker</p>
+          <div className="flex items-center justify-between gap-4">
+            <div className="min-w-0 flex-1 header-title">
+              <h1 className="text-lg sm:text-xl md:text-2xl font-bold text-primary whitespace-nowrap overflow-hidden text-ellipsis">Dr. Dédé Tetsubayashi</h1>
+              <p className="text-xs sm:text-sm text-muted-foreground whitespace-nowrap">AI GRC Exec | Board Member | TEDx Speaker</p>
             </div>
-            <div className="flex items-center gap-2 md:gap-4 flex-shrink-0">
+            <div className="flex items-center gap-1 sm:gap-2 flex-shrink-0">
               <Button 
                 variant="ghost" 
                 size="sm"
                 onClick={() => window.open('https://pmukyznd.manus.space/', '_blank')}
-                className="hidden sm:flex text-xs"
+                className="hidden lg:flex text-xs px-2 py-1"
               >
-                <Calculator size={16} className="mr-2" />
-                🎉 ROI Calculator ✨
+                <Calculator size={14} className="mr-1" />
+                <span className="hidden xl:inline">🎉 ROI Calculator ✨</span>
+                <span className="xl:hidden">ROI Calc</span>
               </Button>
               <Button 
                 variant="ghost" 
@@ -1277,25 +1279,25 @@ function App() {
                     }
                   }, 2000)
                 }}
-                className="hidden sm:flex text-xs"
+                className="hidden md:flex text-xs px-2 py-1"
               >
-                <Presentation size={16} className="mr-2" />
+                <Presentation size={14} className="mr-1" />
                 TEDx Talk
               </Button>
               <Button 
                 variant="ghost" 
                 size="sm" 
                 onClick={() => window.open('https://www.incluu.us/blog', '_blank')}
-                className="hidden sm:flex"
+                className="hidden md:flex text-xs px-2 py-1"
               >
-                <BookOpen size={16} className="mr-2" />
+                <BookOpen size={14} className="mr-1" />
                 Blog
               </Button>
               <Button 
                 variant="ghost" 
                 size="sm" 
                 onClick={() => window.open('https://incluu.us', '_blank')}
-                className="hidden sm:flex"
+                className="hidden sm:flex text-xs px-2 py-1"
               >
                 incluu
               </Button>
@@ -1303,12 +1305,12 @@ function App() {
                 variant="ghost" 
                 size="sm" 
                 onClick={() => setCurrentPage('resources')}
-                className="hidden sm:flex"
+                className="hidden lg:flex text-xs px-2 py-1"
               >
-                <FileText size={16} className="mr-2" />
+                <FileText size={14} className="mr-1" />
                 Resources
               </Button>
-              <div className="w-full sm:w-auto">
+              <div className="flex-shrink-0">
                 <CalendlyIntegration />
               </div>
             </div>

@@ -75,6 +75,25 @@ body {
   }
 }
 
+/* Mobile-first header utilities */
+@media (max-width: 480px) {
+  .header-title {
+    max-width: 200px;
+  }
+}
+
+@media (min-width: 481px) and (max-width: 640px) {
+  .header-title {
+    max-width: 250px;
+  }
+}
+
+@media (min-width: 641px) and (max-width: 768px) {
+  .header-title {
+    max-width: 300px;
+  }
+}
+
 /* Ensure video embeds are responsive */
 .aspect-video iframe {
   border-radius: inherit;
