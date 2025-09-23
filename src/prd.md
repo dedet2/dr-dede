@@ -35,6 +35,16 @@
 - **Why it matters**: Direct revenue generation through speaking engagements
 - **Success criteria**: Clear service offerings, easy booking process
 
+### Video Testimonial Recording System ⭐ NEW
+- **What it does**: Allows clients to record video testimonials directly in-browser with AI-generated transcripts
+- **Why it matters**: Authentic social proof collection and streamlined testimonial gathering
+- **Success criteria**: Camera/microphone access, recording quality, easy sharing and management
+
+### AI-Powered Content Recommendations ⭐ NEW
+- **What it does**: Personalized content suggestions based on user interests and behavior using AI analysis
+- **Why it matters**: Enhanced user engagement, longer site visits, and improved content discovery
+- **Success criteria**: Relevant recommendations, user preference learning, increased content consumption
+
 ### Testimonials Section
 - **What it does**: Showcases client feedback and speaking engagement success stories
 - **Why it matters**: Social proof and credibility for potential clients

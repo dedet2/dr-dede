@@ -16,6 +16,8 @@ import heroBackground from '@/assets/images/hero-bg.png'
 import ResourcesPage from './ResourcesPage'
 import SocialMediaFeeds from './components/SocialMediaFeeds'
 import AIGovernanceAssessment from './components/AIGovernanceAssessment'
+import VideoTestimonialRecorder from './components/VideoTestimonialRecorder'
+import AIContentRecommendations from './components/AIContentRecommendations'
 
 declare global {
   interface Window {
@@ -1538,6 +1540,8 @@ function App() {
 
         <BlogInsightsSection />
 
+        <AIContentRecommendations />
+
         <SocialMediaFeeds />
 
         <section className="py-12 bg-gradient-to-br from-accent/5 to-primary/5">
@@ -1694,6 +1698,12 @@ function App() {
               </div>
               <div className="mt-4 md:mt-6">
                 <CalendlyIntegration />
+              </div>
+              <div className="mt-4 text-center">
+                <VideoTestimonialRecorder />
+                <p className="text-xs text-muted-foreground mt-2">
+                  Share your experience working with Dr. Dédé
+                </p>
               </div>
             </div>
             <ContactForm />
