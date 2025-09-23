@@ -4,19 +4,12 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar"
-import { LinkedinLogo, InstagramLogo, YoutubeLogo, CalendarBlank, Heart, ChatCircle, Share, Repeat } from "@phosphor-icons/react"
+import { LinkedinLogo, InstagramLogo, YoutubeLogo, CalendarBlank, Heart, ChatCircle, Share, Repeat, ArrowSquareOut, TrendUp } from "@phosphor-icons/react"
 import { useKV } from '@github/spark/hooks'
 import professionalHeadshot from '@/assets/images/professional-headshot-1.jpg'
 import professionalHeadshot2 from '@/assets/images/professional-headshot-2.jpg'
-import professionalHeadshot3 from '@/assets/images/professional-headshot-3.jpg'
-import professionalHeadshot4 from '@/assets/images/professional-headshot-4.jpg'
-import professionalHeadshot5 from '@/assets/images/professional-headshot-5.jpg'
 import consultingPhoto from '@/assets/images/consulting-photo-1.jpg'
-import consultingPhoto2 from '@/assets/images/consulting-photo-2.jpg'
-import boardroomPhoto from '@/assets/images/boardroom-photo-1.jpg'
 import speakingPhoto from '@/assets/images/speaking-photo-1.jpg'
-import speakingPhoto2 from '@/assets/images/speaking-photo-2.jpg'
-import healthcareCaseStudy from '@/assets/images/healthcare-case-study.jpg'
 
 interface SocialPost {
   id: string
@@ -38,16 +31,116 @@ interface SocialMediaStats {
     followers: number
     posts: number
     engagement: string
+    lastUpdate: string
   }
   instagram: {
     followers: number
     posts: number
     engagement: string
+    lastUpdate: string
   }
   youtube: {
     subscribers: number
     videos: number
     views: string
+    lastUpdate: string
+  }
+}
+
+// Social media API integration functions (placeholder for real API calls)
+const fetchLinkedInPosts = async (): Promise<SocialPost[]> => {
+  // In production, this would use LinkedIn's API
+  // For now, return realistic mock data
+  return [
+    {
+      id: 'li-1',
+      platform: 'linkedin',
+      content: 'Just wrapped up a fascinating board meeting discussing AI governance frameworks. The conversation around equitable technology design continues to evolve, and I\'m encouraged by the progress we\'re making. When we center disability perspectives from day one, we create better solutions for everyone. #AIGovernance #DisabilityInclusion #TechEquity',
+      author: 'Dr. Dédé Tetsubayashi',
+      authorImage: professionalHeadshot,
+      timestamp: new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString(), // 2 hours ago
+      likes: 287,
+      comments: 34,
+      shares: 56,
+      url: 'https://linkedin.com/in/dr-dede-tetsubayashi',
+      mediaUrl: consultingPhoto,
+      mediaType: 'image'
+    },
+    {
+      id: 'li-2', 
+      platform: 'linkedin',
+      content: 'Excited to announce that our AI governance framework helped another Fortune 500 client avoid $125M in regulatory penalties while expanding their market reach. True equity isn\'t just morally right—it\'s profitable. Looking forward to sharing more insights at next week\'s tech conference.',
+      author: 'Dr. Dédé Tetsubayashi',
+      authorImage: professionalHeadshot2,
+      timestamp: new Date(Date.now() - 6 * 60 * 60 * 1000).toISOString(), // 6 hours ago
+      likes: 445,
+      comments: 67,
+      shares: 89,
+      url: 'https://linkedin.com/in/dr-dede-tetsubayashi'
+    }
+  ]
+}
+
+const fetchInstagramPosts = async (): Promise<SocialPost[]> => {
+  return [
+    {
+      id: 'ig-1',
+      platform: 'instagram',
+      content: 'Behind the scenes at today\'s AI ethics workshop! 🤖✨ Teaching teams how to build inclusive technology from the ground up. When we design for accessibility first, everyone wins. #AIEthics #TechInclusion #DisabilityAdvocate',
+      author: 'Dr. Dédé Tetsubayashi',
+      authorImage: professionalHeadshot,
+      timestamp: new Date(Date.now() - 4 * 60 * 60 * 1000).toISOString(),
+      likes: 156,
+      comments: 23,
+      shares: 0,
+      url: 'https://instagram.com/dr.dede.tetsubayashi',
+      mediaUrl: speakingPhoto,
+      mediaType: 'image'
+    }
+  ]
+}
+
+const fetchYouTubePosts = async (): Promise<SocialPost[]> => {
+  return [
+    {
+      id: 'yt-1',
+      platform: 'youtube',
+      content: 'New video: "The Hidden Costs of Biased AI - How Fortune 500 Companies Are Losing Billions" - Breaking down real case studies and actionable solutions for building equitable AI systems.',
+      author: 'Dr. Dédé Tetsubayashi',
+      authorImage: professionalHeadshot,
+      timestamp: new Date(Date.now() - 8 * 60 * 60 * 1000).toISOString(),
+      likes: 89,
+      comments: 12,
+      shares: 0,
+      url: 'https://youtube.com/@the_drdede',
+      mediaType: 'video'
+    }
+  ]
+}
+
+const fetchSocialMediaStats = async (): Promise<SocialMediaStats> => {
+  // In production, these would be real API calls
+  const now = new Date().toISOString()
+  
+  return {
+    linkedin: {
+      followers: 12450 + Math.floor(Math.random() * 50), // Simulate growth
+      posts: 142,
+      engagement: "8.7%",
+      lastUpdate: now
+    },
+    instagram: {
+      followers: 8920 + Math.floor(Math.random() * 30),
+      posts: 267,
+      engagement: "12.3%",
+      lastUpdate: now
+    },
+    youtube: {
+      subscribers: 7420 + Math.floor(Math.random() * 20),
+      videos: 24,
+      views: "156K",
+      lastUpdate: now
+    }
   }
 }
 
@@ -57,142 +150,40 @@ const RealTimeSocialFeeds = () => {
   const [isLoading, setIsLoading] = useState(true)
   const [lastUpdated, setLastUpdated] = useState<Date | null>(null)
   const [selectedPlatform, setSelectedPlatform] = useState<'all' | 'linkedin' | 'instagram' | 'youtube'>('all')
+  const [refreshKey, setRefreshKey] = useState(0)
 
-  // Since we can't make real API calls, we'll simulate dynamic social media data
-  const generateMockSocialData = (): { posts: SocialPost[], stats: SocialMediaStats } => {
-    const platforms: Array<'linkedin' | 'instagram' | 'youtube'> = ['linkedin', 'instagram', 'youtube']
-    const now = new Date()
-    
-    const mockPosts: SocialPost[] = [
-      {
-        id: 'li-1',
-        platform: 'linkedin',
-        content: "🚀 Just completed another successful AI governance transformation for a Fortune 500 client! Seeing organizations embrace equitable AI principles isn't just rewarding—it's essential for our collective future. #AIGovernance #EquitableAI #Leadership",
-        author: "Dr. Dédé Tetsubayashi",
-        authorImage: professionalHeadshot,
-        timestamp: new Date(now.getTime() - 2 * 60 * 60 * 1000).toISOString(), // 2 hours ago
-        likes: 247,
-        comments: 34,
-        shares: 89,
-        url: "https://linkedin.com/in/dr-dede-tetsubayashi",
-        mediaUrl: consultingPhoto,
-        mediaType: 'image'
-      },
-      {
-        id: 'ig-1',
-        platform: 'instagram',
-        content: "Behind the scenes at today's boardroom presentation on inclusive AI strategies. Every voice matters in shaping the future of technology. 💡✨ #AIethics #InclusiveDesign #BoardroomToBreakthrough",
-        author: "Dr. Dédé Tetsubayashi",
-        authorImage: professionalHeadshot2,
-        timestamp: new Date(now.getTime() - 4 * 60 * 60 * 1000).toISOString(), // 4 hours ago
-        likes: 892,
-        comments: 76,
-        shares: 123,
-        url: "https://instagram.com/the_drdede",
-        mediaUrl: boardroomPhoto,
-        mediaType: 'image'
-      },
-      {
-        id: 'yt-1',
-        platform: 'youtube',
-        content: "New video: 'The Hidden Costs of Biased AI - And How to Fix Them' is live! This week we explore real case studies showing how inclusive AI design saves money AND lives. Link in bio! 🎬",
-        author: "Dr. Dédé Tetsubayashi",
-        authorImage: professionalHeadshot3,
-        timestamp: new Date(now.getTime() - 6 * 60 * 60 * 1000).toISOString(), // 6 hours ago
-        likes: 1547,
-        comments: 203,
-        shares: 456,
-        url: "https://youtube.com/@the_drdede",
-        mediaUrl: speakingPhoto,
-        mediaType: 'video'
-      },
-      {
-        id: 'li-2',
-        platform: 'linkedin',
-        content: "Thrilled to announce our latest research on AI bias in healthcare has been published! Working with disabled communities to improve AI diagnostic accuracy isn't just the right thing to do—it's essential for quality healthcare. 🏥📊 #HealthcareAI #DisabilityAdvocacy #MedicalAI",
-        author: "Dr. Dédé Tetsubayashi",
-        authorImage: professionalHeadshot4,
-        timestamp: new Date(now.getTime() - 12 * 60 * 60 * 1000).toISOString(), // 12 hours ago
-        likes: 425,
-        comments: 67,
-        shares: 134,
-        url: "https://linkedin.com/in/dr-dede-tetsubayashi",
-        mediaUrl: healthcareCaseStudy,
-        mediaType: 'image'
-      },
-      {
-        id: 'ig-2',
-        platform: 'instagram',
-        content: "Grateful for the warm welcome at today's TEDx rehearsal! Can't wait to share insights on reimagining AI for equitable innovation. The future of technology must include ALL of us. 🌟 #TEDx #EquitableInnovation #SpeakerLife",
-        author: "Dr. Dédé Tetsubayashi",
-        authorImage: professionalHeadshot5,
-        timestamp: new Date(now.getTime() - 18 * 60 * 60 * 1000).toISOString(), // 18 hours ago
-        likes: 634,
-        comments: 41,
-        shares: 78,
-        url: "https://instagram.com/the_drdede",
-        mediaUrl: speakingPhoto2,
-        mediaType: 'image'
-      },
-      {
-        id: 'yt-2',
-        platform: 'youtube',
-        content: "Just uploaded: 'AI Governance Masterclass - 5 Critical Steps Every Executive Must Know'. Perfect for C-suite leaders navigating AI compliance and ethics. What topic should I cover next? 💼",
-        author: "Dr. Dédé Tetsubayashi",
-        authorImage: professionalHeadshot,
-        timestamp: new Date(now.getTime() - 24 * 60 * 60 * 1000).toISOString(), // 1 day ago
-        likes: 2103,
-        comments: 389,
-        shares: 721,
-        url: "https://youtube.com/@the_drdede",
-        mediaUrl: consultingPhoto2,
-        mediaType: 'video'
-      }
-    ]
-
-    const mockStats: SocialMediaStats = {
-      linkedin: {
-        followers: 12450,
-        posts: 142,
-        engagement: "8.7%"
-      },
-      instagram: {
-        followers: 8920,
-        posts: 267,
-        engagement: "12.3%"
-      },
-      youtube: {
-        subscribers: 7420,
-        videos: 24,
-        views: "156K"
-      }
-    }
-
-    return { posts: mockPosts, stats: mockStats }
-  }
-
-  // Simulate real-time updates
+  // Load social media data
   useEffect(() => {
-    const fetchSocialData = () => {
+    const loadSocialData = async () => {
       setIsLoading(true)
       
-      // Simulate API delay
-      setTimeout(() => {
-        const { posts: newPosts, stats: newStats } = generateMockSocialData()
-        setPosts(newPosts)
-        setStats(newStats)
+      try {
+        const [linkedinPosts, instagramPosts, youtubePosts, socialStats] = await Promise.all([
+          fetchLinkedInPosts(),
+          fetchInstagramPosts(), 
+          fetchYouTubePosts(),
+          fetchSocialMediaStats()
+        ])
+
+        const allPosts = [...linkedinPosts, ...instagramPosts, ...youtubePosts]
+        allPosts.sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime())
+        
+        setPosts(allPosts)
+        setStats(socialStats)
         setLastUpdated(new Date())
+      } catch (error) {
+        console.error('Failed to load social media data:', error)
+      } finally {
         setIsLoading(false)
-      }, 1500)
+      }
     }
 
-    fetchSocialData()
+    loadSocialData()
+  }, [refreshKey])
 
-    // Update every 5 minutes to simulate real-time feeds
-    const interval = setInterval(fetchSocialData, 5 * 60 * 1000)
-
-    return () => clearInterval(interval)
-  }, [])
+  const refreshFeed = () => {
+    setRefreshKey(prev => prev + 1)
+  }
 
   const filteredPosts = selectedPlatform === 'all' 
     ? posts 
@@ -201,60 +192,40 @@ const RealTimeSocialFeeds = () => {
   const formatTimestamp = (timestamp: string) => {
     const date = new Date(timestamp)
     const now = new Date()
-    const diff = now.getTime() - date.getTime()
-    const hours = Math.floor(diff / (1000 * 60 * 60))
-    const days = Math.floor(hours / 24)
-
-    if (days > 0) return `${days}d ago`
-    if (hours > 0) return `${hours}h ago`
-    return 'Just now'
-  }
-
-  const getPlatformIcon = (platform: 'linkedin' | 'instagram' | 'youtube') => {
-    switch (platform) {
-      case 'linkedin': return <LinkedinLogo size={20} />
-      case 'instagram': return <InstagramLogo size={20} />
-      case 'youtube': return <YoutubeLogo size={20} />
+    const diffInMinutes = Math.floor((now.getTime() - date.getTime()) / (1000 * 60))
+    
+    if (diffInMinutes < 60) {
+      return `${diffInMinutes}m ago`
+    } else if (diffInMinutes < 1440) {
+      return `${Math.floor(diffInMinutes / 60)}h ago`
+    } else {
+      return `${Math.floor(diffInMinutes / 1440)}d ago`
     }
   }
 
-  const getPlatformColor = (platform: 'linkedin' | 'instagram' | 'youtube') => {
+  const getPlatformIcon = (platform: string) => {
     switch (platform) {
-      case 'linkedin': return 'text-blue-600'
-      case 'instagram': return 'text-pink-600'
-      case 'youtube': return 'text-red-600'
+      case 'linkedin':
+        return <LinkedinLogo size={20} className="text-blue-600" weight="fill" />
+      case 'instagram':
+        return <InstagramLogo size={20} className="text-pink-600" weight="fill" />
+      case 'youtube':
+        return <YoutubeLogo size={20} className="text-red-600" weight="fill" />
+      default:
+        return null
     }
   }
 
-  if (isLoading && !posts.length) {
+  if (isLoading) {
     return (
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-8">
-          <div className="h-8 bg-muted animate-pulse rounded mb-4 mx-auto w-64"></div>
-          <div className="h-4 bg-muted animate-pulse rounded mx-auto w-96"></div>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {[...Array(6)].map((_, i) => (
-            <Card key={i} className="animate-pulse">
-              <CardHeader>
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 bg-muted rounded-full"></div>
-                  <div className="space-y-2">
-                    <div className="h-4 bg-muted rounded w-24"></div>
-                    <div className="h-3 bg-muted rounded w-16"></div>
-                  </div>
-                </div>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-3">
-                  <div className="h-4 bg-muted rounded"></div>
-                  <div className="h-4 bg-muted rounded"></div>
-                  <div className="h-4 bg-muted rounded w-3/4"></div>
-                  <div className="h-32 bg-muted rounded"></div>
-                </div>
-              </CardContent>
-            </Card>
-          ))}
+          <h2 className="text-2xl font-bold mb-4">Latest Social Updates</h2>
+          <div className="animate-pulse space-y-4">
+            {[1, 2, 3].map((i) => (
+              <Card key={i} className="h-32 bg-muted/50" />
+            ))}
+          </div>
         </div>
       </div>
     )
@@ -262,229 +233,175 @@ const RealTimeSocialFeeds = () => {
 
   return (
     <div className="max-w-6xl mx-auto">
-      <motion.div 
-        className="text-center mb-8"
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-      >
-        <h3 className="text-2xl font-bold mb-4">Latest Social Media Updates</h3>
-        <p className="text-muted-foreground mb-6">
-          Real-time insights, thoughts, and behind-the-scenes content from Dr. Dédé's social platforms
-        </p>
+      {/* Header with stats */}
+      <div className="text-center mb-8">
+        <h2 className="text-2xl font-bold mb-6">Latest Social Updates</h2>
         
-        {lastUpdated && (
-          <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground mb-6">
-            <CalendarBlank size={16} />
-            Last updated: {lastUpdated.toLocaleTimeString()}
-          </div>
+        {/* Social Media Stats */}
+        {stats && (
+          <motion.div 
+            className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+          >
+            <Card className="bg-gradient-to-br from-blue-50 to-blue-100 border-blue-200">
+              <CardContent className="p-6 text-center">
+                <LinkedinLogo size={32} className="text-blue-600 mx-auto mb-3" weight="fill" />
+                <div className="text-2xl font-bold text-blue-700">{stats.linkedin.followers.toLocaleString()}</div>
+                <div className="text-sm text-blue-600 mb-2">LinkedIn Followers</div>
+                <Badge variant="secondary" className="text-xs bg-blue-100">
+                  <TrendUp size={12} className="mr-1" />
+                  {stats.linkedin.engagement} engagement
+                </Badge>
+              </CardContent>
+            </Card>
+
+            <Card className="bg-gradient-to-br from-pink-50 to-pink-100 border-pink-200">
+              <CardContent className="p-6 text-center">
+                <InstagramLogo size={32} className="text-pink-600 mx-auto mb-3" weight="fill" />
+                <div className="text-2xl font-bold text-pink-700">{stats.instagram.followers.toLocaleString()}</div>
+                <div className="text-sm text-pink-600 mb-2">Instagram Followers</div>
+                <Badge variant="secondary" className="text-xs bg-pink-100">
+                  <TrendUp size={12} className="mr-1" />
+                  {stats.instagram.engagement} engagement
+                </Badge>
+              </CardContent>
+            </Card>
+
+            <Card className="bg-gradient-to-br from-red-50 to-red-100 border-red-200">
+              <CardContent className="p-6 text-center">
+                <YoutubeLogo size={32} className="text-red-600 mx-auto mb-3" weight="fill" />
+                <div className="text-2xl font-bold text-red-700">{stats.youtube.subscribers.toLocaleString()}</div>
+                <div className="text-sm text-red-600 mb-2">YouTube Subscribers</div>
+                <Badge variant="secondary" className="text-xs bg-red-100">
+                  <TrendUp size={12} className="mr-1" />
+                  {stats.youtube.views} total views
+                </Badge>
+              </CardContent>
+            </Card>
+          </motion.div>
         )}
 
-        {/* Platform Filter */}
+        {/* Platform filter */}
         <div className="flex flex-wrap justify-center gap-2 mb-6">
-          <Button
-            variant={selectedPlatform === 'all' ? "default" : "outline"}
-            size="sm"
-            onClick={() => setSelectedPlatform('all')}
-            className="text-xs"
-          >
-            All Platforms
-          </Button>
-          <Button
-            variant={selectedPlatform === 'linkedin' ? "default" : "outline"}
-            size="sm"
-            onClick={() => setSelectedPlatform('linkedin')}
-            className="text-xs"
-          >
-            <LinkedinLogo size={14} className="mr-1" />
-            LinkedIn
-          </Button>
-          <Button
-            variant={selectedPlatform === 'instagram' ? "default" : "outline"}
-            size="sm"
-            onClick={() => setSelectedPlatform('instagram')}
-            className="text-xs"
-          >
-            <InstagramLogo size={14} className="mr-1" />
-            Instagram
-          </Button>
-          <Button
-            variant={selectedPlatform === 'youtube' ? "default" : "outline"}
-            size="sm"
-            onClick={() => setSelectedPlatform('youtube')}
-            className="text-xs"
-          >
-            <YoutubeLogo size={14} className="mr-1" />
-            YouTube
-          </Button>
+          {['all', 'linkedin', 'instagram', 'youtube'].map((platform) => (
+            <Button
+              key={platform}
+              variant={selectedPlatform === platform ? "default" : "outline"}
+              size="sm"
+              onClick={() => setSelectedPlatform(platform as any)}
+              className="capitalize"
+            >
+              {platform === 'all' ? 'All Platforms' : platform}
+            </Button>
+          ))}
         </div>
 
-        {/* Social Stats */}
-        {stats && (
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.2 }}
-            >
-              <Card className="bg-blue-50 border-blue-200">
-                <CardContent className="p-4 text-center">
-                  <LinkedinLogo size={32} className="mx-auto mb-2 text-blue-600" />
-                  <div className="text-lg font-bold">{stats.linkedin.followers.toLocaleString()}</div>
-                  <div className="text-xs text-muted-foreground">LinkedIn Followers</div>
-                  <div className="text-xs text-blue-600">{stats.linkedin.engagement} engagement</div>
-                </CardContent>
-              </Card>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.3 }}
-            >
-              <Card className="bg-pink-50 border-pink-200">
-                <CardContent className="p-4 text-center">
-                  <InstagramLogo size={32} className="mx-auto mb-2 text-pink-600" />
-                  <div className="text-lg font-bold">{stats.instagram.followers.toLocaleString()}</div>
-                  <div className="text-xs text-muted-foreground">Instagram Followers</div>
-                  <div className="text-xs text-pink-600">{stats.instagram.engagement} engagement</div>
-                </CardContent>
-              </Card>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.4 }}
-            >
-              <Card className="bg-red-50 border-red-200">
-                <CardContent className="p-4 text-center">
-                  <YoutubeLogo size={32} className="mx-auto mb-2 text-red-600" />
-                  <div className="text-lg font-bold">{stats.youtube.subscribers.toLocaleString()}</div>
-                  <div className="text-xs text-muted-foreground">YouTube Subscribers</div>
-                  <div className="text-xs text-red-600">{stats.youtube.views} total views</div>
-                </CardContent>
-              </Card>
-            </motion.div>
-          </div>
+        {lastUpdated && (
+          <p className="text-sm text-muted-foreground mb-4">
+            Last updated: {lastUpdated.toLocaleTimeString()}
+          </p>
         )}
-      </motion.div>
+      </div>
 
-      {/* Posts Grid */}
-      <motion.div 
-        className="grid grid-cols-1 md:grid-cols-2 gap-6"
-        layout
-      >
+      {/* Social media feed */}
+      <div className="space-y-6 mb-8">
         <AnimatePresence>
           {filteredPosts.map((post, index) => (
             <motion.div
               key={post.id}
-              layout
-              initial={{ opacity: 0, y: 50 }}
+              initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -50 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              whileHover={{ scale: 1.02, y: -5 }}
+              exit={{ opacity: 0, y: -30 }}
+              transition={{ duration: 0.4, delay: index * 0.1 }}
             >
-              <Card className="h-full hover:shadow-lg transition-all duration-300 bg-card/90 backdrop-blur-sm">
-                <CardHeader className="pb-3">
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-3">
-                      <Avatar>
-                        <AvatarImage src={post.authorImage} alt={post.author} />
-                        <AvatarFallback>DD</AvatarFallback>
-                      </Avatar>
-                      <div>
-                        <p className="font-medium text-sm">{post.author}</p>
+              <Card className="hover:shadow-lg transition-shadow duration-300 bg-card/90 backdrop-blur-sm">
+                <CardContent className="p-6">
+                  <div className="flex items-start gap-4">
+                    {/* Author avatar */}
+                    <Avatar className="w-12 h-12">
+                      <AvatarImage src={post.authorImage} alt={post.author} />
+                      <AvatarFallback>DT</AvatarFallback>
+                    </Avatar>
+
+                    <div className="flex-1 min-w-0">
+                      {/* Header */}
+                      <div className="flex items-center justify-between mb-3">
                         <div className="flex items-center gap-2">
-                          <span className={getPlatformColor(post.platform)}>
-                            {getPlatformIcon(post.platform)}
-                          </span>
-                          <span className="text-xs text-muted-foreground">
-                            {formatTimestamp(post.timestamp)}
-                          </span>
+                          <p className="font-semibold text-sm">{post.author}</p>
+                          {getPlatformIcon(post.platform)}
+                        </div>
+                        <div className="flex items-center gap-3 text-sm text-muted-foreground">
+                          <span>{formatTimestamp(post.timestamp)}</span>
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            onClick={() => window.open(post.url, '_blank')}
+                          >
+                            <ArrowSquareOut size={16} />
+                          </Button>
                         </div>
                       </div>
-                    </div>
-                    <Badge variant="secondary" className="text-xs">
-                      {post.platform}
-                    </Badge>
-                  </div>
-                </CardHeader>
-                
-                <CardContent className="space-y-4">
-                  <p className="text-sm leading-relaxed">{post.content}</p>
-                  
-                  {post.mediaUrl && (
-                    <div className="relative rounded-lg overflow-hidden">
-                      {post.mediaType === 'video' ? (
-                        <div className="relative bg-gray-100 aspect-video rounded-lg flex items-center justify-center">
-                          <img 
-                            src={post.mediaUrl} 
-                            alt="Video thumbnail"
-                            className="w-full h-full object-cover"
-                          />
-                          <div className="absolute inset-0 bg-black/20 flex items-center justify-center">
-                            <div className="bg-white/90 rounded-full p-3">
-                              <YoutubeLogo size={24} className="text-red-600" />
-                            </div>
+
+                      {/* Content */}
+                      <div className="space-y-4">
+                        <p className="text-sm leading-relaxed">{post.content}</p>
+
+                        {/* Media */}
+                        {post.mediaUrl && (
+                          <div className="rounded-lg overflow-hidden bg-muted">
+                            {post.mediaType === 'image' ? (
+                              <img
+                                src={post.mediaUrl}
+                                alt="Post media"
+                                className="w-full h-64 object-cover hover:scale-105 transition-transform duration-300"
+                              />
+                            ) : (
+                              <div className="w-full h-64 bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center">
+                                <YoutubeLogo size={48} className="text-red-600" />
+                              </div>
+                            )}
                           </div>
+                        )}
+
+                        {/* Engagement metrics */}
+                        <div className="flex items-center justify-between pt-3 border-t border-border">
+                          <div className="flex items-center gap-4 text-sm text-muted-foreground">
+                            <div className="flex items-center gap-1">
+                              <Heart size={16} />
+                              <span>{post.likes}</span>
+                            </div>
+                            <div className="flex items-center gap-1">
+                              <ChatCircle size={16} />
+                              <span>{post.comments}</span>
+                            </div>
+                            {post.shares > 0 && (
+                              <div className="flex items-center gap-1">
+                                <Share size={16} />
+                                <span>{post.shares}</span>
+                              </div>
+                            )}
+                          </div>
+                          <Badge variant="outline" className="text-xs capitalize">
+                            {post.platform}
+                          </Badge>
                         </div>
-                      ) : (
-                        <img 
-                          src={post.mediaUrl} 
-                          alt="Post content"
-                          className="w-full h-48 object-cover rounded-lg"
-                        />
-                      )}
-                    </div>
-                  )}
-                  
-                  <div className="flex items-center justify-between pt-3 border-t text-sm text-muted-foreground">
-                    <div className="flex items-center gap-4">
-                      <div className="flex items-center gap-1">
-                        <Heart size={16} />
-                        <span>{post.likes}</span>
-                      </div>
-                      <div className="flex items-center gap-1">
-                        <ChatCircle size={16} />
-                        <span>{post.comments}</span>
-                      </div>
-                      <div className="flex items-center gap-1">
-                        <Share size={16} />
-                        <span>{post.shares}</span>
                       </div>
                     </div>
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      onClick={() => window.open(post.url, '_blank')}
-                      className="text-xs"
-                    >
-                      View Post
-                    </Button>
                   </div>
                 </CardContent>
               </Card>
             </motion.div>
           ))}
         </AnimatePresence>
-      </motion.div>
+      </div>
 
-      {filteredPosts.length === 0 && (
-        <div className="text-center py-12">
-          <p className="text-muted-foreground">No posts found for the selected platform.</p>
-        </div>
-      )}
-
-      <div className="text-center mt-8">
-        <Button 
-          onClick={() => {
-            const { posts: newPosts, stats: newStats } = generateMockSocialData()
-            setPosts(newPosts)
-            setStats(newStats)
-            setLastUpdated(new Date())
-          }}
+      {/* Refresh button */}
+      <div className="text-center">
+        <Button
+          onClick={refreshFeed}
+          disabled={isLoading}
           variant="outline"
         >
           Refresh Feed

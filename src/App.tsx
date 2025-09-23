@@ -29,9 +29,6 @@ import personalPhoto from '@/assets/images/personal-photo-1.jpg'
 import personalPhoto2 from '@/assets/images/personal-photo-2.jpg'
 import boardroomPhoto from '@/assets/images/boardroom-photo-1.jpg'
 import startupPhoto from '@/assets/images/startup-photo-1.jpg'
-import fortune500CaseStudy from '@/assets/images/fortune500-case-study.jpg'
-import startupCaseStudy from '@/assets/images/startup-case-study.jpg'
-import healthcareCaseStudy from '@/assets/images/healthcare-case-study.jpg'
 import ResourcesPage from './ResourcesPage'
 import CaseStudiesPage from './CaseStudiesPage'
 import SocialMediaFeeds from './components/SocialMediaFeeds'
@@ -40,7 +37,6 @@ import AIGovernanceAssessment from './components/AIGovernanceAssessment'
 import VideoTestimonialRecorder from './components/VideoTestimonialRecorder'
 import AIContentRecommendations from './components/AIContentRecommendations'
 import EnhancedCaseStudies from './components/EnhancedCaseStudies'
-import InteractiveTestimonialGallery from './components/InteractiveTestimonialGallery'
 import { ScrollReveal, ParallaxContainer, StaggerContainer, StaggerItem, FloatingElement, ScaleOnHover, GlowOnHover } from './components/ScrollAnimations'
 
 declare global {
@@ -509,182 +505,6 @@ function VideoTestimonialsSection() {
 }
 
 function CaseStudyShowcase({ setCurrentPage }: { setCurrentPage: (page: 'home' | 'resources' | 'assessment' | 'case-studies') => void }) {
-  const caseStudies = [
-    {
-      id: 1,
-      title: "Fortune 500 AI Risk Prevention - $500M Savings",
-      client: "Global Financial Services Corporation",
-      industry: "Financial Services",
-      challenge: "Massive AI system vulnerabilities across international operations threatened regulatory compliance and exposed the organization to potential $500M+ in penalties, lawsuits, and operational losses. Legacy AI models showed severe bias in lending decisions affecting 2.3M customers.",
-      solution: "Implemented comprehensive AI risk management framework with real-time bias detection, automated compliance monitoring across 47 countries, and equitable lending algorithms. Created crisis prevention protocols and stakeholder communication strategies.",
-      results: [
-        "$500M in potential losses prevented through proactive risk mitigation",
-        "100% regulatory compliance achieved across all jurisdictions",
-        "87% reduction in biased lending decisions within 6 months",
-        "Enhanced reputation leading to 23% increase in customer trust scores",
-        "Framework deployed across 8 additional business units",
-        "Avoided class-action lawsuit with 50,000+ affected customers"
-      ],
-      image: fortune500CaseStudy,
-      tags: ["Risk Prevention", "$500M Savings", "Financial Services", "Global Compliance"],
-      metrics: { savings: "$500M", timeframe: "18 months", scope: "47 countries" }
-    },
-    {
-      id: 2,
-      title: "Emerging Markets AI Discovery - $300M Opportunity",
-      client: "Multinational Consumer Goods Company",
-      industry: "Consumer Goods",
-      challenge: "Traditional market analysis missed accessibility needs in emerging markets, leaving $300M+ in revenue untapped. AI-powered market research tools excluded disabled consumers, representing 15% of global purchasing power.",
-      solution: "Redesigned AI market analysis to include disability data and accessibility preferences. Created inclusive consumer profiling algorithms and developed culturally-sensitive AI tools for emerging market research across 23 countries.",
-      results: [
-        "$300M in new market opportunities discovered and captured",
-        "Expanded market reach to 45M previously excluded consumers",
-        "157% ROI on inclusive AI research investment within 24 months",
-        "Market leadership position established in 12 new countries",
-        "Product accessibility improvements benefiting 100% of user base",
-        "Recognition as 'Most Inclusive Brand' in 8 emerging markets"
-      ],
-      image: healthcareCaseStudy,
-      tags: ["Market Discovery", "$300M Revenue", "Emerging Markets", "Accessibility"],
-      metrics: { opportunity: "$300M", markets: "23 countries", consumers: "45M" }
-    },
-    {
-      id: 3,
-      title: "Healthcare System Transformation - $100M Cost Reduction",
-      client: "National Healthcare Network",
-      industry: "Healthcare",
-      challenge: "AI diagnostic systems showed persistent bias against disabled patients, resulting in $100M+ annual costs from misdiagnoses, extended treatments, and malpractice claims. Patient outcomes disparities reached crisis levels.",
-      solution: "Comprehensive overhaul of AI diagnostic protocols with disability-inclusive training data, real-time bias monitoring, and accessibility-first user interfaces. Implemented continuous learning systems and provider education programs.",
-      results: [
-        "$100M annual cost savings through accurate diagnoses",
-        "95% accuracy improvement for disabled patient diagnoses",
-        "Reduced diagnostic disparities by 78% across all patient groups", 
-        "Malpractice claims decreased by 62% within 18 months",
-        "Patient satisfaction scores increased by 94% for disabled patients",
-        "Model deployed across 847 healthcare facilities nationwide"
-      ],
-      image: startupCaseStudy,
-      tags: ["Healthcare Transformation", "$100M Savings", "Patient Outcomes", "Bias Elimination"],
-      metrics: { savings: "$100M", improvement: "95%", facilities: "847" }
-    },
-    {
-      id: 4,
-      title: "Global Supply Chain AI Ethics Integration",
-      client: "Fortune 100 Manufacturing Corporation",
-      industry: "Manufacturing",
-      challenge: "AI-powered supply chain optimization inadvertently excluded suppliers owned by disabled entrepreneurs, creating ethical risks and missing cost-saving opportunities worth $75M annually.",
-      solution: "Integrated equity metrics into AI supplier selection algorithms, created inclusive vendor evaluation frameworks, and established real-time monitoring for bias in procurement decisions across global operations.",
-      results: [
-        "$75M in additional cost savings through diverse supplier network",
-        "Supply chain resilience improved by 43% through vendor diversification", 
-        "Reduced procurement bias by 89% across 156 countries",
-        "Established partnerships with 2,847 disability-owned businesses",
-        "ESG rating improvement led to $200M in sustainable financing access",
-        "Industry leadership recognition for equitable AI practices"
-      ],
-      image: consultingPhoto,
-      tags: ["Supply Chain", "ESG Leadership", "Procurement Equity", "Global Operations"],
-      metrics: { savings: "$75M", suppliers: "2,847", countries: "156" }
-    },
-    {
-      id: 5,
-      title: "EdTech Accessibility Revolution",
-      client: "Leading Online Education Platform",
-      industry: "Education Technology",
-      challenge: "AI-powered learning systems excluded 12M disabled students globally, creating accessibility lawsuits and missing $180M market opportunity while facing regulatory pressure in 34 countries.",
-      solution: "Rebuilt learning AI with Universal Design principles, implemented real-time accessibility testing, and created adaptive learning paths for diverse cognitive and physical abilities.",
-      results: [
-        "$180M new market opportunity captured through accessible design",
-        "12M disabled students gained full platform access",
-        "Learning outcomes improved by 67% for all student populations",
-        "Regulatory compliance achieved across 34 countries",
-        "Platform adoption increased by 156% in special education market",
-        "Winner of 'Most Accessible EdTech Platform' for 3 consecutive years"
-      ],
-      image: speakingPhoto,
-      tags: ["EdTech", "Universal Design", "Student Accessibility", "Market Expansion"],
-      metrics: { opportunity: "$180M", students: "12M", countries: "34" }
-    },
-    {
-      id: 6,
-      title: "Banking AI Bias Elimination Initiative",
-      client: "Top 5 Global Investment Bank",
-      industry: "Investment Banking",
-      challenge: "Credit scoring AI systems showed systematic bias against disabled borrowers, threatening $350M in regulatory penalties and damaging relationships with institutional investors focused on ESG criteria.",
-      solution: "Complete credit AI model overhaul with equitable risk assessment, bias detection algorithms, and inclusive financial product design. Implemented real-time fairness monitoring and stakeholder transparency reporting.",
-      results: [
-        "$350M in regulatory penalties avoided through proactive compliance",
-        "Credit approval rates equalized across all demographic groups",
-        "ESG investor confidence increased, securing $2.1B in sustainable investments",
-        "Lending portfolio diversity improved by 124% while maintaining risk standards",
-        "Industry benchmark established for equitable AI in financial services",
-        "Customer retention increased by 89% among underserved populations"
-      ],
-      image: boardroomPhoto,
-      tags: ["Banking", "Credit Scoring", "Regulatory Compliance", "ESG Investment"],
-      metrics: { penalties_avoided: "$350M", investments: "$2.1B", improvement: "124%" }
-    },
-    {
-      id: 7,
-      title: "Retail AI Personalization Equity Transformation",
-      client: "Global E-commerce Giant",
-      industry: "E-commerce/Retail",
-      challenge: "AI recommendation engines systematically excluded products for disabled customers, missing $95M in annual revenue and facing discrimination lawsuits in multiple jurisdictions.",
-      solution: "Redesigned recommendation algorithms with inclusive personalization, implemented accessibility-first product discovery, and created adaptive shopping experiences for diverse abilities and needs.",
-      results: [
-        "$95M in new revenue captured through inclusive recommendations",
-        "Customer engagement increased by 203% among disabled shoppers",
-        "Discrimination lawsuits settled and prevention protocols established",
-        "Market share increased by 47% in accessibility-focused segments",
-        "Platform usability improved by 156% for all customer segments",
-        "Recognition as 'Most Inclusive Shopping Experience' globally"
-      ],
-      image: personalPhoto,
-      tags: ["E-commerce", "Personalization", "Customer Experience", "Revenue Growth"],
-      metrics: { revenue: "$95M", engagement: "203%", market_share: "47%" }
-    },
-    {
-      id: 8,
-      title: "Pharmaceutical AI Drug Discovery Inclusion",
-      client: "Top 10 Global Pharmaceutical Company",
-      industry: "Pharmaceuticals",
-      challenge: "AI-powered drug discovery models excluded disability-related conditions from research priorities, missing breakthrough treatments and $420M in market opportunities while facing advocacy group pressure.",
-      solution: "Integrated disability conditions into AI research prioritization, created inclusive clinical trial algorithms, and established equitable drug development pipelines with community input protocols.",
-      results: [
-        "$420M market opportunity identified in disability-focused treatments",
-        "3 breakthrough drugs for rare disability conditions entered trials",
-        "Clinical trial participation by disabled patients increased by 267%",
-        "Research efficiency improved by 89% through inclusive data modeling",
-        "Partnership agreements established with 47 disability advocacy organizations",
-        "FDA recognition for exemplary inclusive drug development practices"
-      ],
-      image: consultingPhoto2,
-      tags: ["Pharmaceuticals", "Drug Discovery", "Clinical Trials", "Healthcare Equity"],
-      metrics: { opportunity: "$420M", participation: "267%", partnerships: "47" }
-    },
-    {
-      id: 9,
-      title: "Transportation AI Safety & Accessibility Integration",
-      client: "Leading Autonomous Vehicle Developer",
-      industry: "Transportation/Automotive",
-      challenge: "Autonomous vehicle AI systems failed to recognize and accommodate disabled pedestrians and passengers, creating safety risks and regulatory barriers worth $250M in delayed market entry.",
-      solution: "Comprehensive AI safety overhaul with disability-aware object recognition, accessible vehicle interface design, and inclusive transportation planning algorithms integrated with real-world testing protocols.",
-      results: [
-        "$250M market entry acceleration through regulatory approval",
-        "Safety incident prevention for 2.3M disabled road users",
-        "First fully accessible autonomous vehicle platform launched",
-        "Regulatory approval achieved in 23 countries simultaneously",
-        "Safety testing accuracy improved by 178% for edge cases",
-        "Industry partnership agreements worth $1.2B in accessible transportation initiatives"
-      ],
-      image: startupPhoto,
-      tags: ["Autonomous Vehicles", "Safety", "Regulatory Approval", "Transportation Equity"],
-      metrics: { acceleration: "$250M", users: "2.3M", countries: "23" }
-    }
-  ]
-
-  const [selectedCase, setSelectedCase] = useState<null | typeof caseStudies[0]>(null)
-
   return (
     <motion.section 
       className="py-12 bg-secondary/20"
@@ -702,7 +522,7 @@ function CaseStudyShowcase({ setCurrentPage }: { setCurrentPage: (page: 'home' |
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
           >
-            <h2 className="text-3xl font-bold mb-4">Case Study Showcase</h2>
+            <h2 className="text-3xl font-bold mb-4">Client Success Stories</h2>
             <p className="text-lg text-muted-foreground mb-8">
               Real-world results from AI governance transformations that drive measurable business value and competitive advantage
             </p>
@@ -715,193 +535,40 @@ function CaseStudyShowcase({ setCurrentPage }: { setCurrentPage: (page: 'home' |
                 className="mb-8"
               >
                 <Trophy size={16} className="mr-2" />
-                View All Case Studies
+                View All Case Studies & Testimonials
               </Button>
             </motion.div>
+            
+            {/* Quick stats */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+              <Card className="bg-card/90 backdrop-blur-sm">
+                <CardContent className="p-6 text-center">
+                  <div className="text-3xl font-bold text-primary mb-2">$1.5B+</div>
+                  <div className="text-sm text-muted-foreground">Total Client Value Delivered</div>
+                </CardContent>
+              </Card>
+              <Card className="bg-card/90 backdrop-blur-sm">
+                <CardContent className="p-6 text-center">
+                  <div className="text-3xl font-bold text-accent mb-2">100%</div>
+                  <div className="text-sm text-muted-foreground">Project Success Rate</div>
+                </CardContent>
+              </Card>
+              <Card className="bg-card/90 backdrop-blur-sm">
+                <CardContent className="p-6 text-center">
+                  <div className="text-3xl font-bold text-primary mb-2">47</div>
+                  <div className="text-sm text-muted-foreground">Countries Served</div>
+                </CardContent>
+              </Card>
+            </div>
+            
+            <div className="flex justify-center">
+              <img 
+                src={consultingPhoto}
+                alt="Dr. Dédé consulting with Fortune 500 executives"
+                className="w-64 h-40 rounded-lg object-cover shadow-xl"
+              />
+            </div>
           </motion.div>
-          
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            {caseStudies.map((caseStudy, index) => (
-              <motion.div
-                key={caseStudy.id}
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: index * 0.2 }}
-                whileHover={{ scale: 1.03, y: -10 }}
-              >
-                <Card className="h-full cursor-pointer hover:shadow-xl transition-all duration-300 bg-card/90 backdrop-blur-sm">
-                  <CardContent className="p-0">
-                    <div className="relative overflow-hidden">
-                      <motion.img 
-                        src={caseStudy.image} 
-                        alt={caseStudy.title}
-                        className="w-full h-48 object-cover rounded-t-lg"
-                        whileHover={{ scale: 1.1 }}
-                        transition={{ duration: 0.5 }}
-                      />
-                      <motion.div 
-                        className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"
-                        initial={{ opacity: 0 }}
-                        whileHover={{ opacity: 1 }}
-                        transition={{ duration: 0.3 }}
-                      />
-                    </div>
-                    <div className="p-6">
-                      <div className="flex flex-wrap gap-2 mb-3">
-                        {caseStudy.tags.map((tag) => (
-                          <Badge key={tag} variant="secondary" className="text-xs">
-                            {tag}
-                          </Badge>
-                        ))}
-                      </div>
-                      <h3 className="font-semibold mb-2">{caseStudy.title}</h3>
-                      <p className="text-sm text-muted-foreground mb-4">{caseStudy.industry}</p>
-                      <p className="text-sm mb-4 line-clamp-3">{caseStudy.challenge}</p>
-                      <Button 
-                        variant="outline" 
-                        size="sm" 
-                        className="w-full"
-                        onClick={() => setSelectedCase(caseStudy)}
-                      >
-                        <Eye size={16} className="mr-2" />
-                        View Full Case Study
-                      </Button>
-                    </div>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            ))}
-          </div>
-
-          <Dialog open={!!selectedCase} onOpenChange={() => setSelectedCase(null)}>
-            <DialogContent className="max-w-6xl max-h-[90vh] overflow-y-auto mx-4 sm:mx-6 lg:mx-8">
-              <DialogHeader className="sticky top-0 bg-card z-10 pb-4 border-b">
-                <DialogTitle className="text-xl sm:text-2xl lg:text-3xl pr-8">{selectedCase?.title}</DialogTitle>
-              </DialogHeader>
-              {selectedCase && (
-                <motion.div 
-                  className="space-y-6 p-1 sm:p-2"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5 }}
-                >
-                  {/* Hero Image */}
-                  <div className="relative w-full h-48 sm:h-64 lg:h-80 rounded-lg overflow-hidden">
-                    <img 
-                      src={selectedCase.image} 
-                      alt={selectedCase.title}
-                      className="w-full h-full object-cover"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
-                    <div className="absolute bottom-4 left-4 right-4">
-                      <div className="flex flex-wrap gap-2 mb-2">
-                        {selectedCase.tags.map((tag) => (
-                          <Badge key={tag} variant="secondary" className="bg-white/90 text-black text-xs">
-                            {tag}
-                          </Badge>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                  
-                  {/* Key Metrics */}
-                  {selectedCase.metrics && (
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 p-4 bg-primary/5 rounded-lg">
-                      {Object.entries(selectedCase.metrics).map(([key, value]) => (
-                        <div key={key} className="text-center">
-                          <div className="text-lg sm:text-xl lg:text-2xl font-bold text-primary">{value}</div>
-                          <div className="text-xs sm:text-sm text-muted-foreground capitalize">
-                            {key.replace('_', ' ')}
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  )}
-                  
-                  {/* Client & Industry Info */}
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 p-4 bg-card/50 rounded-lg">
-                    <div>
-                      <h4 className="font-semibold mb-2 text-sm sm:text-base">Client & Industry</h4>
-                      <p className="text-muted-foreground text-sm sm:text-base">{selectedCase.client}</p>
-                      <p className="text-xs sm:text-sm text-muted-foreground">{selectedCase.industry}</p>
-                    </div>
-                    <div>
-                      <h4 className="font-semibold mb-2 text-sm sm:text-base">Project Scope</h4>
-                      <div className="flex flex-wrap gap-2">
-                        {selectedCase.tags.map((tag) => (
-                          <Badge key={tag} variant="outline" className="text-xs">
-                            {tag}
-                          </Badge>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                  
-                  {/* Challenge */}
-                  <div className="p-4 bg-destructive/5 rounded-lg border-l-4 border-destructive/20">
-                    <h4 className="font-semibold mb-3 text-destructive text-sm sm:text-base flex items-center">
-                      <Shield size={16} className="mr-2" />
-                      Challenge
-                    </h4>
-                    <p className="text-muted-foreground leading-relaxed text-sm sm:text-base">{selectedCase.challenge}</p>
-                  </div>
-                  
-                  {/* Solution */}
-                  <div className="p-4 bg-primary/5 rounded-lg border-l-4 border-primary/20">
-                    <h4 className="font-semibold mb-3 text-primary text-sm sm:text-base flex items-center">
-                      <Lightbulb size={16} className="mr-2" />
-                      Solution
-                    </h4>
-                    <p className="text-muted-foreground leading-relaxed text-sm sm:text-base">{selectedCase.solution}</p>
-                  </div>
-                  
-                  {/* Results */}
-                  <div className="p-4 bg-accent/5 rounded-lg border-l-4 border-accent/20">
-                    <h4 className="font-semibold mb-4 text-accent text-sm sm:text-base flex items-center">
-                      <Trophy size={16} className="mr-2" />
-                      Results & Impact
-                    </h4>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                      {selectedCase.results.map((result, index) => (
-                        <motion.div
-                          key={index}
-                          initial={{ opacity: 0, x: -20 }}
-                          animate={{ opacity: 1, x: 0 }}
-                          transition={{ delay: index * 0.1 }}
-                          className="flex items-start gap-3 p-3 bg-card rounded-lg"
-                        >
-                          <Star size={16} className="text-yellow-500 mt-1 flex-shrink-0" weight="fill" />
-                          <span className="text-muted-foreground text-xs sm:text-sm leading-relaxed">{result}</span>
-                        </motion.div>
-                      ))}
-                    </div>
-                  </div>
-                  
-                  {/* Call to Action */}
-                  <div className="flex flex-col sm:flex-row gap-4 pt-6 border-t sticky bottom-0 bg-card pb-4">
-                    <Button 
-                      onClick={() => setCurrentPage('case-studies')}
-                      className="flex-1"
-                      size="lg"
-                    >
-                      <Trophy size={16} className="mr-2" />
-                      View All Case Studies
-                    </Button>
-                    <Button 
-                      variant="outline" 
-                      className="flex-1"
-                      size="lg"
-                      onClick={() => window.open('https://calendly.com/dr-dede', '_blank')}
-                    >
-                      <Calendar size={16} className="mr-2" />
-                      Get Similar Results
-                    </Button>
-                  </div>
-                </motion.div>
-              )}
-            </DialogContent>
-          </Dialog>
         </div>
       </div>
     </motion.section>
@@ -1983,7 +1650,7 @@ function App() {
 
         <TestimonialsSection />
 
-        <InteractiveTestimonialGallery />
+        <CaseStudyShowcase setCurrentPage={setCurrentPage} />
 
         <EnhancedCaseStudies />
 
