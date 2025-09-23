@@ -7,15 +7,15 @@ interface ParallaxProps {
   className?: string
 }
 
-export function ParallaxContainer({ children, offset = 50, className = "" }: ParallaxProps) {
+export function ParallaxContainer({ children, offset = 30, className = "" }: ParallaxProps) {
   const ref = useRef(null)
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start end", "end start"]
   })
   
-  const y = useTransform(scrollYProgress, [0, 1], [offset, -offset])
-  const smoothY = useSpring(y, { stiffness: 400, damping: 90 })
+  const y = useTransform(scrollYProgress, [0, 1], [offset * 0.5, -offset * 0.5])
+  const smoothY = useSpring(y, { stiffness: 200, damping: 50, mass: 0.5 })
 
   return (
     <motion.div ref={ref} style={{ y: smoothY }} className={className}>
@@ -114,13 +114,14 @@ export function FloatingElement({ children, intensity = 1 }: { children: ReactNo
   return (
     <motion.div
       animate={{
-        y: [-5 * intensity, 5 * intensity, -5 * intensity],
-        rotate: [-1 * intensity, 1 * intensity, -1 * intensity]
+        y: [-3 * intensity, 3 * intensity, -3 * intensity],
+        rotate: [-0.5 * intensity, 0.5 * intensity, -0.5 * intensity]
       }}
       transition={{
-        duration: 6,
+        duration: 8,
         repeat: Infinity,
-        ease: "easeInOut"
+        ease: "easeInOut",
+        repeatType: "reverse"
       }}
     >
       {children}

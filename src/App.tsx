@@ -18,14 +18,20 @@ import heroBackground from '@/assets/images/hero-bg.png'
 import professionalHeadshot from '@/assets/images/professional-headshot-1.jpg'
 import professionalHeadshot2 from '@/assets/images/professional-headshot-2.jpg'
 import professionalHeadshot3 from '@/assets/images/professional-headshot-3.jpg'
+import professionalHeadshot4 from '@/assets/images/professional-headshot-4.jpg'
+import professionalHeadshot5 from '@/assets/images/professional-headshot-5.jpg'
 import speakingPhoto from '@/assets/images/speaking-photo-1.jpg'
 import speakingPhoto2 from '@/assets/images/speaking-photo-2.jpg'
+import speakingPhoto3 from '@/assets/images/speaking-photo-3.jpg'
 import consultingPhoto from '@/assets/images/consulting-photo-1.jpg'
 import consultingPhoto2 from '@/assets/images/consulting-photo-2.jpg'
 import personalPhoto from '@/assets/images/personal-photo-1.jpg'
 import personalPhoto2 from '@/assets/images/personal-photo-2.jpg'
 import boardroomPhoto from '@/assets/images/boardroom-photo-1.jpg'
 import startupPhoto from '@/assets/images/startup-photo-1.jpg'
+import fortune500CaseStudy from '@/assets/images/fortune500-case-study.jpg'
+import startupCaseStudy from '@/assets/images/startup-case-study.jpg'
+import healthcareCaseStudy from '@/assets/images/healthcare-case-study.jpg'
 import ResourcesPage from './ResourcesPage'
 import CaseStudiesPage from './CaseStudiesPage'
 import SocialMediaFeeds from './components/SocialMediaFeeds'
@@ -514,7 +520,7 @@ function CaseStudyShowcase({ setCurrentPage }: { setCurrentPage: (page: 'home' |
         "40% reduction in AI project approval time",
         "Created reusable framework adopted by 3 other divisions"
       ],
-      image: boardroomPhoto,
+      image: fortune500CaseStudy,
       tags: ["AI Governance", "Global Scale", "Regulatory Compliance"]
     },
     {
@@ -531,7 +537,7 @@ function CaseStudyShowcase({ setCurrentPage }: { setCurrentPage: (page: 'home' |
         "$2.3M cost savings from reduced misdiagnoses",
         "Improved patient satisfaction scores by 85%"
       ],
-      image: "https://images.unsplash.com/photo-1631815588090-d4bfec5b1ccb?w=600&h=400&fit=crop",
+      image: healthcareCaseStudy,
       tags: ["Healthcare AI", "Accessibility", "Bias Mitigation", "Patient Outcomes"]
     },
     {
@@ -546,7 +552,7 @@ function CaseStudyShowcase({ setCurrentPage }: { setCurrentPage: (page: 'home' |
         "Secured $50M Series C citing responsible AI practices",
         "Framework open-sourced and adopted by 100+ startups"
       ],
-      image: startupPhoto,
+      image: startupCaseStudy,
       tags: ["Startup", "EdTech", "Ethics Framework", "Equitable Design"]
     }
   ]
@@ -729,7 +735,7 @@ function TestimonialsSection() {
       title: "CTO, TechForward Inc.",
       rating: 5,
       avatar: "SC",
-      photo: professionalHeadshot3
+      photo: professionalHeadshot5
     },
     {
       quote: "The accessibility workshop was eye-opening. We implemented Dr. Tetsubayashi's recommendations and saw immediate improvements in our product's inclusive design.",
@@ -745,7 +751,7 @@ function TestimonialsSection() {
       title: "Conference Chair, AI Ethics Summit 2024",
       rating: 5,
       avatar: "AF",
-      photo: speakingPhoto2
+      photo: speakingPhoto3
     },
     {
       quote: "Working with Dr. Tetsubayashi on our AI governance strategy was transformative. Their interdisciplinary approach helped us navigate complex regulatory requirements while staying true to our values.",
@@ -781,7 +787,7 @@ function TestimonialsSection() {
                   Feedback from speaking engagements and consulting clients
                 </p>
                 {/* Professional headshot in testimonial header */}
-                <FloatingElement intensity={0.5}>
+                <FloatingElement intensity={0.2}>
                   <motion.div 
                     className="flex justify-center mb-4"
                     initial={{ opacity: 0, scale: 0.8 }}
@@ -791,7 +797,7 @@ function TestimonialsSection() {
                   >
                     <ScaleOnHover scale={1.1}>
                       <img 
-                        src={professionalHeadshot2}
+                        src={professionalHeadshot4}
                         alt="Dr. Dédé Tetsubayashi with clients"
                         className="w-32 h-32 rounded-full object-cover shadow-2xl ring-4 ring-primary/20 professional-img"
                       />
@@ -805,7 +811,7 @@ function TestimonialsSection() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 {testimonials.map((testimonial, index) => (
                   <StaggerItem key={index}>
-                    <ParallaxContainer offset={index % 2 === 0 ? 20 : -20}>
+                    <ParallaxContainer offset={index % 2 === 0 ? 10 : -10}>
                       <GlowOnHover>
                         <motion.div
                           whileHover={{ scale: 1.02, y: -5 }}
@@ -1533,7 +1539,7 @@ function App() {
           
           <div className="container mx-auto px-4 relative z-10">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center max-w-7xl mx-auto">
-              <ParallaxContainer offset={30}>
+              <ParallaxContainer offset={15}>
                 <motion.div 
                   className="order-2 lg:order-1 space-y-8"
                   initial={{ opacity: 0, x: -50 }}
@@ -1601,7 +1607,7 @@ function App() {
                   </motion.div>
                 </motion.div>
               </ParallaxContainer>
-              <ParallaxContainer offset={-30}>
+              <ParallaxContainer offset={-15}>
                 <motion.div 
                   className="order-1 lg:order-2"
                   initial={{ opacity: 0, x: 50 }}
@@ -1614,7 +1620,7 @@ function App() {
                       animate={{ opacity: 1, scale: 1 }}
                       transition={{ delay: 0.5, duration: 0.8 }}
                     >
-                      <FloatingElement intensity={0.8}>
+                      <FloatingElement intensity={0.3}>
                         <YouTubeEmbed />
                       </FloatingElement>
                     </motion.div>
@@ -1662,7 +1668,7 @@ function App() {
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
             >
-              <FloatingElement intensity={1}>
+              <FloatingElement intensity={0.2}>
                 <ScaleOnHover scale={1.15}>
                   <div className="relative">
                     <img 
@@ -1678,7 +1684,7 @@ function App() {
                   </div>
                 </ScaleOnHover>
               </FloatingElement>
-              <FloatingElement intensity={0.8}>
+              <FloatingElement intensity={0.2}>
                 <ScaleOnHover scale={1.1}>
                   <img 
                     src={speakingPhoto}
@@ -1688,7 +1694,7 @@ function App() {
                   />
                 </ScaleOnHover>
               </FloatingElement>
-              <FloatingElement intensity={1.2}>
+              <FloatingElement intensity={0.2}>
                 <ScaleOnHover scale={1.1}>
                   <img 
                     src={consultingPhoto}
@@ -1739,7 +1745,7 @@ function App() {
                   }
                 ].map((item, index) => (
                   <StaggerItem key={index}>
-                    <ParallaxContainer offset={index % 2 === 0 ? 20 : -20}>
+                    <ParallaxContainer offset={index % 2 === 0 ? 10 : -10}>
                       <GlowOnHover>
                         <motion.div
                           whileHover={{ scale: 1.05, y: -10 }}
@@ -1755,7 +1761,7 @@ function App() {
                               <div className="absolute inset-0 bg-gradient-to-t from-card via-transparent to-transparent" />
                             </div>
                             <CardContent className="p-8 pt-0">
-                              <FloatingElement intensity={0.5}>
+                              <FloatingElement intensity={0.2}>
                                 <item.icon size={48} className={`mx-auto mb-4 ${item.color}`} />
                               </FloatingElement>
                               <h3 className="font-semibold mb-3 text-lg leading-tight">{item.title}</h3>
@@ -1944,7 +1950,7 @@ function App() {
                   viewport={{ once: true }}
                   transition={{ duration: 0.8, delay: 0.3 }}
                 >
-                  <FloatingElement intensity={1}>
+                  <FloatingElement intensity={0.2}>
                     <ScaleOnHover scale={1.1}>
                       <div className="relative">
                         <img 
@@ -1963,7 +1969,7 @@ function App() {
                       </div>
                     </ScaleOnHover>
                   </FloatingElement>
-                  <FloatingElement intensity={0.7}>
+                  <FloatingElement intensity={0.2}>
                     <ScaleOnHover scale={1.1}>
                       <img 
                         src={speakingPhoto2}
@@ -1985,7 +1991,7 @@ function App() {
                 transition={{ duration: 0.8, delay: 0.4 }}
               >
                 <StaggerItem>
-                  <ParallaxContainer offset={20}>
+                  <ParallaxContainer offset={10}>
                     <GlowOnHover>
                       <motion.div
                         whileHover={{ scale: 1.02 }}
@@ -2030,7 +2036,7 @@ function App() {
                 </StaggerItem>
 
                 <StaggerItem>
-                  <ParallaxContainer offset={-20}>
+                  <ParallaxContainer offset={-10}>
                     <GlowOnHover>
                       <motion.div
                         whileHover={{ scale: 1.02 }}

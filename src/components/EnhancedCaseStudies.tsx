@@ -8,6 +8,9 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
 import { Progress } from "@/components/ui/progress"
 import { Star, Play, TrendUp, Calendar, CurrencyDollar, Users, CheckCircle, Clock, ArrowUp } from "@phosphor-icons/react"
 import { ScrollReveal, ParallaxContainer, StaggerContainer, StaggerItem } from './ScrollAnimations'
+import fortune500CaseStudy from '@/assets/images/fortune500-case-study.jpg'
+import startupCaseStudy from '@/assets/images/startup-case-study.jpg'
+import healthcareCaseStudy from '@/assets/images/healthcare-case-study.jpg'
 
 interface ROIMetric {
   label: string
@@ -61,7 +64,7 @@ const enhancedCaseStudies: CaseStudy[] = [
       "$2.8M cost savings from streamlined processes",
       "Zero compliance violations in 18 months post-implementation"
     ],
-    image: "https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=600&h=400&fit=crop",
+    image: fortune500CaseStudy,
     videoUrl: "https://youtube.com/embed/dQw4w9WgXcQ",
     tags: ["AI Governance", "Global Scale", "Regulatory Compliance", "Enterprise"],
     roi: [
@@ -98,7 +101,7 @@ const enhancedCaseStudies: CaseStudy[] = [
       "$2.3M cost savings from reduced misdiagnoses",
       "Improved patient satisfaction scores by 85%"
     ],
-    image: "https://images.unsplash.com/photo-1631815588090-d4bfec5b1ccb?w=600&h=400&fit=crop",
+    image: healthcareCaseStudy,
     videoUrl: "https://youtube.com/embed/healthcare-case",
     tags: ["Healthcare AI", "Accessibility", "Bias Mitigation", "Patient Outcomes"],
     roi: [
@@ -135,7 +138,7 @@ const enhancedCaseStudies: CaseStudy[] = [
       "35% faster development cycles with built-in ethics",
       "Improved investor confidence scores by 90%"
     ],
-    image: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=600&h=400&fit=crop",
+    image: startupCaseStudy,
     videoUrl: "https://youtube.com/embed/startup-case",
     tags: ["Startup", "EdTech", "Ethics Framework", "Funding Success"],
     roi: [
@@ -181,7 +184,7 @@ export default function EnhancedCaseStudies() {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16">
             {enhancedCaseStudies.map((caseStudy, index) => (
               <StaggerItem key={caseStudy.id}>
-                <ParallaxContainer offset={20}>
+                <ParallaxContainer offset={10}>
                   <motion.div
                     whileHover={{ y: -10, scale: 1.02 }}
                     transition={{ duration: 0.3 }}
