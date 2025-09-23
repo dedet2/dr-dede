@@ -1251,20 +1251,25 @@ function App() {
             <div className="flex items-center gap-2 md:gap-4 flex-shrink-0">
               <Button 
                 variant="ghost" 
-                size="sm" 
                 onClick={() => window.open('https://pmukyznd.manus.space/', '_blank')}
-                className="hidden sm:flex text-xs"
-              >
+            </div>x text-xs"
+            <div className="flex items-center gap-2 md:gap-4 flex-shrink-0">
                 <Calculator size={16} className="mr-2" />
-                🎉 ROI Calculator ✨
+                variant="ghost" 
+              </Button>
+                onClick={() => window.open('https://pmukyznd.manus.space/', '_blank')}
+                variant="ghost" 
+              >
+                onClick={() => {
+                🎉 ROI Calculator ✨, if not use backup
               </Button>
               <Button 
-                variant="ghost" 
-                size="sm" 
-                onClick={() => {
-                  // Check if background image is loading, if not use backup
-                  const img = new Image()
-                  img.onload = () => {
+                  }
+                  img.onerror = () => {
+                    window.open('https://nslacnow.manus.space/', '_blank')
+                  }
+                  img.src = heroBackground
+                  // Fallback timeout
                     window.open('https://dr-dede-tedx-homepage.vercel.app/', '_blank')
                   }
                   img.onerror = () => {
@@ -1274,13 +1279,6 @@ function App() {
                   // Fallback timeout
                   setTimeout(() => {
                     if (!img.complete) {
-                      window.open('https://nslacnow.manus.space/', '_blank')
-                    }
-                  }, 2000)
-                }}
-                className="hidden sm:flex text-xs"
-              >
-                <Presentation size={16} className="mr-2" />
                 TEDx Talk
               </Button>
               <Button 
@@ -1545,8 +1543,17 @@ function App() {
         <section className="py-12">
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto">
-              <Accordion type="single" collapsible className="space-y-4">
                 <AccordionItem value="social-updates" className="border rounded-lg px-6">
+                  <AccordionTrigger className="text-xl font-semibold hover:no-underline">
+                  <AccordionTrigger className="text-xl font-semibold hover:no-underline">
+ Latest Insights
+        <BlogInsightsSection />
+
+                    <BlogInsightsContent />
+          <div className="container mx-auto px-4">
+            <div className="max-w-4xl mx-auto">
+              <Accordion type="single" collapsible className="space-y-4">
+                <AccordionItem value="ai-curated" className="border rounded-lg px-6">
                   <AccordionTrigger className="text-xl font-semibold hover:no-underline">
                     Latest Social Updates
                   </AccordionTrigger>
@@ -1554,79 +1561,70 @@ function App() {
                     <SocialMediaFeeds />
                   </AccordionContent>
                 </AccordionItem>
-
-                <AccordionItem value="latest-insights" className="border rounded-lg px-6">
+       </Accordion>
+            </div>
                   <AccordionTrigger className="text-xl font-semibold hover:no-underline">
-                    Latest Insights
-                  </AccordionTrigger>
-                  <AccordionContent>
-                    <BlogInsightsContent />
-                  </AccordionContent>
-                </AccordionItem>
+        </section>
 
-                <AccordionItem value="ai-curated" className="border rounded-lg px-6">
-                  <AccordionTrigger className="text-xl font-semibold hover:no-underline">
-                    AI-Curated for You
-                  </AccordionTrigger>
-                  <AccordionContent>
+                  <AccordionContent>om-accent/5 to-primary/5">
                     <AIContentRecommendations />
                   </AccordionContent>
                 </AccordionItem>
               </Accordion>
             </div>
-          </div>
-        </section>
+              </p>
+        </section> gap-6 mb-8">
 
-        <section className="py-12 bg-gradient-to-br from-accent/5 to-primary/5">
-          <div className="container mx-auto px-4">
+                  <FileText size={40} className="mx-auto mb-4 text-primary" />
+                  <h3 className="font-semibold mb-2">Free Resources</h3>
             <div className="max-w-4xl mx-auto text-center">
-              <h2 className="text-3xl font-bold mb-4">Ready to Transform Your AI Governance?</h2>
+                    Download frameworks, guides, and toolkits to advance your AI governance journey.
               <p className="text-lg text-muted-foreground mb-8">
                 Access our comprehensive resources, take the maturity assessment, and stay connected with the latest insights.
-              </p>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
                 <Card className="p-6">
-                  <FileText size={40} className="mx-auto mb-4 text-primary" />
+                  <CheckCircle size={40} className="mx-auto mb-4 text-accent" />
+                  <h3 className="font-semibold mb-2">Maturity Assessment</h3>
+                  <p className="text-sm text-muted-foreground mb-4">
                   <h3 className="font-semibold mb-2">Free Resources</h3>
                   <p className="text-sm text-muted-foreground mb-4">
                     Download frameworks, guides, and toolkits to advance your AI governance journey.
-                  </p>
-                </Card>
-                <Card className="p-6">
+                    size="sm" 
+                    onClick={() => setCurrentPage('assessment')}
+                    className="w-full"
                   <CheckCircle size={40} className="mx-auto mb-4 text-accent" />
                   <h3 className="font-semibold mb-2">Maturity Assessment</h3>
                   <p className="text-sm text-muted-foreground mb-4">
                     Discover your organization's AI governance strengths and improvement opportunities.
                   </p>
-                  <Button 
-                    size="sm" 
-                    onClick={() => setCurrentPage('assessment')}
-                    className="w-full"
+                  <Button ssName="mx-auto mb-4 text-primary" />
+                    size="sm" b-2">Stay Connected</h3>
+                  <p className="text-sm text-muted-foreground mb-4">
+                    Follow events, insights, and connect on LinkedIn, Instagram, and YouTube.
                   >
                     Take Assessment
                   </Button>
                 </Card>
                 <Card className="p-6">
-                  <UsersIcon size={40} className="mx-auto mb-4 text-primary" />
-                  <h3 className="font-semibold mb-2">Stay Connected</h3>
-                  <p className="text-sm text-muted-foreground mb-4">
+                size="lg"
+                className="bg-primary hover:bg-primary/90"
+              >
                     Follow events, insights, and connect on LinkedIn, Instagram, and YouTube.
                   </p>
                 </Card>
               </div>
               <Button 
                 onClick={() => setCurrentPage('resources')}
-                size="lg"
-                className="bg-primary hover:bg-primary/90"
-              >
-                <ArrowRight size={20} className="mr-2" />
-                Access Resources & Assessment
-              </Button>
-            </div>
-          </div>
-        </section>
 
         <section className="py-8 md:py-12">
+          <div className="container mx-auto px-4">
+            <div className="max-w-4xl mx-auto">
+                Access Resources & Assessmenthops</h2>
+              <p className="text-lg md:text-xl text-muted-foreground text-center mb-8 md:mb-12">
+                Transform your organization's approach to AI governance and equitable innovation
+              </p>
+              
+d:gap-8 mb-8 md:mb-12">
+                <Card>
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto">
               <h2 className="text-2xl md:text-3xl font-bold text-center mb-3 md:mb-4">Speaking & Workshops</h2>
@@ -1635,45 +1633,45 @@ function App() {
               </p>
               
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8 mb-8 md:mb-12">
-                <Card>
-                  <CardContent className="p-4 md:p-6">
-                    <h3 className="text-lg md:text-xl font-semibold mb-3 md:mb-4">Keynote Presentations</h3>
-                    <p className="text-muted-foreground mb-3 md:mb-4 text-sm md:text-base">
-                      Inspirational talks that challenge assumptions and provide actionable frameworks 
-                      for building more equitable AI systems.
-                    </p>
-                    <div className="flex flex-wrap gap-2">
-                      <Badge variant="secondary" className="text-xs">45-60 minutes</Badge>
-                      <Badge variant="secondary" className="text-xs">Q&A included</Badge>
+                <Card>>
                       <Badge variant="secondary" className="text-xs">Virtual or in-person</Badge>
                     </div>
-                  </CardContent>
+                    <p className="text-muted-foreground mb-3 md:mb-4 text-sm md:text-base">
                 </Card>
 
-                <Card>
-                  <CardContent className="p-4 md:p-6">
+                    </p>
+                    <div className="flex flex-wrap gap-2">
                     <h3 className="text-lg md:text-xl font-semibold mb-3 md:mb-4">Custom Workshops</h3>
                     <p className="text-muted-foreground mb-3 md:mb-4 text-sm md:text-base">
                       Interactive sessions tailored to your team's needs, focusing on practical 
                       implementation of equitable AI governance practices.
                     </p>
-                    <div className="flex flex-wrap gap-2">
-                      <Badge variant="secondary" className="text-xs">2-8 hours</Badge>
+                </Card>
+                   <Badge variant="secondary" className="text-xs">2-8 hours</Badge>
                       <Badge variant="secondary" className="text-xs">Hands-on exercises</Badge>
-                      <Badge variant="secondary" className="text-xs">Team-specific</Badge>
-                    </div>
+                  <CardContent className="p-4 md:p-6">cific</Badge>
+                    <h3 className="text-lg md:text-xl font-semibold mb-3 md:mb-4">Custom Workshops</h3>
                   </CardContent>
                 </Card>
               </div>
 
               <div className="bg-card p-4 md:p-8 rounded-lg">
                 <h3 className="text-xl md:text-2xl font-semibold mb-4 md:mb-6 text-center">Speaking Topics</h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
-                  <div>
-                    <h4 className="font-semibold mb-2 md:mb-3">AI Governance & Ethics</h4>
-                    <ul className="space-y-1 md:space-y-2 text-xs md:text-sm text-muted-foreground">
-                      <li>• Regulatory compliance strategies</li>
+                      <Badge variant="secondary" className="text-xs">Hands-on exercises</Badge>
+                      <Badge variant="secondary" className="text-xs">Team-specific</Badge>
+                    </div>
+                  </CardContent>ound">
+                </Card>
                       <li>• Ethical AI framework development</li>
+                      <li>• Risk assessment methodologies</li>
+                    </ul>
+                  </div>
+                  <div>
+                    <h4 className="font-semibold mb-2 md:mb-3">Equitable Technology Design</h4>
+                    <ul className="space-y-1 md:space-y-2 text-xs md:text-sm text-muted-foreground">
+                      <li>• Accessibility-first development</li>
+                      <li>• Bias detection and mitigation</li>
+                      <li>• Community-centered design thinking</li>
                       <li>• Risk assessment methodologies</li>
                     </ul>
                   </div>
@@ -1694,16 +1692,16 @@ function App() {
                     </ul>
                   </div>
                   <div>
-                    <h4 className="font-semibold mb-2 md:mb-3">Disability Advocacy in Tech</h4>
-                    <ul className="space-y-1 md:space-y-2 text-xs md:text-sm text-muted-foreground">
-                      <li>• Creating accessible AI interfaces</li>
-                      <li>• Disability representation in datasets</li>
-                      <li>• Legal compliance and beyond</li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
             </div>
+          </div>
+        </section>
+
+        <section className="py-8 md:py-12 bg-primary/5">
+          <div className="container mx-auto px-4">
+            <div className="max-w-2xl mx-auto text-center mb-8 md:mb-12">
+              <h2 className="text-2xl md:text-3xl font-bold mb-3 md:mb-4">Transform Your Organization's AI Future</h2>
+              <p className="text-base md:text-lg text-muted-foreground mb-4 md:mb-6">
+                Ready to build AI systems that drive equitable innovation while ensuring regulatory compliance? 
           </div>
         </section>
 
@@ -1716,20 +1714,11 @@ function App() {
                 Let's discuss how we can accelerate your success.
               </p>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
-                <div className="bg-card/80 p-4 rounded-lg">
+                  <div className="text-2xl font-bold text-primary">Global</div>
                   <div className="text-2xl font-bold text-primary">48hr</div>
                   <div className="text-sm text-muted-foreground">Response time guaranteed</div>
                 </div>
                 <div className="bg-card/80 p-4 rounded-lg">
-                  <div className="text-2xl font-bold text-accent">500+</div>
-                  <div className="text-sm text-muted-foreground">Organizations transformed</div>
-                </div>
-                <div className="bg-card/80 p-4 rounded-lg">
-                  <div className="text-2xl font-bold text-primary">Global</div>
-                  <div className="text-sm text-muted-foreground">Virtual & in-person delivery</div>
-                </div>
-              </div>
-              <div className="mt-4 md:mt-6">
                 <CalendlyIntegration />
               </div>
               <div className="mt-4 text-center">
@@ -1739,8 +1728,8 @@ function App() {
                 </p>
               </div>
             </div>
-            <ContactForm />
-          </div>
+                <CalendlyIntegration />
+              </div>
         </section>
       </main>
 
@@ -1751,16 +1740,25 @@ function App() {
               <h3 className="text-lg md:text-xl font-semibold mb-2">Dr. Dédé Tetsubayashi</h3>
               <p className="text-sm md:text-base text-muted-foreground">AI GRC Executive | Board Member | TEDx Speaker | Systems Disruptor</p>
             </div>
+      </main>
+lassName="flex flex-col sm:flex-row justify-center gap-2 md:gap-4">
+      <footer className="bg-card border-t py-8 md:py-12">
+        <div className="container mx-auto px-4">
+          <div className="text-center space-y-4 md:space-y-6">
+            <div>
+              <h3 className="text-lg md:text-xl font-semibold mb-2">Dr. Dédé Tetsubayashi</h3>
+              <p className="text-sm md:text-base text-muted-foreground">AI GRC Executive | Board Member | TEDx Speaker | Systems Disruptor</p>
+            </div>https://dr-dede-tedx-homepage.vercel.app/', '_blank')
             
             <div className="flex flex-col sm:flex-row justify-center gap-2 md:gap-4">
-              <Button 
-                variant="outline" 
-                size="sm"
+              <Button dow.open('https://nslacnow.manus.space/', '_blank')
+                  setTimeout(() => {
+                    if (!img.complete) {
                 onClick={() => {
                   const img = new Image()
                   img.onload = () => {
                     window.open('https://dr-dede-tedx-homepage.vercel.app/', '_blank')
-                  }
+                  }o"
                   img.onerror = () => {
                     window.open('https://nslacnow.manus.space/', '_blank')
                   }
@@ -1768,7 +1766,7 @@ function App() {
                   setTimeout(() => {
                     if (!img.complete) {
                       window.open('https://nslacnow.manus.space/', '_blank')
-                    }
+                    }blank')}
                   }, 2000)
                 }}
                 className="w-full sm:w-auto"
@@ -1777,7 +1775,7 @@ function App() {
                 TEDx Talk
               </Button>
               <Button 
-                variant="outline" 
+                variant="outline" ww.youtube.com/@the_drdede', '_blank')}
                 size="sm"
                 onClick={() => window.open('https://pmukyznd.manus.space/', '_blank')}
                 className="w-full sm:w-auto"
@@ -1785,38 +1783,26 @@ function App() {
                 <Calculator size={16} className="mr-2" />
                 🎉 ROI Calculator ✨
               </Button>
-              <Button 
+              <Button 'https://www.incluu.us/blog', '_blank')}
                 variant="outline" 
                 size="sm"
                 onClick={() => window.open('https://www.youtube.com/@the_drdede', '_blank')}
-                className="w-full sm:w-auto"
-              >
-                YouTube Channel
+                Blog
               </Button>
-              <Button 
+                YouTube Channel
+                size="sm"
+                onClick={() => window.open('https://incluu.us', '_blank')}
                 variant="outline" 
                 size="sm"
                 onClick={() => window.open('https://www.incluu.us/blog', '_blank')}
                 className="w-full sm:w-auto"
               >
                 <BookOpen size={16} className="mr-2" />
-                Blog
-              </Button>
+              </div>
+            </div>
               <Button 
                 variant="outline" 
                 size="sm"
-                onClick={() => window.open('https://incluu.us', '_blank')}
-                className="w-full sm:w-auto"
-              >
-                incluu
-              </Button>
-              <div className="w-full sm:w-auto">
-                <CalendlyIntegration />
-              </div>
-            </div>
-
-            <div className="pt-4 md:pt-6 border-t text-xs md:text-sm text-muted-foreground">
-              <p>© 2025 Dr. Dédé Tetsubayashi. All rights reserved.</p>
             </div>
           </div>
         </div>
