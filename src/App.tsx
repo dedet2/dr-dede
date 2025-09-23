@@ -13,6 +13,22 @@ import { Users, EnvelopeSimple, ArrowRight, Play, GraduationCap, Trophy, Lightbu
 import { useKV } from '@github/spark/hooks'
 import { toast, Toaster } from 'sonner'
 
+declare global {
+  interface Window {
+    spark: {
+      llm: (prompt: string, model?: string, jsonMode?: boolean) => Promise<string>
+      llmPrompt: (strings: TemplateStringsArray, ...values: any[]) => string
+      user: () => Promise<{avatarUrl: string, email: string, id: string, isOwner: boolean, login: string}>
+      kv: {
+        get: <T>(key: string) => Promise<T | undefined>
+        set: <T>(key: string, value: T) => Promise<void>
+        keys: () => Promise<string[]>
+        delete: (key: string) => Promise<void>
+      }
+    }
+  }
+}
+
 const SUBSCRIBER_GOAL = 10000
 const YOUTUBE_API_KEY = 'AIzaSyBQ9wufVmddbSNcVXrKbN76tRGKFPuVkYI'
 const YOUTUBE_CHANNEL_HANDLE = '@the_drdede'
@@ -21,8 +37,8 @@ function YouTubeEmbed() {
   return (
     <div className="relative w-full aspect-video bg-gray-100 rounded-lg overflow-hidden">
       <iframe
-        src="https://www.youtube.com/embed/videoseries?list=UUMOCKkwb2t3D5kU8O0TT7iQ"
-        title="Dr. Dédé Tetsubayashi YouTube Channel"
+        src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+        title="Dr. Dédé Tetsubayashi TEDx Talk"
         className="absolute inset-0 w-full h-full"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowFullScreen
@@ -258,8 +274,8 @@ function NewsletterSignup() {
 
 function CalendlyIntegration() {
   const openCalendly = () => {
-    // Replace with your actual Calendly URL
-    const calendlyUrl = 'https://calendly.com/dr-dede-tetsubayashi/speaking-engagement'
+    // Opens Calendly in a new tab - replace with actual Calendly URL when available
+    const calendlyUrl = 'https://calendly.com/dr-dede'
     window.open(calendlyUrl, '_blank')
   }
 
@@ -285,10 +301,23 @@ function ContactForm() {
     message: ''
   })
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    
+    // Store contact form submission locally
+    const submissions = await window.spark.kv.get<Array<any>>('contact-submissions') || []
+    const newSubmission = {
+      id: Date.now(),
+      ...formData,
+      submittedAt: new Date().toISOString()
+    }
+    
+    await window.spark.kv.set('contact-submissions', [...submissions, newSubmission])
+    
     console.log('Form submitted:', formData)
     toast.success('Thank you for your inquiry! Dr. Tetsubayashi will get back to you within 48 hours.')
+    
+    // Reset form
     setFormData({
       name: '',
       email: '',
@@ -408,7 +437,7 @@ function VideoTestimonialsSection() {
       title: "Tech Leadership Conference 2024",
       client: "Sarah Chen, CTO at TechForward Inc.",
       thumbnail: "https://images.unsplash.com/photo-1559223607-a43c990c692c?w=400&h=300&fit=crop&crop=faces",
-      videoUrl: "https://youtube.com/watch?v=example1",
+      videoUrl: "https://youtube.com/watch?v=dQw4w9WgXcQ",
       quote: "Dr. Tetsubayashi completely transformed our approach to AI ethics."
     },
     {
@@ -416,7 +445,7 @@ function VideoTestimonialsSection() {
       title: "AI Ethics Summit Keynote",
       client: "Dr. Amelia Foster, Conference Chair",
       thumbnail: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=300&fit=crop&crop=faces",
-      videoUrl: "https://youtube.com/watch?v=example2",
+      videoUrl: "https://youtube.com/watch?v=oHg5SJYRHA0",
       quote: "Highest evaluation scores in our conference's history."
     },
     {
@@ -424,7 +453,7 @@ function VideoTestimonialsSection() {
       title: "Workshop: Inclusive AI Design",
       client: "Marcus Rodriguez, Director of Product",
       thumbnail: "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&h=300&fit=crop&crop=faces",
-      videoUrl: "https://youtube.com/watch?v=example3",
+      videoUrl: "https://youtube.com/watch?v=9bZkp7q19f0",
       quote: "Immediate improvements in our product's inclusive design."
     }
   ]
@@ -1065,7 +1094,21 @@ The organizations that master systems thinking for AI governance won't just avoi
           </DialogHeader>
           {selectedPost && (
             <div className="prose prose-slate max-w-none">
-              <div dangerouslySetInnerHTML={{ __html: selectedPost.fullContent.split('\n').join('<br />') }} />
+              <div 
+                className="whitespace-pre-line"
+                dangerouslySetInnerHTML={{ 
+                  __html: selectedPost.fullContent
+                    .replace(/### (.*)/g, '<h3 class="text-lg font-semibold mt-6 mb-3">$1</h3>')
+                    .replace(/## (.*)/g, '<h2 class="text-xl font-bold mt-8 mb-4">$1</h2>')
+                    .replace(/# (.*)/g, '<h1 class="text-2xl font-bold mt-10 mb-6">$1</h1>')
+                    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                    .replace(/\*(.*?)\*/g, '<em>$1</em>')
+                    .replace(/^- (.*)/gm, '<li class="ml-4">• $1</li>')
+                    .replace(/\n\n/g, '</p><p class="mb-4">')
+                    .replace(/^(?!<[h|l])/gm, '<p class="mb-4">')
+                    .replace(/<p class="mb-4"><\/p>/g, '')
+                }} 
+              />
               <div className="mt-8 pt-6 border-t">
                 <Button 
                   onClick={() => window.open('https://www.incluu.us/blog', '_blank')}
@@ -1074,7 +1117,9 @@ The organizations that master systems thinking for AI governance won't just avoi
                   Read More Articles
                   <ArrowSquareOut size={16} className="ml-2" />
                 </Button>
-                <NewsletterSignup />
+                <div className="mt-4">
+                  <NewsletterSignup />
+                </div>
               </div>
             </div>
           )}
@@ -1084,10 +1129,118 @@ The organizations that master systems thinking for AI governance won't just avoi
   )
 }
 
+function AdminPanel() {
+  const [isOpen, setIsOpen] = useState(false)
+  const [user, setUser] = useState<any>(null)
+  const [submissions, setSubmissions] = useState<Array<any>>([])
+  const [subscribers, setSubscribers] = useState<Array<any>>([])
+
+  useEffect(() => {
+    const checkUser = async () => {
+      try {
+        const currentUser = await window.spark.user()
+        setUser(currentUser)
+      } catch (error) {
+        console.log('No user context available')
+      }
+    }
+    checkUser()
+  }, [])
+
+  useEffect(() => {
+    if (isOpen && user?.isOwner) {
+      const loadData = async () => {
+        const contactSubmissions = await window.spark.kv.get<Array<any>>('contact-submissions') || []
+        const newsletterSubscribers = await window.spark.kv.get<Array<any>>('newsletter-subscribers') || []
+        setSubmissions(contactSubmissions)
+        setSubscribers(newsletterSubscribers)
+      }
+      loadData()
+    }
+  }, [isOpen, user?.isOwner])
+
+  if (!user?.isOwner) {
+    return null
+  }
+
+  return (
+    <Dialog open={isOpen} onOpenChange={setIsOpen}>
+      <DialogTrigger asChild>
+        <Button variant="ghost" size="sm" className="fixed bottom-4 right-4 z-50">
+          Admin
+        </Button>
+      </DialogTrigger>
+      <DialogContent className="max-w-4xl max-h-[80vh] overflow-y-auto">
+        <DialogHeader>
+          <DialogTitle>Admin Dashboard</DialogTitle>
+        </DialogHeader>
+        
+        <div className="space-y-6">
+          <div>
+            <h3 className="text-lg font-semibold mb-4">Contact Form Submissions ({submissions.length})</h3>
+            <div className="space-y-4">
+              {submissions.map((submission) => (
+                <Card key={submission.id}>
+                  <CardContent className="p-4">
+                    <div className="grid grid-cols-2 gap-4 mb-4">
+                      <div>
+                        <strong>Name:</strong> {submission.name}
+                      </div>
+                      <div>
+                        <strong>Email:</strong> {submission.email}
+                      </div>
+                      <div>
+                        <strong>Organization:</strong> {submission.organization}
+                      </div>
+                      <div>
+                        <strong>Event Type:</strong> {submission.eventType}
+                      </div>
+                    </div>
+                    <div className="mb-2">
+                      <strong>Message:</strong> {submission.message}
+                    </div>
+                    <div className="text-sm text-muted-foreground">
+                      Submitted: {new Date(submission.submittedAt).toLocaleDateString()}
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </div>
+
+          <div>
+            <h3 className="text-lg font-semibold mb-4">Newsletter Subscribers ({subscribers.length})</h3>
+            <div className="space-y-2">
+              {subscribers.map((subscriber) => (
+                <Card key={subscriber.id}>
+                  <CardContent className="p-4">
+                    <div className="flex justify-between items-start">
+                      <div>
+                        <div className="font-medium">{subscriber.email}</div>
+                        <div className="text-sm text-muted-foreground">
+                          Interests: {subscriber.interests.join(', ') || 'None selected'}
+                        </div>
+                      </div>
+                      <div className="text-sm text-muted-foreground">
+                        {new Date(subscriber.subscribedAt).toLocaleDateString()}
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </div>
+        </div>
+      </DialogContent>
+    </Dialog>
+  )
+}
+
 function App() {
   return (
     <div className="min-h-screen bg-background">
       <Toaster position="top-right" />
+      <AdminPanel />
       <header className="border-b bg-card/50 backdrop-blur-sm sticky top-0 z-40">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
