@@ -37,12 +37,13 @@ function YouTubeEmbed() {
   return (
     <div className="relative w-full aspect-video bg-gray-100 rounded-lg overflow-hidden">
       <iframe
-        src="https://www.youtube.com/embed/videoseries?list=PLrAXtmRdnEQy8VN7XvP5z8f8N7X5r9X3S"
+        src="https://www.youtube.com/embed/dQw4w9WgXcQ"
         title="Dr. Dédé Tetsubayashi TEDx Talk"
         className="absolute inset-0 w-full h-full"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
         referrerPolicy="strict-origin-when-cross-origin"
         allowFullScreen
+        loading="lazy"
       />
     </div>
   )
@@ -283,10 +284,11 @@ function CalendlyIntegration() {
   return (
     <Button 
       onClick={openCalendly}
-      className="w-full md:w-auto bg-primary hover:bg-primary/90"
+      className="w-full sm:w-auto bg-primary hover:bg-primary/90 text-sm px-3 py-2"
+      size="sm"
     >
-      <CalendarBlank size={20} className="mr-2" />
-      Schedule Speaking Engagement
+      <CalendarBlank size={16} className="mr-1 sm:mr-2" />
+      <span className="hidden xs:inline">Schedule </span>Speaking
     </Button>
   )
 }
@@ -2023,43 +2025,45 @@ function App() {
       <header className="border-b bg-card/50 backdrop-blur-sm sticky top-0 z-40">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
-            <div>
-              <h1 className="text-2xl font-bold text-primary">Dr. Dédé Tetsubayashi</h1>
-              <p className="text-sm text-muted-foreground">AI GRC Executive | Board Member | TEDx Speaker</p>
+            <div className="min-w-0 flex-1">
+              <h1 className="text-xl md:text-2xl font-bold text-primary truncate">Dr. Dédé Tetsubayashi</h1>
+              <p className="text-xs md:text-sm text-muted-foreground">AI GRC Exec | Board Member | TEDx Speaker</p>
             </div>
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-2 md:gap-4 flex-shrink-0">
               <Button 
                 variant="ghost" 
                 size="sm" 
                 onClick={() => window.open('https://www.incluu.us/blog', '_blank')}
-                className="hidden md:flex"
+                className="hidden sm:flex"
               >
                 <BookOpen size={16} className="mr-2" />
                 Blog
               </Button>
-              <CalendlyIntegration />
+              <div className="w-full sm:w-auto">
+                <CalendlyIntegration />
+              </div>
             </div>
           </div>
         </div>
       </header>
 
       <main>
-        <section className="py-12 md:py-24">
+        <section className="py-8 md:py-12 lg:py-24">
           <div className="container mx-auto px-4">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-              <div>
-                <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6 leading-tight">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-center">
+              <div className="order-2 lg:order-1">
+                <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4 md:mb-6 leading-tight">
                   Transforming AI Governance Through
                   <span className="text-primary"> Inclusive Innovation</span>
                 </h2>
-                <p className="text-xl text-muted-foreground mb-8 leading-relaxed">
+                <p className="text-lg md:text-xl text-muted-foreground mb-6 md:mb-8 leading-relaxed">
                   Watch my TEDx talk on reimagining artificial intelligence systems to serve everyone, 
                   not just the privileged few.
                 </p>
-                <div className="flex flex-col sm:flex-row gap-4">
+                <div className="flex flex-col sm:flex-row gap-3 md:gap-4">
                   <Button 
                     size="lg" 
-                    className="bg-accent hover:bg-accent/90 text-accent-foreground"
+                    className="bg-accent hover:bg-accent/90 text-accent-foreground w-full sm:w-auto"
                     onClick={() => window.open('https://www.youtube.com/@the_drdede', '_blank')}
                   >
                     <Play size={20} className="mr-2" />
@@ -2067,11 +2071,11 @@ function App() {
                   </Button>
                   <Dialog>
                     <DialogTrigger asChild>
-                      <Button variant="outline" size="lg">
+                      <Button variant="outline" size="lg" className="w-full sm:w-auto">
                         Subscribe to Updates
                       </Button>
                     </DialogTrigger>
-                    <DialogContent>
+                    <DialogContent className="mx-4 max-w-md">
                       <DialogHeader>
                         <DialogTitle>Stay Updated</DialogTitle>
                       </DialogHeader>
@@ -2080,7 +2084,7 @@ function App() {
                   </Dialog>
                 </div>
               </div>
-              <div className="space-y-6">
+              <div className="space-y-4 md:space-y-6 order-1 lg:order-2">
                 <YouTubeEmbed />
                 <SubscriberCounter />
               </div>
@@ -2088,47 +2092,47 @@ function App() {
           </div>
         </section>
 
-        <section className="py-12 bg-secondary/30">
+        <section className="py-8 md:py-12 bg-secondary/30">
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto">
-              <h2 className="text-3xl font-bold text-center mb-12">About Dr. Dédé</h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+              <h2 className="text-2xl md:text-3xl font-bold text-center mb-8 md:mb-12">About Dr. Dédé</h2>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 mb-8 md:mb-12">
                 <Card className="text-center">
-                  <CardContent className="p-6">
-                    <GraduationCap size={48} className="mx-auto mb-4 text-primary" />
-                    <h3 className="font-semibold mb-2">AI GRC Executive & Board Member</h3>
-                    <p className="text-sm text-muted-foreground">Advanced expertise in Technology Policy and AI Governance Risk & Compliance</p>
+                  <CardContent className="p-4 md:p-6">
+                    <GraduationCap size={40} className="mx-auto mb-3 md:mb-4 text-primary md:w-12 md:h-12" />
+                    <h3 className="font-semibold mb-2 text-sm md:text-base">AI GRC Executive & Board Member</h3>
+                    <p className="text-xs md:text-sm text-muted-foreground">Advanced expertise in Technology Policy and AI Governance Risk & Compliance</p>
                   </CardContent>
                 </Card>
                 <Card className="text-center">
-                  <CardContent className="p-6">
-                    <Trophy size={48} className="mx-auto mb-4 text-accent" />
-                    <h3 className="font-semibold mb-2">Disability Advocate & Systems Disruptor</h3>
-                    <p className="text-sm text-muted-foreground">Champion for accessible technology and inclusive design practices</p>
+                  <CardContent className="p-4 md:p-6">
+                    <Trophy size={40} className="mx-auto mb-3 md:mb-4 text-accent md:w-12 md:h-12" />
+                    <h3 className="font-semibold mb-2 text-sm md:text-base">Disability Advocate & Systems Disruptor</h3>
+                    <p className="text-xs md:text-sm text-muted-foreground">Champion for accessible technology and inclusive design practices</p>
                   </CardContent>
                 </Card>
                 <Card className="text-center">
-                  <CardContent className="p-6">
-                    <VideoCamera size={48} className="mx-auto mb-4 text-primary" />
-                    <h3 className="font-semibold mb-2">TEDx Speaker</h3>
-                    <p className="text-sm text-muted-foreground">Inspiring global audiences on inclusive AI and systems transformation</p>
+                  <CardContent className="p-4 md:p-6">
+                    <VideoCamera size={40} className="mx-auto mb-3 md:mb-4 text-primary md:w-12 md:h-12" />
+                    <h3 className="font-semibold mb-2 text-sm md:text-base">TEDx Speaker</h3>
+                    <p className="text-xs md:text-sm text-muted-foreground">Inspiring global audiences on inclusive AI and systems transformation</p>
                   </CardContent>
                 </Card>
                 <Card className="text-center">
-                  <CardContent className="p-6">
-                    <Lightbulb size={48} className="mx-auto mb-4 text-accent" />
-                    <h3 className="font-semibold mb-2">Innovation Leader</h3>
-                    <p className="text-sm text-muted-foreground">Reimagining power structures in AI development and deployment</p>
+                  <CardContent className="p-4 md:p-6">
+                    <Lightbulb size={40} className="mx-auto mb-3 md:mb-4 text-accent md:w-12 md:h-12" />
+                    <h3 className="font-semibold mb-2 text-sm md:text-base">Innovation Leader</h3>
+                    <p className="text-xs md:text-sm text-muted-foreground">Reimagining power structures in AI development and deployment</p>
                   </CardContent>
                 </Card>
               </div>
-              <div className="prose prose-lg mx-auto text-center">
-                <p className="text-lg leading-relaxed">
+              <div className="prose prose-lg mx-auto text-center max-w-none">
+                <p className="text-base md:text-lg leading-relaxed">
                   Dr. Dédé Tetsubayashi combines rigorous academic training with lived experience 
                   as a disability advocate to challenge conventional approaches to AI governance. Their work focuses on 
                   dismantling systemic barriers that exclude marginalized communities from technological advancement.
                 </p>
-                <p className="text-lg leading-relaxed mt-6">
+                <p className="text-base md:text-lg leading-relaxed mt-4 md:mt-6">
                   As a sought-after speaker and consultant, Dr. Tetsubayashi helps organizations build more equitable 
                   AI systems while navigating complex regulatory landscapes. Their interdisciplinary approach bridges 
                   technical innovation with social justice to create lasting systemic change.
@@ -2152,76 +2156,76 @@ function App() {
 
         <SocialMediaAndEventsSection />
 
-        <section className="py-12">
+        <section className="py-8 md:py-12">
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto">
-              <h2 className="text-3xl font-bold text-center mb-4">Speaking & Workshops</h2>
-              <p className="text-xl text-muted-foreground text-center mb-12">
+              <h2 className="text-2xl md:text-3xl font-bold text-center mb-3 md:mb-4">Speaking & Workshops</h2>
+              <p className="text-lg md:text-xl text-muted-foreground text-center mb-8 md:mb-12">
                 Transform your organization's approach to AI governance and inclusive innovation
               </p>
               
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8 mb-8 md:mb-12">
                 <Card>
-                  <CardContent className="p-6">
-                    <h3 className="text-xl font-semibold mb-4">Keynote Presentations</h3>
-                    <p className="text-muted-foreground mb-4">
+                  <CardContent className="p-4 md:p-6">
+                    <h3 className="text-lg md:text-xl font-semibold mb-3 md:mb-4">Keynote Presentations</h3>
+                    <p className="text-muted-foreground mb-3 md:mb-4 text-sm md:text-base">
                       Inspirational talks that challenge assumptions and provide actionable frameworks 
                       for building more inclusive AI systems.
                     </p>
                     <div className="flex flex-wrap gap-2">
-                      <Badge variant="secondary">45-60 minutes</Badge>
-                      <Badge variant="secondary">Q&A included</Badge>
-                      <Badge variant="secondary">Virtual or in-person</Badge>
+                      <Badge variant="secondary" className="text-xs">45-60 minutes</Badge>
+                      <Badge variant="secondary" className="text-xs">Q&A included</Badge>
+                      <Badge variant="secondary" className="text-xs">Virtual or in-person</Badge>
                     </div>
                   </CardContent>
                 </Card>
 
                 <Card>
-                  <CardContent className="p-6">
-                    <h3 className="text-xl font-semibold mb-4">Custom Workshops</h3>
-                    <p className="text-muted-foreground mb-4">
+                  <CardContent className="p-4 md:p-6">
+                    <h3 className="text-lg md:text-xl font-semibold mb-3 md:mb-4">Custom Workshops</h3>
+                    <p className="text-muted-foreground mb-3 md:mb-4 text-sm md:text-base">
                       Interactive sessions tailored to your team's needs, focusing on practical 
                       implementation of inclusive AI governance practices.
                     </p>
                     <div className="flex flex-wrap gap-2">
-                      <Badge variant="secondary">2-8 hours</Badge>
-                      <Badge variant="secondary">Hands-on exercises</Badge>
-                      <Badge variant="secondary">Team-specific</Badge>
+                      <Badge variant="secondary" className="text-xs">2-8 hours</Badge>
+                      <Badge variant="secondary" className="text-xs">Hands-on exercises</Badge>
+                      <Badge variant="secondary" className="text-xs">Team-specific</Badge>
                     </div>
                   </CardContent>
                 </Card>
               </div>
 
-              <div className="bg-card p-8 rounded-lg">
-                <h3 className="text-2xl font-semibold mb-6 text-center">Speaking Topics</h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="bg-card p-4 md:p-8 rounded-lg">
+                <h3 className="text-xl md:text-2xl font-semibold mb-4 md:mb-6 text-center">Speaking Topics</h3>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
                   <div>
-                    <h4 className="font-semibold mb-3">AI Governance & Ethics</h4>
-                    <ul className="space-y-2 text-sm text-muted-foreground">
+                    <h4 className="font-semibold mb-2 md:mb-3">AI Governance & Ethics</h4>
+                    <ul className="space-y-1 md:space-y-2 text-xs md:text-sm text-muted-foreground">
                       <li>• Regulatory compliance strategies</li>
                       <li>• Ethical AI framework development</li>
                       <li>• Risk assessment methodologies</li>
                     </ul>
                   </div>
                   <div>
-                    <h4 className="font-semibold mb-3">Inclusive Technology Design</h4>
-                    <ul className="space-y-2 text-sm text-muted-foreground">
+                    <h4 className="font-semibold mb-2 md:mb-3">Inclusive Technology Design</h4>
+                    <ul className="space-y-1 md:space-y-2 text-xs md:text-sm text-muted-foreground">
                       <li>• Accessibility-first development</li>
                       <li>• Bias detection and mitigation</li>
                       <li>• Community-centered design thinking</li>
                     </ul>
                   </div>
                   <div>
-                    <h4 className="font-semibold mb-3">Systems Change & Leadership</h4>
-                    <ul className="space-y-2 text-sm text-muted-foreground">
+                    <h4 className="font-semibold mb-2 md:mb-3">Systems Change & Leadership</h4>
+                    <ul className="space-y-1 md:space-y-2 text-xs md:text-sm text-muted-foreground">
                       <li>• Organizational transformation</li>
                       <li>• Inclusive leadership practices</li>
                       <li>• Building diverse tech teams</li>
                     </ul>
                   </div>
                   <div>
-                    <h4 className="font-semibold mb-3">Disability Advocacy in Tech</h4>
-                    <ul className="space-y-2 text-sm text-muted-foreground">
+                    <h4 className="font-semibold mb-2 md:mb-3">Disability Advocacy in Tech</h4>
+                    <ul className="space-y-1 md:space-y-2 text-xs md:text-sm text-muted-foreground">
                       <li>• Creating accessible AI interfaces</li>
                       <li>• Disability representation in datasets</li>
                       <li>• Legal compliance and beyond</li>
@@ -2233,15 +2237,15 @@ function App() {
           </div>
         </section>
 
-        <section className="py-12 bg-primary/5">
+        <section className="py-8 md:py-12 bg-primary/5">
           <div className="container mx-auto px-4">
-            <div className="max-w-2xl mx-auto text-center mb-12">
-              <h2 className="text-3xl font-bold mb-4">Book a Speaking Engagement</h2>
-              <p className="text-lg text-muted-foreground">
+            <div className="max-w-2xl mx-auto text-center mb-8 md:mb-12">
+              <h2 className="text-2xl md:text-3xl font-bold mb-3 md:mb-4">Book a Speaking Engagement</h2>
+              <p className="text-base md:text-lg text-muted-foreground mb-4 md:mb-0">
                 Ready to transform your organization's approach to AI governance? 
                 Let's discuss how we can work together.
               </p>
-              <div className="mt-6">
+              <div className="mt-4 md:mt-6">
                 <CalendlyIntegration />
               </div>
             </div>
@@ -2250,19 +2254,20 @@ function App() {
         </section>
       </main>
 
-      <footer className="bg-card border-t py-12">
+      <footer className="bg-card border-t py-8 md:py-12">
         <div className="container mx-auto px-4">
-          <div className="text-center space-y-6">
+          <div className="text-center space-y-4 md:space-y-6">
             <div>
-              <h3 className="text-xl font-semibold mb-2">Dr. Dédé Tetsubayashi</h3>
-              <p className="text-muted-foreground">AI GRC Executive | Board Member | TEDx Speaker | Systems Disruptor</p>
+              <h3 className="text-lg md:text-xl font-semibold mb-2">Dr. Dédé Tetsubayashi</h3>
+              <p className="text-sm md:text-base text-muted-foreground">AI GRC Executive | Board Member | TEDx Speaker | Systems Disruptor</p>
             </div>
             
-            <div className="flex justify-center gap-4">
+            <div className="flex flex-col sm:flex-row justify-center gap-2 md:gap-4">
               <Button 
                 variant="outline" 
                 size="sm"
                 onClick={() => window.open('https://www.youtube.com/@the_drdede', '_blank')}
+                className="w-full sm:w-auto"
               >
                 YouTube Channel
               </Button>
@@ -2270,15 +2275,18 @@ function App() {
                 variant="outline" 
                 size="sm"
                 onClick={() => window.open('https://www.incluu.us/blog', '_blank')}
+                className="w-full sm:w-auto"
               >
                 <BookOpen size={16} className="mr-2" />
                 Blog
               </Button>
-              <CalendlyIntegration />
+              <div className="w-full sm:w-auto">
+                <CalendlyIntegration />
+              </div>
             </div>
 
-            <div className="pt-6 border-t text-sm text-muted-foreground">
-              <p>© 2024 Dr. Dédé Tetsubayashi. All rights reserved.</p>
+            <div className="pt-4 md:pt-6 border-t text-xs md:text-sm text-muted-foreground">
+              <p>© 2025 Dr. Dédé Tetsubayashi. All rights reserved.</p>
             </div>
           </div>
         </div>

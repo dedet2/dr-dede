@@ -67,3 +67,15 @@ body {
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
   font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
 }
+
+/* Custom responsive utilities */
+@screen xs {
+  .xs\:inline {
+    display: inline;
+  }
+}
+
+/* Ensure video embeds are responsive */
+.aspect-video iframe {
+  border-radius: inherit;
+}
