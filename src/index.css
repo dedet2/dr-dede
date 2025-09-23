@@ -113,3 +113,33 @@ body {
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
+
+/* Fixed background support */
+.fixed-bg {
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* Enhanced backdrop blur for content over fixed background */
+.backdrop-blur-strong {
+  backdrop-filter: blur(20px);
+}
+
+/* Smooth transitions for all cards */
+.transition-card {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.transition-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.1);
+}
+
+/* Enhanced glassmorphism effect */
+.glass-card {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}

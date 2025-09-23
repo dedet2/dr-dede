@@ -43,7 +43,7 @@ function YouTubeEmbed() {
   return (
     <div className="relative w-full aspect-video bg-gray-100 rounded-lg overflow-hidden">
       <iframe
-        src="https://www.youtube.com/embed/YtYXwV8YdNI?rel=0&modestbranding=1"
+        src="https://www.youtube.com/embed/ZnqUquGeUzI?rel=0&modestbranding=1"
         title="Dr. Dédé Tetsubayashi TEDx Talk - Reimagining AI for Equitable Innovation"
         className="absolute inset-0 w-full h-full"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -1203,154 +1203,172 @@ function App() {
 
   if (currentPage === 'assessment') {
     return (
-      <div className="min-h-screen bg-background">
+      <div className="min-h-screen relative">
+        {/* Fixed background image */}
+        <div 
+          className="fixed inset-0 bg-cover bg-center bg-no-repeat z-0"
+          style={{
+            backgroundImage: `url(${heroBackground})`,
+          }}
+        />
+        <div className="fixed inset-0 bg-gradient-to-br from-background/95 via-background/90 to-background/85 z-0" />
+        
+        {/* Content over background */}
+        <div className="relative z-10">
+          <Toaster position="top-right" />
+          <AdminPanel />
+          <header className="border-b bg-card/80 backdrop-blur-md sticky top-0 z-40">
+            <div className="container mx-auto px-4 py-4">
+              <div className="flex items-center justify-between gap-4">
+                <div className="min-w-0 flex-1 header-title">
+                  <h1 className="text-lg sm:text-xl md:text-2xl font-bold text-primary whitespace-nowrap overflow-hidden text-ellipsis">Dr. Dédé Tetsubayashi</h1>
+                  <p className="text-xs sm:text-sm text-muted-foreground whitespace-nowrap">AI GRC Exec | Board Member | TEDx Speaker</p>
+                </div>
+                <Button 
+                  variant="ghost" 
+                  onClick={() => setCurrentPage('home')}
+                  className="text-xs px-2 py-1 whitespace-nowrap flex-shrink-0"
+                  size="sm"
+                >
+                  ← Back to Home
+                </Button>
+              </div>
+            </div>
+          </header>
+          <main className="py-12">
+            <div className="container mx-auto px-4">
+              <div className="text-center mb-8">
+                <h1 className="text-3xl font-bold mb-4">AI Governance Maturity Assessment</h1>
+                <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+                  Discover your organization's AI governance strengths and areas for improvement with this comprehensive assessment tool.
+                </p>
+              </div>
+              <AIGovernanceAssessment />
+            </div>
+          </main>
+        </div>
+      </div>
+    )
+  }
+  return (
+    <div className="min-h-screen relative">
+      {/* Fixed background image */}
+      <div 
+        className="fixed inset-0 bg-cover bg-center bg-no-repeat z-0"
+        style={{
+          backgroundImage: `url(${heroBackground})`,
+        }}
+      />
+      <div className="fixed inset-0 bg-gradient-to-br from-background/95 via-background/90 to-background/85 z-0" />
+      
+      {/* Content over background */}
+      <div className="relative z-10">
         <Toaster position="top-right" />
         <AdminPanel />
-        <header className="border-b bg-card/50 backdrop-blur-sm sticky top-0 z-40">
+        <header className="border-b bg-card/80 backdrop-blur-md sticky top-0 z-40">
           <div className="container mx-auto px-4 py-4">
             <div className="flex items-center justify-between gap-4">
               <div className="min-w-0 flex-1 header-title">
                 <h1 className="text-lg sm:text-xl md:text-2xl font-bold text-primary whitespace-nowrap overflow-hidden text-ellipsis">Dr. Dédé Tetsubayashi</h1>
                 <p className="text-xs sm:text-sm text-muted-foreground whitespace-nowrap">AI GRC Exec | Board Member | TEDx Speaker</p>
               </div>
-              <Button 
-                variant="ghost" 
-                onClick={() => setCurrentPage('home')}
-                className="text-xs px-2 py-1 whitespace-nowrap flex-shrink-0"
-                size="sm"
-              >
-                ← Back to Home
-              </Button>
-            </div>
-          </div>
-        </header>
-        <main className="py-12">
-          <div className="container mx-auto px-4">
-            <div className="text-center mb-8">
-              <h1 className="text-3xl font-bold mb-4">AI Governance Maturity Assessment</h1>
-              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                Discover your organization's AI governance strengths and areas for improvement with this comprehensive assessment tool.
-              </p>
-            </div>
-            <AIGovernanceAssessment />
-          </div>
-        </main>
-      </div>
-    )
-  }
-  return (
-    <div className="min-h-screen bg-background">
-      <Toaster position="top-right" />
-      <AdminPanel />
-      <header className="border-b bg-card/50 backdrop-blur-sm sticky top-0 z-40">
-        <div className="container mx-auto px-4 py-4">
-          <div className="flex items-center justify-between gap-4">
-            <div className="min-w-0 flex-1 header-title">
-              <h1 className="text-lg sm:text-xl md:text-2xl font-bold text-primary whitespace-nowrap overflow-hidden text-ellipsis">Dr. Dédé Tetsubayashi</h1>
-              <p className="text-xs sm:text-sm text-muted-foreground whitespace-nowrap">AI GRC Exec | Board Member | TEDx Speaker</p>
-            </div>
-            <div className="flex items-center gap-1 sm:gap-2 flex-shrink-0">
-              <Button 
-                variant="ghost" 
-                size="sm"
-                onClick={() => window.open('https://pmukyznd.manus.space/', '_blank')}
-                className="hidden lg:flex text-xs px-2 py-1"
-              >
-                <Calculator size={14} className="mr-1" />
-                <span className="hidden xl:inline">🎉 ROI Calculator ✨</span>
-                <span className="xl:hidden">ROI Calc</span>
-              </Button>
-              <Button 
-                variant="ghost" 
-                size="sm"
-                onClick={() => {
-                  const img = new Image()
-                  img.onload = () => {
-                    window.open('https://dr-dede-tedx-homepage.vercel.app/', '_blank')
-                  }
-                  img.onerror = () => {
-                    window.open('https://nslacnow.manus.space/', '_blank')
-                  }
-                  img.src = heroBackground
-                  // Fallback timeout
-                  setTimeout(() => {
-                    if (!img.complete) {
+              <div className="flex items-center gap-1 sm:gap-2 flex-shrink-0">
+                <Button 
+                  variant="ghost" 
+                  size="sm"
+                  onClick={() => window.open('https://pmukyznd.manus.space/', '_blank')}
+                  className="hidden lg:flex text-xs px-2 py-1"
+                >
+                  <Calculator size={14} className="mr-1" />
+                  <span className="hidden xl:inline">🎉 ROI Calculator ✨</span>
+                  <span className="xl:hidden">ROI Calc</span>
+                </Button>
+                <Button 
+                  variant="ghost" 
+                  size="sm"
+                  onClick={() => {
+                    const img = new Image()
+                    img.onload = () => {
+                      window.open('https://dr-dede-tedx-homepage.vercel.app/', '_blank')
+                    }
+                    img.onerror = () => {
                       window.open('https://nslacnow.manus.space/', '_blank')
                     }
-                  }, 2000)
-                }}
-                className="hidden md:flex text-xs px-2 py-1"
-              >
-                <Presentation size={14} className="mr-1" />
-                TEDx Talk
-              </Button>
-              <Button 
-                variant="ghost" 
-                size="sm" 
-                onClick={() => window.open('https://www.incluu.us/blog', '_blank')}
-                className="hidden md:flex text-xs px-2 py-1"
-              >
-                <BookOpen size={14} className="mr-1" />
-                Blog
-              </Button>
-              <Button 
-                variant="ghost" 
-                size="sm" 
-                onClick={() => window.open('https://incluu.us', '_blank')}
-                className="hidden sm:flex text-xs px-2 py-1"
-              >
-                incluu
-              </Button>
-              <Button 
-                variant="ghost" 
-                size="sm" 
-                onClick={() => setCurrentPage('resources')}
-                className="hidden lg:flex text-xs px-2 py-1"
-              >
-                <FileText size={14} className="mr-1" />
-                Resources
-              </Button>
-              <div className="flex-shrink-0">
-                <CalendlyIntegration />
+                    img.src = heroBackground
+                    // Fallback timeout
+                    setTimeout(() => {
+                      if (!img.complete) {
+                        window.open('https://nslacnow.manus.space/', '_blank')
+                      }
+                    }, 2000)
+                  }}
+                  className="hidden md:flex text-xs px-2 py-1"
+                >
+                  <Presentation size={14} className="mr-1" />
+                  TEDx Talk
+                </Button>
+                <Button 
+                  variant="ghost" 
+                  size="sm" 
+                  onClick={() => window.open('https://www.incluu.us/blog', '_blank')}
+                  className="hidden md:flex text-xs px-2 py-1"
+                >
+                  <BookOpen size={14} className="mr-1" />
+                  Blog
+                </Button>
+                <Button 
+                  variant="ghost" 
+                  size="sm" 
+                  onClick={() => window.open('https://incluu.us', '_blank')}
+                  className="hidden sm:flex text-xs px-2 py-1"
+                >
+                  incluu
+                </Button>
+                <Button 
+                  variant="ghost" 
+                  size="sm" 
+                  onClick={() => setCurrentPage('resources')}
+                  className="hidden lg:flex text-xs px-2 py-1"
+                >
+                  <FileText size={14} className="mr-1" />
+                  Resources
+                </Button>
+                <div className="flex-shrink-0">
+                  <CalendlyIntegration />
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </header>
+        </header>
 
-      <main>
-        <section className="relative py-8 md:py-12 lg:py-24 overflow-hidden">
-          <div 
-            className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-            style={{
-              backgroundImage: `url(${heroBackground})`,
-            }}
-          />
-          <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-background/80 to-accent/10" />
-          <div className="container mx-auto px-4 relative">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-center">
-              <div className="order-2 lg:order-1">
-                <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4 md:mb-6 leading-tight">
-                  Transforming AI Governance Through
-                  <span className="text-primary"> Equitable Innovation</span>
-                </h2>
-                <p className="text-lg md:text-xl text-muted-foreground mb-6 md:mb-8 leading-relaxed">
-                  Watch my TEDx talk on reimagining artificial intelligence systems to serve everyone, 
-                  not just the privileged few.
-                </p>
-                <div className="flex flex-col sm:flex-row gap-3 md:gap-4">
+        <main>
+        <section className="py-12 lg:py-32 min-h-[80vh] flex items-center">
+          <div className="container mx-auto px-4">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center max-w-7xl mx-auto">
+              <div className="order-2 lg:order-1 space-y-8">
+                <div>
+                  <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6 leading-tight">
+                    Transforming AI Through
+                    <span className="text-primary block"> Equitable Innovation</span>
+                  </h1>
+                  <p className="text-xl text-muted-foreground mb-8 leading-relaxed max-w-2xl">
+                    Watch my TEDx talk on reimagining artificial intelligence systems to serve everyone, 
+                    not just the privileged few.
+                  </p>
+                </div>
+                <div className="flex flex-col sm:flex-row gap-4">
                   <Button 
                     size="lg" 
-                    className="bg-accent hover:bg-accent/90 text-accent-foreground w-full sm:w-auto"
+                    className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-4 text-lg"
                     onClick={() => window.open('https://www.youtube.com/@the_drdede', '_blank')}
                   >
-                    <Play size={20} className="mr-2" />
+                    <Play size={24} className="mr-3" />
                     Watch TEDx Talk
                   </Button>
                   <Dialog>
                     <DialogTrigger asChild>
-                      <Button variant="outline" size="lg" className="w-full sm:w-auto">
-                        Subscribe to Updates
+                      <Button variant="outline" size="lg" className="px-8 py-4 text-lg">
+                        Get AI Insights
                       </Button>
                     </DialogTrigger>
                     <DialogContent className="mx-4 max-w-md">
@@ -1362,214 +1380,326 @@ function App() {
                   </Dialog>
                 </div>
               </div>
-              <div className="space-y-4 md:space-y-6 order-1 lg:order-2">
-                <YouTubeEmbed />
-                <SubscriberCounter />
+              <div className="order-1 lg:order-2">
+                <div className="space-y-6">
+                  <YouTubeEmbed />
+                  <SubscriberCounter />
+                </div>
               </div>
             </div>
           </div>
         </section>
 
-        <section className="py-8 md:py-12 bg-secondary/30">
+        <section className="py-16 bg-card/50 backdrop-blur-sm">
           <div className="container mx-auto px-4">
-            <div className="max-w-4xl mx-auto">
-              <h2 className="text-2xl md:text-3xl font-bold text-center mb-8 md:mb-12">About Dr. Dédé</h2>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 mb-8 md:mb-12">
-                <Card className="text-center">
-                  <CardContent className="p-4 md:p-6">
-                    <GraduationCap size={40} className="mx-auto mb-3 md:mb-4 text-primary md:w-12 md:h-12" />
-                    <h3 className="font-semibold mb-2 text-sm md:text-base">AI GRC Executive & Board Member</h3>
-                    <p className="text-xs md:text-sm text-muted-foreground">Advanced expertise in Technology Policy and AI Governance Risk & Compliance</p>
-                  </CardContent>
-                </Card>
-                <Card className="text-center">
-                  <CardContent className="p-4 md:p-6">
-                    <Trophy size={40} className="mx-auto mb-3 md:mb-4 text-accent md:w-12 md:h-12" />
-                    <h3 className="font-semibold mb-2 text-sm md:text-base">Disability Advocate & Systems Disruptor</h3>
-                    <p className="text-xs md:text-sm text-muted-foreground">Champion for accessible technology and equitable design practices</p>
-                  </CardContent>
-                </Card>
-                <Card className="text-center">
-                  <CardContent className="p-4 md:p-6">
-                    <VideoCamera size={40} className="mx-auto mb-3 md:mb-4 text-primary md:w-12 md:h-12" />
-                    <h3 className="font-semibold mb-2 text-sm md:text-base">TEDx Speaker</h3>
-                    <p className="text-xs md:text-sm text-muted-foreground">Inspiring global audiences on inclusive AI and systems transformation</p>
-                  </CardContent>
-                </Card>
-                <Card className="text-center">
-                  <CardContent className="p-4 md:p-6">
-                    <Lightbulb size={40} className="mx-auto mb-3 md:mb-4 text-accent md:w-12 md:h-12" />
-                    <h3 className="font-semibold mb-2 text-sm md:text-base">Innovation Leader</h3>
-                    <p className="text-xs md:text-sm text-muted-foreground">Reimagining power structures in AI development and deployment</p>
-                  </CardContent>
-                </Card>
-              </div>
-              <div className="prose prose-lg mx-auto text-center max-w-none">
-                <p className="text-base md:text-lg leading-relaxed">
-                  Dr. Dédé Tetsubayashi combines rigorous academic training with lived experience 
-                  as a disability advocate to challenge conventional approaches to AI governance. Their work focuses on 
-                  dismantling systemic barriers that exclude marginalized communities from technological advancement.
-                </p>
-                <p className="text-base md:text-lg leading-relaxed mt-4 md:mt-6">
-                  As a sought-after speaker and consultant, Dr. Tetsubayashi helps organizations build more equitable 
-                  AI systems while navigating complex regulatory landscapes. Their interdisciplinary approach bridges 
-                  technical innovation with social justice to create lasting systemic change.
-                </p>
-              </div>
+            <div className="max-w-4xl mx-auto text-center mb-16">
+              <h2 className="text-3xl md:text-4xl font-bold mb-6">About Dr. Dédé</h2>
+              <p className="text-xl text-muted-foreground leading-relaxed">
+                Combining rigorous academic training with lived experience as a disability advocate 
+                to challenge conventional approaches to AI governance and create lasting systemic change.
+              </p>
             </div>
-          </div>
-        </section>
-
-        <section className="py-8 md:py-12 bg-gradient-to-br from-accent/5 to-primary/5">
-          <div className="container mx-auto px-4">
-            <div className="max-w-6xl mx-auto">
-              <div className="text-center mb-12">
-                <h2 className="text-3xl font-bold mb-4">Why Organizations Choose Dr. Dédé</h2>
-                <p className="text-lg text-muted-foreground">
-                  Measurable results that drive competitive advantage and sustainable growth
-                </p>
-              </div>
-              
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
-                <Card className="text-center bg-card/80 backdrop-blur-sm">
-                  <CardContent className="p-6">
-                    <div className="text-3xl font-bold text-primary mb-2">$50M+</div>
-                    <p className="text-sm text-muted-foreground">In funding secured by clients citing responsible AI practices</p>
-                  </CardContent>
-                </Card>
-                <Card className="text-center bg-card/80 backdrop-blur-sm">
-                  <CardContent className="p-6">
-                    <div className="text-3xl font-bold text-accent mb-2">85%</div>
-                    <p className="text-sm text-muted-foreground">Reduction in compliance review time for regulated industries</p>
-                  </CardContent>
-                </Card>
-                <Card className="text-center bg-card/80 backdrop-blur-sm">
-                  <CardContent className="p-6">
-                    <div className="text-3xl font-bold text-primary mb-2">100%</div>
-                    <p className="text-sm text-muted-foreground">Regulatory compliance success rate across all jurisdictions</p>
-                  </CardContent>
-                </Card>
-                <Card className="text-center bg-card/80 backdrop-blur-sm">
-                  <CardContent className="p-6">
-                    <div className="text-3xl font-bold text-accent mb-2">40%</div>
-                    <p className="text-sm text-muted-foreground">Faster AI project approval times with comprehensive governance</p>
-                  </CardContent>
-                </Card>
-              </div>
-
-              <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                <Card>
-                  <CardHeader>
-                    <Shield size={32} className="text-primary mb-2" />
-                    <CardTitle className="text-xl">Risk Mitigation</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-muted-foreground mb-4">
-                      Proactive identification and mitigation of AI-related risks before they impact your business. 
-                      Our frameworks have helped organizations avoid costly regulatory penalties and reputational damage.
-                    </p>
-                    <ul className="text-sm space-y-2">
-                      <li>• Comprehensive risk assessment methodologies</li>
-                      <li>• Regulatory compliance strategies</li>
-                      <li>• Crisis prevention and response planning</li>
-                    </ul>
-                  </CardContent>
-                </Card>
-
-                <Card>
-                  <CardHeader>
-                    <Trophy size={32} className="text-accent mb-2" />
-                    <CardTitle className="text-xl">Competitive Advantage</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-muted-foreground mb-4">
-                      Transform ethical AI from a compliance burden into a strategic differentiator. 
-                      Organizations with mature AI governance attract top talent, secure funding, and win more business.
-                    </p>
-                    <ul className="text-sm space-y-2">
-                      <li>• Market differentiation through ethical leadership</li>
-                      <li>• Enhanced brand reputation and trust</li>
-                      <li>• Access to ESG-conscious investment capital</li>
-                    </ul>
-                  </CardContent>
-                </Card>
-
-                <Card>
-                  <CardHeader>
-                    <Users size={32} className="text-primary mb-2" />
-                    <CardTitle className="text-xl">Market Expansion</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-muted-foreground mb-4">
-                      Inclusive AI design opens new markets and customer segments. 
-                      The disability market alone represents over $13 trillion in annual disposable income globally.
-                    </p>
-                    <ul className="text-sm space-y-2">
-                      <li>• Access to underserved market segments</li>
-                      <li>• Improved product usability for all users</li>
-                      <li>• Innovation opportunities through inclusive design</li>
-                    </ul>
-                  </CardContent>
-                </Card>
-              </div>
-
-              <div className="mt-12 text-center">
-                <Card className="max-w-2xl mx-auto bg-gradient-to-r from-primary/10 to-accent/10">
-                  <CardContent className="p-8">
-                    <h3 className="text-2xl font-bold mb-4">Ready to Transform Your AI Governance?</h3>
-                    <p className="text-muted-foreground mb-6">
-                      Join the Fortune 500 companies, innovative startups, and leading healthcare networks 
-                      who trust Dr. Dédé to guide their AI governance transformation.
-                    </p>
-                    <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                      <Button size="lg" className="bg-primary hover:bg-primary/90">
-                        <Calendar size={20} className="mr-2" />
-                        Book Strategy Session
-                      </Button>
-                      <Button variant="outline" size="lg">
-                        Download Success Stories
-                      </Button>
-                    </div>
-                  </CardContent>
-                </Card>
-              </div>
+            
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
+              <Card className="text-center bg-card/80 backdrop-blur-sm border-0 shadow-lg">
+                <CardContent className="p-8">
+                  <GraduationCap size={48} className="mx-auto mb-4 text-primary" />
+                  <h3 className="font-semibold mb-3">AI GRC Executive & Board Member</h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed">Advanced expertise in Technology Policy and AI Governance Risk & Compliance</p>
+                </CardContent>
+              </Card>
+              <Card className="text-center bg-card/80 backdrop-blur-sm border-0 shadow-lg">
+                <CardContent className="p-8">
+                  <Trophy size={48} className="mx-auto mb-4 text-accent" />
+                  <h3 className="font-semibold mb-3">Disability Advocate & Systems Disruptor</h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed">Champion for accessible technology and equitable design practices</p>
+                </CardContent>
+              </Card>
+              <Card className="text-center bg-card/80 backdrop-blur-sm border-0 shadow-lg">
+                <CardContent className="p-8">
+                  <VideoCamera size={48} className="mx-auto mb-4 text-primary" />
+                  <h3 className="font-semibold mb-3">TEDx Speaker</h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed">Inspiring global audiences on inclusive AI and systems transformation</p>
+                </CardContent>
+              </Card>
+              <Card className="text-center bg-card/80 backdrop-blur-sm border-0 shadow-lg">
+                <CardContent className="p-8">
+                  <Lightbulb size={48} className="mx-auto mb-4 text-accent" />
+                  <h3 className="font-semibold mb-3">Innovation Leader</h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed">Reimagining power structures in AI development and deployment</p>
+                </CardContent>
+              </Card>
+            </div>
+            
+            <div className="max-w-4xl mx-auto text-center">
+              <p className="text-lg leading-relaxed mb-6">
+                Dr. Dédé Tetsubayashi dismantles systemic barriers that exclude marginalized communities 
+                from technological advancement. Their interdisciplinary approach bridges technical innovation 
+                with social justice to create lasting systemic change.
+              </p>
+              <p className="text-lg leading-relaxed">
+                As a sought-after speaker and consultant, Dr. Tetsubayashi helps organizations build more equitable 
+                AI systems while navigating complex regulatory landscapes.
+              </p>
             </div>
           </div>
         </section>
 
         <TestimonialsSection />
 
-        {/* <VideoTestimonialsSection /> */}
-
         <CaseStudyShowcase />
 
-        <section className="py-12">
+        <section className="py-16 bg-card/50 backdrop-blur-sm">
+          <div className="container mx-auto px-4">
+            <div className="max-w-6xl mx-auto">
+              <div className="text-center mb-16">
+                <h2 className="text-3xl md:text-4xl font-bold mb-6">Why Organizations Choose Dr. Dédé</h2>
+                <p className="text-xl text-muted-foreground">
+                  Measurable results that drive competitive advantage and sustainable growth
+                </p>
+              </div>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
+                <Card className="text-center bg-card/90 backdrop-blur-sm border-0 shadow-lg">
+                  <CardContent className="p-8">
+                    <div className="text-4xl font-bold text-primary mb-3">$50M+</div>
+                    <p className="text-sm text-muted-foreground">In funding secured by clients citing responsible AI practices</p>
+                  </CardContent>
+                </Card>
+                <Card className="text-center bg-card/90 backdrop-blur-sm border-0 shadow-lg">
+                  <CardContent className="p-8">
+                    <div className="text-4xl font-bold text-accent mb-3">85%</div>
+                    <p className="text-sm text-muted-foreground">Reduction in compliance review time for regulated industries</p>
+                  </CardContent>
+                </Card>
+                <Card className="text-center bg-card/90 backdrop-blur-sm border-0 shadow-lg">
+                  <CardContent className="p-8">
+                    <div className="text-4xl font-bold text-primary mb-3">100%</div>
+                    <p className="text-sm text-muted-foreground">Regulatory compliance success rate across all jurisdictions</p>
+                  </CardContent>
+                </Card>
+                <Card className="text-center bg-card/90 backdrop-blur-sm border-0 shadow-lg">
+                  <CardContent className="p-8">
+                    <div className="text-4xl font-bold text-accent mb-3">40%</div>
+                    <p className="text-sm text-muted-foreground">Faster AI project approval times with comprehensive governance</p>
+                  </CardContent>
+                </Card>
+              </div>
+
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <Card className="bg-card/90 backdrop-blur-sm border-0 shadow-lg">
+                  <CardHeader>
+                    <Shield size={40} className="text-primary mb-3" />
+                    <CardTitle className="text-2xl">Risk Mitigation</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-muted-foreground mb-6 leading-relaxed">
+                      Proactive identification and mitigation of AI-related risks before they impact your business. 
+                      Our frameworks have helped organizations avoid costly regulatory penalties and reputational damage.
+                    </p>
+                    <ul className="space-y-3">
+                      <li className="flex items-center text-sm">
+                        <CheckCircle size={16} className="text-primary mr-3 flex-shrink-0" />
+                        Comprehensive risk assessment methodologies
+                      </li>
+                      <li className="flex items-center text-sm">
+                        <CheckCircle size={16} className="text-primary mr-3 flex-shrink-0" />
+                        Regulatory compliance strategies
+                      </li>
+                      <li className="flex items-center text-sm">
+                        <CheckCircle size={16} className="text-primary mr-3 flex-shrink-0" />
+                        Crisis prevention and response planning
+                      </li>
+                    </ul>
+                  </CardContent>
+                </Card>
+
+                <Card className="bg-card/90 backdrop-blur-sm border-0 shadow-lg">
+                  <CardHeader>
+                    <Trophy size={40} className="text-accent mb-3" />
+                    <CardTitle className="text-2xl">Competitive Advantage</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-muted-foreground mb-6 leading-relaxed">
+                      Transform ethical AI from a compliance burden into a strategic differentiator. 
+                      Organizations with mature AI governance attract top talent, secure funding, and win more business.
+                    </p>
+                    <ul className="space-y-3">
+                      <li className="flex items-center text-sm">
+                        <CheckCircle size={16} className="text-accent mr-3 flex-shrink-0" />
+                        Market differentiation through ethical leadership
+                      </li>
+                      <li className="flex items-center text-sm">
+                        <CheckCircle size={16} className="text-accent mr-3 flex-shrink-0" />
+                        Enhanced brand reputation and trust
+                      </li>
+                      <li className="flex items-center text-sm">
+                        <CheckCircle size={16} className="text-accent mr-3 flex-shrink-0" />
+                        Access to ESG-conscious investment capital
+                      </li>
+                    </ul>
+                  </CardContent>
+                </Card>
+
+                <Card className="bg-card/90 backdrop-blur-sm border-0 shadow-lg">
+                  <CardHeader>
+                    <Users size={40} className="text-primary mb-3" />
+                    <CardTitle className="text-2xl">Market Expansion</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-muted-foreground mb-6 leading-relaxed">
+                      Inclusive AI design opens new markets and customer segments. 
+                      The disability market alone represents over $13 trillion in annual disposable income globally.
+                    </p>
+                    <ul className="space-y-3">
+                      <li className="flex items-center text-sm">
+                        <CheckCircle size={16} className="text-primary mr-3 flex-shrink-0" />
+                        Access to underserved market segments
+                      </li>
+                      <li className="flex items-center text-sm">
+                        <CheckCircle size={16} className="text-primary mr-3 flex-shrink-0" />
+                        Improved product usability for all users
+                      </li>
+                      <li className="flex items-center text-sm">
+                        <CheckCircle size={16} className="text-primary mr-3 flex-shrink-0" />
+                        Innovation opportunities through inclusive design
+                      </li>
+                    </ul>
+                  </CardContent>
+                </Card>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="py-16">
+          <div className="container mx-auto px-4">
+            <div className="max-w-4xl mx-auto text-center mb-16">
+              <h2 className="text-3xl md:text-4xl font-bold mb-6">Speaking & Workshops</h2>
+              <p className="text-xl text-muted-foreground">
+                Transform your organization's approach to AI governance and equitable innovation
+              </p>
+            </div>
+            
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
+              <Card className="bg-card/80 backdrop-blur-sm border-0 shadow-lg">
+                <CardContent className="p-8">
+                  <div className="flex flex-wrap gap-2 mb-4">
+                    <Badge variant="secondary" className="text-xs">Virtual or in-person</Badge>
+                    <Badge variant="secondary" className="text-xs">30-90 minutes</Badge>
+                  </div>
+                  <h3 className="text-2xl font-semibold mb-4">Keynote Speaking</h3>
+                  <p className="text-muted-foreground mb-6 leading-relaxed">
+                    Inspiring presentations on AI governance, accessibility, and systems transformation 
+                    that energize audiences and drive organizational change.
+                  </p>
+                </CardContent>
+              </Card>
+
+              <Card className="bg-card/80 backdrop-blur-sm border-0 shadow-lg">
+                <CardContent className="p-8">
+                  <div className="flex flex-wrap gap-2 mb-4">
+                    <Badge variant="secondary" className="text-xs">2-8 hours</Badge>
+                    <Badge variant="secondary" className="text-xs">Hands-on exercises</Badge>
+                    <Badge variant="secondary" className="text-xs">Team-specific</Badge>
+                  </div>
+                  <h3 className="text-2xl font-semibold mb-4">Custom Workshops</h3>
+                  <p className="text-muted-foreground mb-6 leading-relaxed">
+                    Interactive sessions tailored to your team's needs, focusing on practical 
+                    implementation of equitable AI governance practices.
+                  </p>
+                </CardContent>
+              </Card>
+            </div>
+
+            <Card className="bg-gradient-to-r from-primary/10 to-accent/10 border-0">
+              <CardContent className="p-12">
+                <h3 className="text-2xl font-semibold mb-8 text-center">Speaking Topics</h3>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                  <div>
+                    <h4 className="font-semibold mb-4 text-lg">AI Governance & Compliance</h4>
+                    <ul className="space-y-3 text-sm text-muted-foreground">
+                      <li className="flex items-start">
+                        <CheckCircle size={14} className="text-primary mr-2 mt-0.5 flex-shrink-0" />
+                        Regulatory compliance strategies
+                      </li>
+                      <li className="flex items-start">
+                        <CheckCircle size={14} className="text-primary mr-2 mt-0.5 flex-shrink-0" />
+                        Ethical AI framework development
+                      </li>
+                      <li className="flex items-start">
+                        <CheckCircle size={14} className="text-primary mr-2 mt-0.5 flex-shrink-0" />
+                        Risk assessment methodologies
+                      </li>
+                    </ul>
+                  </div>
+                  <div>
+                    <h4 className="font-semibold mb-4 text-lg">Equitable Technology Design</h4>
+                    <ul className="space-y-3 text-sm text-muted-foreground">
+                      <li className="flex items-start">
+                        <CheckCircle size={14} className="text-accent mr-2 mt-0.5 flex-shrink-0" />
+                        Accessibility-first development
+                      </li>
+                      <li className="flex items-start">
+                        <CheckCircle size={14} className="text-accent mr-2 mt-0.5 flex-shrink-0" />
+                        Bias detection and mitigation
+                      </li>
+                      <li className="flex items-start">
+                        <CheckCircle size={14} className="text-accent mr-2 mt-0.5 flex-shrink-0" />
+                        Community-centered design thinking
+                      </li>
+                    </ul>
+                  </div>
+                  <div>
+                    <h4 className="font-semibold mb-4 text-lg">Systems Change & Leadership</h4>
+                    <ul className="space-y-3 text-sm text-muted-foreground">
+                      <li className="flex items-start">
+                        <CheckCircle size={14} className="text-primary mr-2 mt-0.5 flex-shrink-0" />
+                        Organizational transformation
+                      </li>
+                      <li className="flex items-start">
+                        <CheckCircle size={14} className="text-primary mr-2 mt-0.5 flex-shrink-0" />
+                        Equitable leadership practices
+                      </li>
+                      <li className="flex items-start">
+                        <CheckCircle size={14} className="text-primary mr-2 mt-0.5 flex-shrink-0" />
+                        Building diverse tech teams
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        </section>
+
+        <section className="py-16 bg-card/50 backdrop-blur-sm">
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto">
-              <Accordion type="single" collapsible className="space-y-4">
-                <AccordionItem value="latest-insights" className="border rounded-lg px-6">
-                  <AccordionTrigger className="text-xl font-semibold hover:no-underline">
+              <Accordion type="single" collapsible className="space-y-6">
+                <AccordionItem value="latest-insights" className="border-0 bg-card/80 backdrop-blur-sm rounded-2xl px-8 shadow-lg">
+                  <AccordionTrigger className="text-2xl font-semibold hover:no-underline py-8">
                     Latest Insights
                   </AccordionTrigger>
-                  <AccordionContent>
+                  <AccordionContent className="pb-8">
                     <BlogInsightsContent />
                   </AccordionContent>
                 </AccordionItem>
                 
-                <AccordionItem value="social-updates" className="border rounded-lg px-6">
-                  <AccordionTrigger className="text-xl font-semibold hover:no-underline">
+                <AccordionItem value="social-updates" className="border-0 bg-card/80 backdrop-blur-sm rounded-2xl px-8 shadow-lg">
+                  <AccordionTrigger className="text-2xl font-semibold hover:no-underline py-8">
                     Latest Social Updates
                   </AccordionTrigger>
-                  <AccordionContent>
+                  <AccordionContent className="pb-8">
                     <SocialMediaFeeds />
                   </AccordionContent>
                 </AccordionItem>
                 
-                <AccordionItem value="ai-curated" className="border rounded-lg px-6">
-                  <AccordionTrigger className="text-xl font-semibold hover:no-underline">
+                <AccordionItem value="ai-curated" className="border-0 bg-card/80 backdrop-blur-sm rounded-2xl px-8 shadow-lg">
+                  <AccordionTrigger className="text-2xl font-semibold hover:no-underline py-8">
                     AI-Curated for You
                   </AccordionTrigger>
-                  <AccordionContent>
+                  <AccordionContent className="pb-8">
                     <AIContentRecommendations />
                   </AccordionContent>
                 </AccordionItem>
@@ -1578,106 +1708,49 @@ function App() {
           </div>
         </section>
 
-        <section className="py-8 md:py-12">
+        <section className="py-16 bg-gradient-to-br from-primary/10 to-accent/10">
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto text-center">
-              <h2 className="text-2xl md:text-3xl font-bold mb-3 md:mb-4">Speaking & Workshops</h2>
-              <p className="text-lg md:text-xl text-muted-foreground text-center mb-8 md:mb-12">
-                Transform your organization's approach to AI governance and equitable innovation
+              <h2 className="text-3xl md:text-4xl font-bold mb-6">Ready to Transform Your AI Future?</h2>
+              <p className="text-xl text-muted-foreground mb-12">
+                Join the Fortune 500 companies, innovative startups, and leading healthcare networks 
+                who trust Dr. Dédé to guide their AI governance transformation.
               </p>
               
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8 mb-8 md:mb-12">
-                <Card>
-                  <CardContent className="p-4 md:p-6">
-                    <div className="flex flex-wrap gap-2 mb-3">
-                      <Badge variant="secondary" className="text-xs">Virtual or in-person</Badge>
-                      <Badge variant="secondary" className="text-xs">30-90 minutes</Badge>
-                    </div>
-                    <h3 className="text-lg md:text-xl font-semibold mb-3 md:mb-4">Keynote Speaking</h3>
-                    <p className="text-muted-foreground mb-3 md:mb-4 text-sm md:text-base">
-                      Inspiring presentations on AI governance, accessibility, and systems transformation 
-                      that energize audiences and drive organizational change.
-                    </p>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-12">
+                <Card className="bg-card/90 backdrop-blur-sm border-0 shadow-lg">
+                  <CardContent className="p-6 text-center">
+                    <div className="text-3xl font-bold text-primary mb-2">Global</div>
+                    <div className="text-sm text-muted-foreground">Reach and impact</div>
                   </CardContent>
                 </Card>
-
-                <Card>
-                  <CardContent className="p-4 md:p-6">
-                    <div className="flex flex-wrap gap-2 mb-3">
-                      <Badge variant="secondary" className="text-xs">2-8 hours</Badge>
-                      <Badge variant="secondary" className="text-xs">Hands-on exercises</Badge>
-                      <Badge variant="secondary" className="text-xs">Team-specific</Badge>
-                    </div>
-                    <h3 className="text-lg md:text-xl font-semibold mb-3 md:mb-4">Custom Workshops</h3>
-                    <p className="text-muted-foreground mb-3 md:mb-4 text-sm md:text-base">
-                      Interactive sessions tailored to your team's needs, focusing on practical 
-                      implementation of equitable AI governance practices.
-                    </p>
+                <Card className="bg-card/90 backdrop-blur-sm border-0 shadow-lg">
+                  <CardContent className="p-6 text-center">
+                    <div className="text-3xl font-bold text-primary mb-2">48hr</div>
+                    <div className="text-sm text-muted-foreground">Response time guaranteed</div>
+                  </CardContent>
+                </Card>
+                <Card className="bg-card/90 backdrop-blur-sm border-0 shadow-lg">
+                  <CardContent className="p-6 text-center">
+                    <div className="text-3xl font-bold text-primary mb-2">100%</div>
+                    <div className="text-sm text-muted-foreground">Client satisfaction</div>
                   </CardContent>
                 </Card>
               </div>
-
-              <div className="bg-card p-4 md:p-8 rounded-lg">
-                <h3 className="text-xl md:text-2xl font-semibold mb-4 md:mb-6 text-center">Speaking Topics</h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
-                  <div>
-                    <h4 className="font-semibold mb-2 md:mb-3">AI Governance & Compliance</h4>
-                    <ul className="space-y-1 md:space-y-2 text-xs md:text-sm text-muted-foreground">
-                      <li>• Regulatory compliance strategies</li>
-                      <li>• Ethical AI framework development</li>
-                      <li>• Risk assessment methodologies</li>
-                    </ul>
-                  </div>
-                  <div>
-                    <h4 className="font-semibold mb-2 md:mb-3">Equitable Technology Design</h4>
-                    <ul className="space-y-1 md:space-y-2 text-xs md:text-sm text-muted-foreground">
-                      <li>• Accessibility-first development</li>
-                      <li>• Bias detection and mitigation</li>
-                      <li>• Community-centered design thinking</li>
-                    </ul>
-                  </div>
-                  <div>
-                    <h4 className="font-semibold mb-2 md:mb-3">Systems Change & Leadership</h4>
-                    <ul className="space-y-1 md:space-y-2 text-xs md:text-sm text-muted-foreground">
-                      <li>• Organizational transformation</li>
-                      <li>• Equitable leadership practices</li>
-                      <li>• Building diverse tech teams</li>
-                    </ul>
-                  </div>
-                </div>
+              
+              <div className="flex flex-col sm:flex-row gap-6 justify-center mb-8">
+                <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-4 text-lg">
+                  <Calendar size={24} className="mr-3" />
+                  Book Strategy Session
+                </Button>
+                <Button variant="outline" size="lg" className="px-8 py-4 text-lg border-2">
+                  Download Success Stories
+                </Button>
               </div>
-            </div>
-          </div>
-        </section>
-
-        <section className="py-8 md:py-12 bg-primary/5">
-          <div className="container mx-auto px-4">
-            <div className="max-w-2xl mx-auto text-center mb-8 md:mb-12">
-              <h2 className="text-2xl md:text-3xl font-bold mb-3 md:mb-4">Transform Your Organization's AI Future</h2>
-              <p className="text-base md:text-lg text-muted-foreground mb-4 md:mb-6">
-                Ready to build AI systems that drive equitable innovation while ensuring regulatory compliance? 
-                Let's discuss how we can accelerate your success.
-              </p>
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
-                <div className="bg-card/80 p-4 rounded-lg">
-                  <div className="text-2xl font-bold text-primary">Global</div>
-                  <div className="text-sm text-muted-foreground">Reach and impact</div>
-                </div>
-                <div className="bg-card/80 p-4 rounded-lg">
-                  <div className="text-2xl font-bold text-primary">48hr</div>
-                  <div className="text-sm text-muted-foreground">Response time guaranteed</div>
-                </div>
-                <div className="bg-card/80 p-4 rounded-lg">
-                  <div className="text-2xl font-bold text-primary">100%</div>
-                  <div className="text-sm text-muted-foreground">Client satisfaction</div>
-                </div>
-              </div>
-              <div className="bg-card/80 p-4 rounded-lg">
-                <CalendlyIntegration />
-              </div>
-              <div className="mt-4 text-center">
+              
+              <div className="flex flex-col items-center gap-4">
                 <VideoTestimonialRecorder />
-                <p className="text-xs text-muted-foreground mt-2">
+                <p className="text-sm text-muted-foreground">
                   Share your experience working with Dr. Dédé
                 </p>
               </div>
@@ -1686,7 +1759,7 @@ function App() {
         </section>
       </main>
 
-      <footer className="bg-card border-t py-8 md:py-12">
+      <footer className="bg-card/80 backdrop-blur-md border-t py-8 md:py-12">
         <div className="container mx-auto px-4">
           <div className="text-center space-y-4 md:space-y-6">
             <div>
@@ -1763,6 +1836,7 @@ function App() {
           </div>
         </div>
       </footer>
+      </div>
     </div>
   )
 }
