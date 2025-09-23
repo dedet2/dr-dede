@@ -179,24 +179,20 @@ body {
 /* Advanced floating animation with multiple elements */
 @keyframes float {
   0%, 100% { transform: translateY(0px) rotate(0deg); }
-  25% { transform: translateY(-10px) rotate(1deg); }
-  50% { transform: translateY(-5px) rotate(0deg); }
-  75% { transform: translateY(-15px) rotate(-1deg); }
+  50% { transform: translateY(-3px) rotate(0.5deg); }
 }
 
 @keyframes floatReverse {
   0%, 100% { transform: translateY(0px) rotate(0deg); }
-  25% { transform: translateY(10px) rotate(-1deg); }
-  50% { transform: translateY(5px) rotate(0deg); }
-  75% { transform: translateY(15px) rotate(1deg); }
+  50% { transform: translateY(3px) rotate(-0.5deg); }
 }
 
 .float-animation {
-  animation: float 4s ease-in-out infinite;
+  animation: float 6s ease-in-out infinite;
 }
 
 .float-reverse {
-  animation: floatReverse 5s ease-in-out infinite;
+  animation: floatReverse 7s ease-in-out infinite;
 }
 
 /* Enhanced pulse effect with multiple colors */
@@ -307,9 +303,12 @@ body {
 
 /* Advanced professional image styling with multiple effects */
 .professional-img {
-  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   position: relative;
   overflow: hidden;
+  will-change: transform;
+  backface-visibility: hidden;
+  -webkit-font-smoothing: subpixel-antialiased;
 }
 
 .professional-img::before {
@@ -318,7 +317,7 @@ body {
   inset: 0;
   background: linear-gradient(45deg, transparent 30%, rgba(139, 92, 246, 0.1) 50%, transparent 70%);
   opacity: 0;
-  transition: opacity 0.5s;
+  transition: opacity 0.4s ease;
   z-index: 1;
 }
 
@@ -328,7 +327,7 @@ body {
   inset: 0;
   background: radial-gradient(circle at center, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
   opacity: 0;
-  transition: opacity 0.5s;
+  transition: opacity 0.4s ease;
   z-index: 2;
 }
 
@@ -341,9 +340,9 @@ body {
 }
 
 .professional-img:hover {
-  transform: scale(1.08) rotateZ(2deg);
-  filter: contrast(1.1) brightness(1.05) saturate(1.1);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+  transform: scale(1.05);
+  filter: contrast(1.05) brightness(1.03) saturate(1.05);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
 }
 
 /* Scroll-triggered stagger animations */
